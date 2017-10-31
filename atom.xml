@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>HFBIN BLOG</title>
+  <title>Hfbin Blog</title>
   
   
   <link href="/atom.xml" rel="self"/>
@@ -43,8 +43,8 @@
   
   <entry>
     <title>基于liunx的git操作</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%9F%BA%E4%BA%8Eliunx%E7%9A%84git%E6%93%8D%E4%BD%9C%20-%20%E5%89%AF%E6%9C%AC/"/>
-    <id>http://yoursite.com/2017/10/31/基于liunx的git操作 - 副本/</id>
+    <link href="http://yoursite.com/2017/10/31/%E5%9F%BA%E4%BA%8Eliunx%E7%9A%84git%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2017/10/31/基于liunx的git操作/</id>
     <published>2017-10-31T04:43:19.000Z</published>
     <updated>2017-10-31T05:07:19.178Z</updated>
     
@@ -70,8 +70,8 @@
   
   <entry>
     <title>基于liunx的git操作</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%9F%BA%E4%BA%8Eliunx%E7%9A%84git%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2017/10/31/基于liunx的git操作/</id>
+    <link href="http://yoursite.com/2017/10/31/%E5%9F%BA%E4%BA%8Eliunx%E7%9A%84git%E6%93%8D%E4%BD%9C%20-%20%E5%89%AF%E6%9C%AC/"/>
+    <id>http://yoursite.com/2017/10/31/基于liunx的git操作 - 副本/</id>
     <published>2017-10-31T04:43:19.000Z</published>
     <updated>2017-10-31T05:07:19.178Z</updated>
     
