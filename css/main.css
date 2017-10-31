@@ -954,7 +954,7 @@ pre .javascript .function {
 }
 .pagination {
   margin: 120px 0 40px;
-  text-align: center;
+  text-align: center !important;
   border-top: 1px solid #eee;
 }
 .page-number-basic,
@@ -1609,7 +1609,7 @@ pre .javascript .function {
   display: block !important;
   margin: 50px auto 60px;
   width: 10%;
-  height: 2px;
+  height: 1px;
   background: #ccc;
   text-align: center;
 }
@@ -2049,7 +2049,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4eff06;
+  background: #1bb4ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2168,7 +2168,7 @@ img:hover {
   border: none;
 }
 .footer-inner {
-  text-align: center;
+  text-align: center !important;
 }
 .with-love {
   display: inline-block;
