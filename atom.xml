@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-31T05:07:19.178Z</updated>
+  <updated>2017-10-31T08:40:21.398Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,36 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>基于liunx的git操作</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%9F%BA%E4%BA%8Eliunx%E7%9A%84git%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2017/10/31/基于liunx的git操作/</id>
-    <published>2017-10-31T04:43:19.000Z</published>
-    <updated>2017-10-31T05:07:19.178Z</updated>
+    <title>文章加密</title>
+    <link href="http://yoursite.com/2017/10/31/%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86/"/>
+    <id>http://yoursite.com/2017/10/31/文章加密/</id>
+    <published>2017-10-31T08:37:01.000Z</published>
+    <updated>2017-10-31T08:40:21.398Z</updated>
     
-    <content type="html"><![CDATA[<p>###在liunx下安装git</p><p><strong><em>yum install git</em></strong> </p><p>###克隆GitHub上的项目到liunx下：<br>第一步先复制链接<br><img src="http://img.blog.csdn.net/20171025162416272?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="复制GitHub的链接"><br>第二步在liunx下克隆项目（最好先创建一个克隆的文件夹）：<br>命令：git clone <a href="https://github.com/hfbin/ThirdPartyLogin.git" target="_blank" rel="external">https://github.com/hfbin/ThirdPartyLogin.git</a><br><img src="http://img.blog.csdn.net/20171025163230709?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p><p>###Liunx环境下更新github项目<br> <img src="http://img.blog.csdn.net/20171025163300481?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 执行git commit 后：<br> <img src="http://img.blog.csdn.net/20171025163312117?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> ：wq 保存后：<br> <img src="http://img.blog.csdn.net/20171025163326714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 本地提交 git push：<br><img src="http://img.blog.csdn.net/20171025163413451?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>输入用户名密码即可发布到GitHub上：<br><img src="http://img.blog.csdn.net/20171025163546162?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p><p>###到GitHub上查看项目是否更新<br><img src="http://img.blog.csdn.net/20171025163633277?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p><p>大功告成 ！！！！</p><p>转发者必须注明转发链接</p>]]></content>
+    <content type="html"><![CDATA[<p>我使用的Jacman主题的配置文件中就有配置有统计插件，有谷歌，百度以及CNZZ，我最终选择的是CNZZ,原因是CNZZ有手机版，比较好随时查看。百度的一开始我也有安装，不过下载的手机软件我打开时空白的，我是IOS版本的，最终CNZZ整体上让我比较满意<br>对应的配置如下，开启cnzz_tongji对应的enable属性改成true,siteid就从注册的cnzz控制台获取。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;###在liunx下安装git&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;yum install git&lt;/em&gt;&lt;/strong&gt; &lt;/p&gt;
-&lt;p&gt;###克隆GitHub上的项目到liunx下：&lt;br&gt;第一步先复制链接&lt;br&gt;&lt;img src=&quot;http://img.blog
+        &lt;p&gt;我使用的Jacman主题的配置文件中就有配置有统计插件，有谷歌，百度以及CNZZ，我最终选择的是CNZZ,原因是CNZZ有手机版，比较好随时查看。百度的一开始我也有安装，不过下载的手机软件我打开时空白的，我是IOS版本的，最终CNZZ整体上让我比较满意&lt;br&gt;对应的配置如下
       
     
     </summary>
     
-      <category term="git" scheme="http://yoursite.com/categories/git/"/>
+      <category term="password" scheme="http://yoursite.com/categories/password/"/>
     
     
-      <category term="liunx,git" scheme="http://yoursite.com/tags/liunx-git/"/>
+      <category term="程序人生" scheme="http://yoursite.com/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/"/>
     
   </entry>
   
   <entry>
     <title>基于liunx的git操作</title>
-    <link href="http://yoursite.com/2017/10/31/%E5%9F%BA%E4%BA%8Eliunx%E7%9A%84git%E6%93%8D%E4%BD%9C%20-%20%E5%89%AF%E6%9C%AC/"/>
-    <id>http://yoursite.com/2017/10/31/基于liunx的git操作 - 副本/</id>
+    <link href="http://yoursite.com/2017/10/31/%E5%9F%BA%E4%BA%8Eliunx%E7%9A%84git%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2017/10/31/基于liunx的git操作/</id>
     <published>2017-10-31T04:43:19.000Z</published>
     <updated>2017-10-31T05:07:19.178Z</updated>
     
@@ -152,6 +150,33 @@
   </entry>
   
   <entry>
+    <title>基于liunx的git操作</title>
+    <link href="http://yoursite.com/2017/10/31/%E5%9F%BA%E4%BA%8Eliunx%E7%9A%84git%E6%93%8D%E4%BD%9C%20-%20%E5%89%AF%E6%9C%AC/"/>
+    <id>http://yoursite.com/2017/10/31/基于liunx的git操作 - 副本/</id>
+    <published>2017-10-31T04:43:19.000Z</published>
+    <updated>2017-10-31T05:07:19.178Z</updated>
+    
+    <content type="html"><![CDATA[<p>###在liunx下安装git</p><p><strong><em>yum install git</em></strong> </p><p>###克隆GitHub上的项目到liunx下：<br>第一步先复制链接<br><img src="http://img.blog.csdn.net/20171025162416272?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="复制GitHub的链接"><br>第二步在liunx下克隆项目（最好先创建一个克隆的文件夹）：<br>命令：git clone <a href="https://github.com/hfbin/ThirdPartyLogin.git" target="_blank" rel="external">https://github.com/hfbin/ThirdPartyLogin.git</a><br><img src="http://img.blog.csdn.net/20171025163230709?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p><p>###Liunx环境下更新github项目<br> <img src="http://img.blog.csdn.net/20171025163300481?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 执行git commit 后：<br> <img src="http://img.blog.csdn.net/20171025163312117?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> ：wq 保存后：<br> <img src="http://img.blog.csdn.net/20171025163326714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 本地提交 git push：<br><img src="http://img.blog.csdn.net/20171025163413451?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>输入用户名密码即可发布到GitHub上：<br><img src="http://img.blog.csdn.net/20171025163546162?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p><p>###到GitHub上查看项目是否更新<br><img src="http://img.blog.csdn.net/20171025163633277?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p><p>大功告成 ！！！！</p><p>转发者必须注明转发链接</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;###在liunx下安装git&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;yum install git&lt;/em&gt;&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;###克隆GitHub上的项目到liunx下：&lt;br&gt;第一步先复制链接&lt;br&gt;&lt;img src=&quot;http://img.blog
+      
+    
+    </summary>
+    
+      <category term="git" scheme="http://yoursite.com/categories/git/"/>
+    
+    
+      <category term="liunx,git" scheme="http://yoursite.com/tags/liunx-git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>1</title>
     <link href="http://yoursite.com/2017/10/30/1/"/>
     <id>http://yoursite.com/2017/10/30/1/</id>
@@ -188,8 +213,8 @@
   
   <entry>
     <title>new blogs</title>
-    <link href="http://yoursite.com/2017/10/30/new-blogs%20-%20%E5%89%AF%E6%9C%AC%20(2)/"/>
-    <id>http://yoursite.com/2017/10/30/new-blogs - 副本 (2)/</id>
+    <link href="http://yoursite.com/2017/10/30/new-blogs/"/>
+    <id>http://yoursite.com/2017/10/30/new-blogs/</id>
     <published>2017-10-30T12:04:29.000Z</published>
     <updated>2017-10-30T12:04:29.230Z</updated>
     
@@ -202,8 +227,8 @@
   
   <entry>
     <title>new blogs</title>
-    <link href="http://yoursite.com/2017/10/30/new-blogs/"/>
-    <id>http://yoursite.com/2017/10/30/new-blogs/</id>
+    <link href="http://yoursite.com/2017/10/30/new-blogs%20-%20%E5%89%AF%E6%9C%AC%20(3)/"/>
+    <id>http://yoursite.com/2017/10/30/new-blogs - 副本 (3)/</id>
     <published>2017-10-30T12:04:29.000Z</published>
     <updated>2017-10-30T12:04:29.230Z</updated>
     
@@ -244,8 +269,8 @@
   
   <entry>
     <title>new blogs</title>
-    <link href="http://yoursite.com/2017/10/30/new-blogs%20-%20%E5%89%AF%E6%9C%AC%20(3)/"/>
-    <id>http://yoursite.com/2017/10/30/new-blogs - 副本 (3)/</id>
+    <link href="http://yoursite.com/2017/10/30/new-blogs%20-%20%E5%89%AF%E6%9C%AC%20(2)/"/>
+    <id>http://yoursite.com/2017/10/30/new-blogs - 副本 (2)/</id>
     <published>2017-10-30T12:04:29.000Z</published>
     <updated>2017-10-30T12:04:29.230Z</updated>
     

@@ -96,16 +96,16 @@
 
 
 
-<meta name="description" content="朋友答应我只要有路一定要走下去">
+<meta name="description" content="My friend promised me to go if I had the road">
 <meta property="og:type" content="website">
 <meta property="og:title" content="HFBIN BLOG">
 <meta property="og:url" content="http://yoursite.com/categories/git/index.html">
 <meta property="og:site_name" content="HFBIN BLOG">
-<meta property="og:description" content="朋友答应我只要有路一定要走下去">
+<meta property="og:description" content="My friend promised me to go if I had the road">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HFBIN BLOG">
-<meta name="twitter:description" content="朋友答应我只要有路一定要走下去">
+<meta name="twitter:description" content="My friend promised me to go if I had the road">
 
 
 
@@ -124,8 +124,8 @@
     },
     algolia: {
       applicationID: '',
-      apiKey: '',
-      indexName: '',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -283,9 +283,47 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -496,7 +534,7 @@
                alt="HuangFuBin" />
           <p class="site-author-name" itemprop="name">HuangFuBin</p>
            
-              <p class="site-description motion-element" itemprop="description">朋友答应我只要有路一定要走下去</p>
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -504,7 +542,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -515,7 +553,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -526,7 +564,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -787,6 +825,19 @@
   
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
 
 
 
