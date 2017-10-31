@@ -84,7 +84,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Hfbin Hexo" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="黄富彬个人博客" type="application/atom+xml" />
 
 
 
@@ -100,7 +100,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="blog">
 <meta property="og:url" content="http://yoursite.com/2017/10/30/blog/index.html">
-<meta property="og:site_name" content="Hfbin Hexo">
+<meta property="og:site_name" content="黄富彬个人博客">
 <meta property="og:description" content="朋友答应我只要有路一定要走下去">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-10-30T12:01:30.018Z">
@@ -133,15 +133,40 @@
   };
 </script>
 
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
 
 
   <link rel="canonical" href="http://yoursite.com/2017/10/30/blog/"/>
 
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
 
 
-
-
-  <title>blog | Hfbin Hexo</title>
+  <title>blog | 黄富彬个人博客</title>
   
 
 
@@ -152,6 +177,12 @@
 
 
 
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
 
 
 
@@ -177,7 +208,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hfbin Hexo</span>
+        <span class="site-title">黄富彬个人博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -293,7 +324,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hfbin Hexo">
+      <meta itemprop="name" content="黄富彬个人博客">
     </span>
 
     
@@ -425,7 +456,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/30/new-blogs/" rel="prev" title="new blogs">
+              <a href="/2017/10/30/new-blogs - 副本 (2)/" rel="prev" title="new blogs">
                 new blogs <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -445,6 +476,30 @@
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
       
     </div>
   </div>
@@ -497,7 +552,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -508,7 +563,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -614,7 +669,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        
+        <div class="copyright" >
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
 <div class="copyright" >
   
   &copy; 
@@ -637,13 +694,9 @@
   </a>
 </div>
 
-
-
-<div class="theme-info">
-  <div class="powered-by"></div>
-  <span class="post-count">博客全站共3.8k字</span>
+<div class="copyright" >
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
 </div>
-
         
 
         
