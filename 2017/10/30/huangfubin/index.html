@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Maven," />
 
 
 
@@ -97,6 +97,7 @@
 
 
 <meta name="description" content="####在整合之前先介绍一下Maven:  Maven是一个项目管理工具，它包含了一个项目对象模型 (Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal)的逻辑。当你使用Maven">
+<meta name="keywords" content="Maven">
 <meta property="og:type" content="article">
 <meta property="og:title" content="huangfubin">
 <meta property="og:url" content="http://yoursite.com/2017/10/30/huangfubin/index.html">
@@ -121,7 +122,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20171027101812625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20171027110002365?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20171027110436398?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-10-30T11:00:14.223Z">
+<meta property="og:updated_time" content="2017-10-31T05:08:41.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="huangfubin">
 <meta name="twitter:description" content="####在整合之前先介绍一下Maven:  Maven是一个项目管理工具，它包含了一个项目对象模型 (Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal)的逻辑。当你使用Maven">
@@ -343,6 +344,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Maven/" itemprop="url" rel="index">
+                    <span itemprop="name">Maven</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -381,7 +404,7 @@
       
 
       
-        <p>####<strong>在整合之前先介绍一下Maven:</strong></p>
+        <p>####在整合之前先介绍一下Maven:</p>
 <blockquote>
 <p>Maven是一个项目管理工具，它包含了一个项目对象模型 (Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal)的逻辑。当你使用Maven的时候，你用一个明确定义的项目对象模型来描述你的项目，然后Maven可以应用横切的逻辑，这些逻辑来自一组共享的（或者自定义的）插件。<br> Maven 有一个生命周期，当你运行 mvn install 的时候被调用。这条命令告诉 Maven 执行一系列的有序的步骤，直到到达你指定的生命周期。遍历生命周期旅途中的一个影响就是，Maven 运行了许多默认的插件目标，这些目标完成了像编译和创建一个 JAR 文件这样的工作。<br>此外，Maven能够很方便的帮你管理项目报告，生成站点，管理JAR文件，等等。：</p>
 </blockquote>
@@ -390,19 +413,19 @@
 <p>mvn archetype:generate 创建Maven项目<br>mvn compile 编译源代码<br>mvn deploy 发布项目<br>mvn test-compile 编译测试源代码<br>mvn test 运行应用程序中的单元测试<br>mvn site 生成项目相关信息的网站<br>mvn clean 清除项目目录中的生成结果<br>mvn package 根据项目生成的jar<br>mvn install 在本地Repository中安装jar<br>mvn eclipse:eclipse 生成eclipse项目文件<br>mvnjetty:run 启动jetty服务<br>mvntomcat:run 启动tomcat服务<br>mvn clean package -Dmaven.test.skip=true:清除以前的包后重新打包，跳过测试类</p>
 </blockquote>
 <p>好Maven就介绍到这里！！！</p>
-<p>####<strong>Spring SpringMVC Mybatis基本概念</strong></p>
+<p>####Spring SpringMVC Mybatis基本概念</p>
 <p>1、Spring</p>
 <pre><code>Spring是一个开源框架，Spring是于2003 年兴起的一个轻量级的Java 开发框架，由Rod Johnson 在其著作Expert One-On-One J2EE Development and Design中阐述的部分理念和原型衍生而来。它是为了解决企业应用开发的复杂性而创建的。Spring使用基本的JavaBean来完成以前只可能由EJB完成的事情。然而，Spring的用途不仅限于服务器端的开发。从简单性、可测试性和松耦合的角度而言，任何Java应用都可以从Spring中受益。 简单来说，Spring是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架。
 </code></pre><p>2、SpringMVC</p>
 <pre><code>Spring MVC属于SpringFrameWork的后续产品，已经融合在Spring Web Flow里面。Spring MVC 分离了控制器、模型对象、分派器以及处理程序对象的角色，这种分离让它们更容易进行定制。
 </code></pre><p>3、MyBatis</p>
 <pre><code>MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis 。MyBatis是一个基于Java的持久层框架。iBATIS提供的持久层框架包括SQL Maps和Data Access Objects（DAO）MyBatis 消除了几乎所有的JDBC代码和参数的手工设置以及结果集的检索。MyBatis 使用简单的 XML或注解用于配置和原始映射，将接口和 Java 的POJOs（Plain Old Java Objects，普通的 Java对象）映射成数据库中的记录。
-</code></pre><p>####<strong>SSM整合在这使用的开发工具是idea</strong></p>
+</code></pre><p>####SSM整合在这使用的开发工具是idea</p>
 <p>新建一个maven工程（在这就省略了）：</p>
 <blockquote>
 <p>在这说明一点创建完之后文件夹有些不完整需要自己创建java源文件目录还有测试（test）目录</p>
 </blockquote>
-<p>#####<strong>先从pom.xml文件入手</strong><br>具体需要加入什么jar，看自己的功能所需 , 可以到官网查<a href="https://mvnrepository.com" target="_blank" rel="external">https://mvnrepository.com</a></p>
+<p>#####先从pom.xml文件入手<br>具体需要加入什么jar，看自己的功能所需 , 可以到官网查<a href="https://mvnrepository.com" target="_blank" rel="external">https://mvnrepository.com</a></p>
 <p>下面是我pom.xml的内容（包括spring+springmvc+mybatis等相关jar包）：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div></pre></td><td class="code"><pre><div class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;</div><div class="line">    &lt;parent&gt;</div><div class="line">        &lt;artifactId&gt;idea_maven&lt;/artifactId&gt;</div><div class="line">        &lt;groupId&gt;com.hfbin.maven&lt;/groupId&gt;</div><div class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</div><div class="line">    &lt;/parent&gt;</div><div class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</div><div class="line">    &lt;artifactId&gt;idea_maven01&lt;/artifactId&gt;</div><div class="line">    &lt;packaging&gt;war&lt;/packaging&gt;</div><div class="line">    &lt;name&gt;idea_maven01 Maven Webapp&lt;/name&gt;</div><div class="line">    &lt;url&gt;http://maven.apache.org&lt;/url&gt;</div><div class="line">    &lt;dependencies&gt;</div><div class="line"></div><div class="line">        &lt;!-- ueditor 编辑器--&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/cn.songxinqiang/com.baidu.ueditor --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;cn.songxinqiang&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;com.baidu.ueditor&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.1.2-offical&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/org.json/json --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.json&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;json&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;20160810&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line"></div><div class="line">        &lt;!-- 文件上传--&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.3.1&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/commons-codec/commons-codec --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;commons-codec&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;commons-codec&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.10&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!--引入pageHelper分页插件 --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;5.0.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!-- MBG --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.3.5&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;4.3.7.RELEASE&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!-- 返回json字符串的支持 --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.8.8&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!--JSR303数据校验支持；tomcat7及以上的服务器，</div><div class="line">        tomcat7以下的服务器：el表达式。额外给服务器的lib包中替换新的标准的el</div><div class="line">        --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.hibernate&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;5.4.1.Final&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line"></div><div class="line">        &lt;!-- Spring-Jdbc --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;4.3.7.RELEASE&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!--Spring-test --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-test --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spring-test&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;4.3.7.RELEASE&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line"></div><div class="line">        &lt;!-- Spring面向切面编程 --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;4.3.7.RELEASE&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!--MyBatis --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/org.mybatis/mybatis --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;mybatis&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;3.4.2&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;!-- MyBatis整合Spring的适配包 --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.3.1&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!-- 数据库连接池、驱动 --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/c3p0/c3p0 --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;c3p0&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;c3p0&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;0.9.1&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;5.1.41&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;!-- （jstl，servlet-api，junit） --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/jstl/jstl --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;jstl&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;jstl&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.2&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;3.0.1&lt;/version&gt;</div><div class="line">            &lt;scope&gt;provided&lt;/scope&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;!-- junit --&gt;</div><div class="line">        &lt;!-- https://mvnrepository.com/artifact/junit/junit --&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;4.12&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">    &lt;/dependencies&gt;</div><div class="line">    &lt;build&gt;</div><div class="line">        &lt;finalName&gt;mybatis_generator&lt;/finalName&gt;</div><div class="line">        &lt;plugins&gt;</div><div class="line">            &lt;plugin&gt;</div><div class="line">                &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</div><div class="line">                &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</div><div class="line">                &lt;version&gt;1.3.2&lt;/version&gt;</div><div class="line">                &lt;configuration&gt;</div><div class="line">                    &lt;verbose&gt;true&lt;/verbose&gt;</div><div class="line">                    &lt;overwrite&gt;true&lt;/overwrite&gt;</div><div class="line">                &lt;/configuration&gt;</div><div class="line">            &lt;/plugin&gt;</div><div class="line">        &lt;/plugins&gt;</div><div class="line">    &lt;/build&gt;</div><div class="line">&lt;/project&gt;</div></pre></td></tr></table></figure>
 <p>####<strong>在resources 下创建mybatis-config.xml配置文件：</strong></p>
@@ -509,6 +532,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Maven/" <i class="fa fa-tag"></i> Maven</a>
+          
+        </div>
+      
 
       
       
@@ -596,14 +625,32 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
           
 
         </nav>
@@ -695,7 +742,8 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+<div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2017</span>
@@ -717,6 +765,12 @@
   </a>
 </div>
 
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共3.8k字</span>
+</div>
 
         
 
