@@ -1168,15 +1168,14 @@ pre .javascript .function {
   }
 }
 .menu {
-  margin-top: 20px;
+  float: none !important;
+  margin-top: 28px !important;
   padding-left: 0;
   text-align: center;
-  background: rgba(240,240,240,0.5);
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
   width: 530px;
   border-radius: initial;
-  -webkit-box-shadow: 0 0 15px #590016;
 }
 .menu .menu-item {
   display: inline-block;
@@ -2059,7 +2058,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #69e4ff;
+  background: #ffff13;
 }
 .links-of-blogroll {
   font-size: 13px;
