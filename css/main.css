@@ -1012,7 +1012,7 @@ pre .javascript .function {
 @media (max-width: 767px) {
   .pagination {
     border-top: none;
-    margin: 0 !important;
+    margin-bottom: 40px !important;
   }
   .pagination .prev,
   .pagination .next,
@@ -1165,7 +1165,6 @@ pre .javascript .function {
     text-align: center;
     display: none;
     margin: 0 -10px;
-    padding: 0 10px;
     clear: both;
     border-top: 1px solid #ddd;
     background: #fdfdfd;
@@ -2120,7 +2119,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cf9ca4;
+  background: #cd5e21;
 }
 .links-of-blogroll {
   font-size: 13px;
