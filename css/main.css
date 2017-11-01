@@ -1074,10 +1074,11 @@ pre .javascript .function {
 }
 .header {
   background: url("../header_background.jpg") no-repeat top center !important;
-  padding: 30px 0 10px 0;
+  padding: 0px 0 10px 0;
 }
 .header-inner {
   position: relative;
+  margin-bottom: 0px !important;
 }
 .headband {
   height: 3px;
@@ -1167,7 +1168,7 @@ pre .javascript .function {
     background: #fdfdfd;
     z-index: 99999;
     position: absolute;
-    top: 20px;
+    top: 40px;
     width: 100%;
   }
 }
@@ -2112,7 +2113,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #423;
+  background: #ff6320;
 }
 .links-of-blogroll {
   font-size: 13px;
