@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-31T08:40:21.398Z</updated>
+  <updated>2017-11-01T03:19:48.890Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="http://yoursite.com/2017/10/31/%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86/"/>
     <id>http://yoursite.com/2017/10/31/文章加密/</id>
     <published>2017-10-31T08:37:01.000Z</published>
-    <updated>2017-10-31T08:40:21.398Z</updated>
+    <updated>2017-11-01T03:19:48.890Z</updated>
     
-    <content type="html"><![CDATA[<p>我使用的Jacman主题的配置文件中就有配置有统计插件，有谷歌，百度以及CNZZ，我最终选择的是CNZZ,原因是CNZZ有手机版，比较好随时查看。百度的一开始我也有安装，不过下载的手机软件我打开时空白的，我是IOS版本的，最终CNZZ整体上让我比较满意<br>对应的配置如下，开启cnzz_tongji对应的enable属性改成true,siteid就从注册的cnzz控制台获取。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="我使用的Jacman主题的配置文件中就有配置有统计插件，"><a href="#我使用的Jacman主题的配置文件中就有配置有统计插件，" class="headerlink" title="我使用的Jacman主题的配置文件中就有配置有统计插件，"></a>我使用的Jacman主题的配置文件中就有配置有统计插件，</h1><ul><li>有谷歌，百度以及CNZZ，我最终选择的是CNZZ,原因是CNZZ有手机版，<blockquote><p>比较好随时查看。百度的一开始我也有安装，不过下载的手机软件我打开时空白的，<br>我是IOS版本的，最终CNZZ整体上让我比较满意<br>对应的配置如下，开启cnzz_tongji对应的enable属性改成true,<br>siteid就从注册的cnzz控制台获取。</p></blockquote></li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;我使用的Jacman主题的配置文件中就有配置有统计插件，有谷歌，百度以及CNZZ，我最终选择的是CNZZ,原因是CNZZ有手机版，比较好随时查看。百度的一开始我也有安装，不过下载的手机软件我打开时空白的，我是IOS版本的，最终CNZZ整体上让我比较满意&lt;br&gt;对应的配置如下
+        &lt;h1 id=&quot;我使用的Jacman主题的配置文件中就有配置有统计插件，&quot;&gt;&lt;a href=&quot;#我使用的Jacman主题的配置文件中就有配置有统计插件，&quot; class=&quot;headerlink&quot; title=&quot;我使用的Jacman主题的配置文件中就有配置有统计插件，&quot;&gt;&lt;/a&gt;我使
       
     
     </summary>
@@ -227,8 +227,8 @@
   
   <entry>
     <title>new blogs</title>
-    <link href="http://yoursite.com/2017/10/30/new-blogs%20-%20%E5%89%AF%E6%9C%AC%20(3)/"/>
-    <id>http://yoursite.com/2017/10/30/new-blogs - 副本 (3)/</id>
+    <link href="http://yoursite.com/2017/10/30/new-blogs%20-%20%E5%89%AF%E6%9C%AC%20(4)/"/>
+    <id>http://yoursite.com/2017/10/30/new-blogs - 副本 (4)/</id>
     <published>2017-10-30T12:04:29.000Z</published>
     <updated>2017-10-30T12:04:29.230Z</updated>
     
@@ -241,8 +241,8 @@
   
   <entry>
     <title>new blogs</title>
-    <link href="http://yoursite.com/2017/10/30/new-blogs%20-%20%E5%89%AF%E6%9C%AC%20(4)/"/>
-    <id>http://yoursite.com/2017/10/30/new-blogs - 副本 (4)/</id>
+    <link href="http://yoursite.com/2017/10/30/new-blogs%20-%20%E5%89%AF%E6%9C%AC%20(3)/"/>
+    <id>http://yoursite.com/2017/10/30/new-blogs - 副本 (3)/</id>
     <published>2017-10-30T12:04:29.000Z</published>
     <updated>2017-10-30T12:04:29.230Z</updated>
     

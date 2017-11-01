@@ -1161,10 +1161,11 @@ pre .javascript .function {
     padding: 0 10px;
     clear: both;
     border-top: 1px solid #ddd;
-    background: #fff;
+    background: #fdfdfd;
     z-index: 99999;
     position: absolute;
     top: 20px;
+    width: 100%;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -1186,6 +1187,7 @@ pre .javascript .function {
     margin-right: auto !important;
     width: 530px;
     border-radius: initial;
+    width: 100%;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -1224,7 +1226,7 @@ pre .javascript .function {
 }
 @media screen and (max-width: 767px) {
   .menu .menu-item {
-    margin-top: 10px;
+    margin-bottom: 15px !important;
   }
 }
 .menu .menu-item a {
@@ -1237,14 +1239,28 @@ pre .javascript .function {
   transition-timing-function: ease-in-out;
   transition-delay: 0s;
   margin-bottom: 5px;
+  text-align: center !important;
 }
 .menu .menu-item a:hover {
   border-bottom: 1px solid #222;
   background: none !important;
   opacity: 1;
 }
-.menu .menu-item .fa {
-  margin-right: 5px;
+@media (max-width: 767px) {
+  .menu .menu-item .fa {
+    margin-right: 5px;
+    display: none !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .menu .menu-item .fa {
+    display: inline !important;
+  }
+}
+@media (min-width: 992px) {
+  .menu .menu-item .fa {
+    display: inline !important;
+  }
 }
 .use-motion .menu-item {
   opacity: 0;
@@ -2101,7 +2117,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fbd9cf;
+  background: #ff9aff;
 }
 .links-of-blogroll {
   font-size: 13px;
