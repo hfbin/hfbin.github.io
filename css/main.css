@@ -1128,7 +1128,7 @@ pre .javascript .function {
 .site-subtitle {
   margin-top: 10px;
   font-size: 13px;
-  color: #999;
+  color: #0c106c;
   display: inline !important;
   top: 6px !important;
   z-index: 1;
@@ -1199,16 +1199,20 @@ pre .javascript .function {
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .menu {
-    margin-top: 28px !important;
+    margin-top: 22px !important;
     float: none !important;
     text-align: center;
+    position: relative;
+    left: -28px;
   }
 }
 @media (min-width: 992px) {
   .menu {
-    margin-top: 28px !important;
+    margin-top: 22px !important;
     float: none !important;
     text-align: center;
+    position: relative;
+    left: -25px;
   }
 }
 @media (max-width: 767px) {
@@ -2116,7 +2120,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff862d;
+  background: #ffa2d4;
 }
 .links-of-blogroll {
   font-size: 13px;
