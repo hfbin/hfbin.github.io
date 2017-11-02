@@ -2119,7 +2119,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cdbf87;
+  background: #ff67ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2638,6 +2638,9 @@ img:hover {
   transform: translate(-50%, -50%);
   color: #ccc;
 }
+.busuanzi-count {
+  text-align: center !important;
+}
 @media (min-width: 768px) and (max-width: 991px) {
   .busuanzi-count {
     text-align: center;
@@ -2647,6 +2650,10 @@ img:hover {
   .busuanzi-count {
     text-align: center;
   }
+}
+.busuanzi-count::before {
+  width: 0px !important;
+  display: none;
 }
 .site-uv,
 .site-pv,
