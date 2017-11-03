@@ -1072,9 +1072,28 @@ pre .javascript .function {
 .back-to-top.back-to-top-on {
   bottom: 19px;
 }
-.header {
-  background: url("../header_background.jpg") no-repeat top center !important;
-  padding: 0px 0 10px 0;
+@media (max-width: 767px) {
+  .header {
+    background: #2c2727 !important;
+  }
+  .header .site-title {
+    font-size: 22px !important;
+  }
+  .header .site-subtitle {
+    color: #fff;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .header {
+    background: url("../header_background.jpg") no-repeat top center !important;
+    padding: 0px 0 10px 0;
+  }
+}
+@media (min-width: 992px) {
+  .header {
+    background: url("../header_background.jpg") no-repeat top center !important;
+    padding: 0px 0 10px 0;
+  }
 }
 .header-inner {
   position: relative;
@@ -1170,7 +1189,7 @@ pre .javascript .function {
     background: #fdfdfd;
     z-index: 99999;
     position: absolute;
-    top: 40px;
+    top: 56px;
     width: 100%;
   }
 }
@@ -2119,7 +2138,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff67ff;
+  background: #864a93;
 }
 .links-of-blogroll {
   font-size: 13px;

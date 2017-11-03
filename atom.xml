@@ -112,6 +112,8 @@
       <category term="SSM+Maven" scheme="http://yoursite.com/categories/SSM-Maven/"/>
     
     
+      <category term="SSM" scheme="http://yoursite.com/tags/SSM/"/>
+    
       <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
     
       <category term="SpringMVC" scheme="http://yoursite.com/tags/SpringMVC/"/>
@@ -119,8 +121,6 @@
       <category term="Mybatis" scheme="http://yoursite.com/tags/Mybatis/"/>
     
       <category term="Maven" scheme="http://yoursite.com/tags/Maven/"/>
-    
-      <category term="SSM" scheme="http://yoursite.com/tags/SSM/"/>
     
   </entry>
   

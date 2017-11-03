@@ -477,7 +477,8 @@
       
         
           
-          最新资讯近日，在微软亚洲研究院与哈工大共同举办的第十九届“二十一世纪的计算”国际学术研讨会上， Peter Lee 博士作为微软全球资深副总裁， 也来到了现场。AI科技大本营非常有幸采访到这位微软研究院的核心领导之一。对话中，Peter Lee透露了很多信息。谈到微软在 AI 研究和 AI 产业化方
+          最新资讯近日，在微软亚洲研究院与哈工大共同举办的第十九届“二十一世纪的计算”国际学术研讨会上， Peter Lee 博士作为微软全球资深副总裁， 也来到了现场。AI科技大本营非常有幸采访到这位微软研究院的核心领导之一。对话中，Peter Lee透露了很多信息。谈到微软在 AI 研究和 AI 产业化方面布局这个问题时，他表示微软对新技术、新机会非常重视，投入得非常多，微软现在领先 20 年。
+简介1、Apache Shiro 是Java  的一个安全（权限）框架2、Shiro 可以非常容易的开发出足够好的应用，其不仅可以用在JavaSE环境，也可以用JavaEE环境。3、Shiro可以完成：认证、授权、加密、会话管理、与Web 集成、缓存等。4、下载：http://shiro.apache.o
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -637,7 +638,7 @@
         
           
           最新资讯谷歌的一篇文章则着重说明了新成立的指导小组将如何“让MDN成为最好的Web参考文档，帮助我们更好地进行Web开发”。指导小组目前的成员包括微软、谷歌、Mozilla、三星和W3C。值得注意的是，苹果公司并没有参与这次发布声明。
-前言一直想要一个自己的独立博客，域名跟服务器到现在快买有一年了，
+前言一直想要一个自己的独立博客，域名跟服务器到现在快买有一年了，由于种种原因最终还是没有搭建自己的博客，服务器差不多放一年了，快要发霉了。去逛gitHub时候发现好多人的项目里都有**.github.io慢慢研究，就偶然的发现Hexo这个优秀的静态博客框架，再搭配现在流行的gitHub，当然也可以放在Coding或码云，简直是完美写博客的黄金搭档（免费+方便）。我就百度好多教程，最后磕磕碰碰的搭建了起来。但是网上的教程多多少少都有点问题。就有了这个自己总结的教
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -804,7 +805,23 @@ daemonize no
 
 
 当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定
+pidfile /var/run/redis.pid
 
+
+
+
+指定Redis监听端口，默认端口为6379，作者在自己的一篇博文中解释了为什么选用6379作为默认端口，因为6379在手机按键上MERZ对应的号码，而MERZ取自意大利歌女Alessia Merz的名字
+port 6379
+
+
+
+
+绑定的主机地址
+
+bind 127.0.0.1
+
+
+当 客户端闲置多长时间后关闭连接，如果指定为0，表示关
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -964,7 +981,7 @@ daemonize no
         
           
           在整合之前先介绍一下Maven:
-Maven是一个项目管理工具，它包含了一个项目对象模型 (Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在
+Maven是一个项目管理工具，它包含了一个项目对象模型 (Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal)的逻辑。当你使用Maven的时候，你用一个明确定义的项目对象模型来描述你的项目，然后Maven可以应用横切的逻辑，这些逻辑来自一组共享的（或者自定义的）插件。 Maven 有一个生命周期，当你运行 mvn install 的时候被调用。这条命令告诉 Maven 执行一系列的有序的步骤，直到到达你指定的生命周期。遍历生命周期旅途中的一个
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1127,8 +1144,12 @@ Maven是一个项目管理工具，它包含了一个项目对象模型 (Project
 yum install git 
 
 克隆GitHub上的项目到liunx下：第一步先复制链接第二步在liunx下克隆项目（最好先创建一个克隆的文件夹）：命令：git clone https://github.com/hfbin/ThirdPartyLogin.git
-Liu
-          ...
+Liunx环境下更新github项目  执行git commit 后：  ：wq 保存后：  本地提交 git push：输入用户名密码即可发布到GitHub上：
+到GitHub上查看项目是否更新
+大功告成 ！！！！
+转发者必须注明转发链接
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/10/31/基于liunx的git操作/#more" rel="contents">
@@ -1226,7 +1247,7 @@ Liu
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1237,7 +1258,7 @@ Liu
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
