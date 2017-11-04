@@ -2138,7 +2138,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #9544c3;
+  background: #2b4ae2;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2256,6 +2256,21 @@ img:hover {
 }
 .footer img {
   border: none;
+}
+@media (max-width: 767px) {
+  .display_zhanzhang {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .display_zhanzhang {
+    display: block !important;
+  }
+}
+@media (min-width: 992px) {
+  .display_zhanzhang {
+    display: block !important;
+  }
 }
 .with-love {
   display: inline-block;
