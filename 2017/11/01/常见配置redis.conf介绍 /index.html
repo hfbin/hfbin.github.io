@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Hfbin Blog">
 <meta property="og:description" content="参数说明redis.conf 配置项说明如下： Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程 daemonize no     当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定 pidfile /var/run/redis.pid     指定Redis监听端口，默认端口为63">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-03T17:09:06.144Z">
+<meta property="og:updated_time" content="2018-01-06T06:10:55.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常见配置redis.conf介绍">
 <meta name="twitter:description" content="参数说明redis.conf 配置项说明如下： Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程 daemonize no     当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定 pidfile /var/run/redis.pid     指定Redis监听端口，默认端口为63">
@@ -116,7 +116,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -696,8 +696,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/31/Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合/" rel="next" title="Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合">
-                <i class="fa fa-chevron-left"></i> Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合
+              <a href="/2017/10/31/基于liunx的git操作/" rel="next" title="基于liunx的git操作">
+                <i class="fa fa-chevron-left"></i> 基于liunx的git操作
               </a>
             
           </div>
@@ -706,8 +706,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/02/hexo+gitHub搭建个人独立博客(一) /" rel="prev" title="hexo+gitHub搭建个人独立博客(一)">
-                hexo+gitHub搭建个人独立博客(一) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/02/shiro 简介/" rel="prev" title="shiro 简介">
+                shiro 简介 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -811,7 +811,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -822,7 +822,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -833,7 +833,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -949,8 +949,8 @@
 </div>
 <div class="copyright" style="text-align: center !important;">
   
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1004,6 +1004,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

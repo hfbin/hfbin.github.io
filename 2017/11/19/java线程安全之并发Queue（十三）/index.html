@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="线程安全,java," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="并发Queue&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在并发的队列上jdk提供了两套实现，一个是以ConcurrentLinkedQueue为代表的高性能队列，一个是以BlockingQueue接口为代表的阻塞队列，无论在那种都继承自Queue。如图继承Queue共有二十四个： ConcurrentLinkedQueue概念理解&amp;nbsp;&amp;nbsp;&amp;">
+<meta name="keywords" content="线程安全,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java线程安全之并发Queue（十三）">
+<meta property="og:url" content="http://yoursite.com/2017/11/19/java线程安全之并发Queue（十三）/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="并发Queue&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在并发的队列上jdk提供了两套实现，一个是以ConcurrentLinkedQueue为代表的高性能队列，一个是以BlockingQueue接口为代表的阻塞队列，无论在那种都继承自Queue。如图继承Queue共有二十四个： ConcurrentLinkedQueue概念理解&amp;nbsp;&amp;nbsp;&amp;">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img.blog.csdn.net/20171119234031495?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171119234043176?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-01-06T06:10:58.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java线程安全之并发Queue（十三）">
+<meta name="twitter:description" content="并发Queue&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在并发的队列上jdk提供了两套实现，一个是以ConcurrentLinkedQueue为代表的高性能队列，一个是以BlockingQueue接口为代表的阻塞队列，无论在那种都继承自Queue。如图继承Queue共有二十四个： ConcurrentLinkedQueue概念理解&amp;nbsp;&amp;nbsp;&amp;">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171119234031495?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/19/java线程安全之并发Queue（十三）/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>java线程安全之并发Queue（十三） | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/19/java线程安全之并发Queue（十三）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java线程安全之并发Queue（十三）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-19T23:40:23+08:00">
+                2017-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/线程安全/" itemprop="url" rel="index">
+                    <span itemprop="name">线程安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/19/java线程安全之并发Queue（十三）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/19/java线程安全之并发Queue（十三）/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="并发Queue"><a href="#并发Queue" class="headerlink" title="并发Queue"></a>并发Queue</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在并发的队列上jdk提供了两套实现，一个是以ConcurrentLinkedQueue为代表的高性能队列，一个是以BlockingQueue接口为代表的阻塞队列，无论在那种都继承自Queue。<br>如图继承Queue共有二十四个：<br><img src="http://img.blog.csdn.net/20171119234031495?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20171119234043176?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h4 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a><strong>ConcurrentLinkedQueue</strong></h4><h5 id="概念理解"><a href="#概念理解" class="headerlink" title="概念理解"></a><strong>概念理解</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ConcurrentLinkedQueue：是一个适用于高并发场景下的队列，通过无锁的方式，实现了高并发状态下的高性能，通常ConcurrentLinkedQueue性能好于BlockingQueueo它是一个基于链接节点的无界线程安全队列。该队列的元素遵循先讲先出的原则。头是最先加入的，尾是最近加入的，该队列不允许null元素。<br>ConcurrentLinkedQueue重要方法：</p>
+<p>Add()和offer()都是加入元素的方法（在ConcurrentLinkedQueue中，这两个方法投有任何区别） </p>
+<p>Poll()和peek()都是取头元素节点，区别在于前者会删除元素，后者不会。</p>
+<h5 id="案例"><a href="#案例" class="headerlink" title="案例"></a><strong>案例</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseQueue_ConcurrentLinkedQueue</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">//高性能无阻塞无界队列：ConcurrentLinkedQueue</span></div><div class="line"></div><div class="line">        ConcurrentLinkedQueue&lt;String&gt; q = <span class="keyword">new</span> ConcurrentLinkedQueue&lt;String&gt;();</div><div class="line">        q.offer(<span class="string">"a"</span>);</div><div class="line">        q.offer(<span class="string">"b"</span>);</div><div class="line">        q.offer(<span class="string">"c"</span>);</div><div class="line">        q.offer(<span class="string">"d"</span>);</div><div class="line">        q.add(<span class="string">"e"</span>);</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"从头部取出元素，并从队列里删除 &gt;&gt; "</span>+q.poll());    <span class="comment">//a 从头部取出元素，并从队列里删除</span></div><div class="line">        System.out.println(<span class="string">"删除后的长度 &gt;&gt; "</span>+q.size());    <span class="comment">//4</span></div><div class="line">        System.out.println(<span class="string">"取出头部元素 &gt;&gt; "</span>+q.peek());    <span class="comment">//b</span></div><div class="line">        System.out.println(<span class="string">"长度 &gt;&gt; "</span>+q.size());    <span class="comment">//4</span></div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">从头部取出元素，并从队列里删除 &gt;&gt; a</div><div class="line">删除后的长度 &gt;&gt; 4</div><div class="line">取出头部元素 &gt;&gt; b</div><div class="line">长度 &gt;&gt; 4</div></pre></td></tr></table></figure>
+<h4 id="BlockingQueue接口"><a href="#BlockingQueue接口" class="headerlink" title="BlockingQueue接口"></a><strong>BlockingQueue接口</strong></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ArrayBlockingQueue：基于数组的阻塞队列实现，在ArrayBlockingQueue内部，维护了一个定长数组，以便缓存队列中的数据对象，其内部没实现读写分离，也就意味着生产和消费不能完全并行，长度是需要定义的，可以指定先讲先出或者先讲后出，也叫有界队列，在很多场合非常适合使用。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LinkedBlockingQueue：基于链表的阻塞队列，同ArrayBlockingQueue类似，其内部也维持着一个数据缓冲队列〈该队列由一个链表构成），LinkedBlockingQueue之所以能够高效的处理并发数据，是因为其内部实现采用分离锁（读写分离两个锁），从而实现生产者和消费者操作的完全并行运行,他是一个无界队列。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SynchronousQueue：一种没有缓冲的队列，生产者产生的数据直接会被消费者获取并消费。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PriorityBlockingQueue：基于优先级的阻塞队列（优先级的判断通过构造函数传入的Compator对象来决定，也就是说传入队列的对象必须实现Comparable接口），在实现PriorityBlockingQueue时，内部控制线程同步的锁采用的是公平锁，他也是一个无界的队列。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DelayQueue：带有延迟时间的Queue，其中的元素只有当其指定的延迟时间到了，才能够从队列中获取到该元素。DelayQueue中的元素必须实现Delayed接口，DelayQueue是一个没有大小限制的队列，应用场景很多，比如对缓存超时的数据进行移除、任务超时处理、空闲连接的关闭等等。</p>
+<h5 id="ArrayBlockingQueue、LinkedBlockingQueue、synchronousQueue案例"><a href="#ArrayBlockingQueue、LinkedBlockingQueue、synchronousQueue案例" class="headerlink" title="ArrayBlockingQueue、LinkedBlockingQueue、synchronousQueue案例"></a><strong>ArrayBlockingQueue、LinkedBlockingQueue、synchronousQueue案例</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseQueue_ConcurrentLinkedQueue</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">        System.out.println(<span class="string">"--------------- ArrayBlockingQueue --------------"</span>);</div><div class="line">        <span class="comment">//阻塞队列    有长度的队列</span></div><div class="line">        ArrayBlockingQueue&lt;String&gt; array = <span class="keyword">new</span> ArrayBlockingQueue&lt;String&gt;(<span class="number">5</span>);</div><div class="line">        array.put(<span class="string">"a"</span>);</div><div class="line">        array.put(<span class="string">"b"</span>);</div><div class="line">        array.add(<span class="string">"c"</span>);</div><div class="line">        array.add(<span class="string">"d"</span>);</div><div class="line">        array.add(<span class="string">"e"</span>);</div><div class="line">        <span class="comment">//array.add("f");</span></div><div class="line">        <span class="comment">//返回一个布尔类型   在3秒之内能不能加入  不能返回false</span></div><div class="line">        System.out.println(array.offer(<span class="string">"a"</span>, <span class="number">3</span>, TimeUnit.SECONDS));</div><div class="line">        System.out.println(<span class="string">"所有数据  &gt;&gt;  "</span> + array.toString());</div><div class="line"></div><div class="line"></div><div class="line">        System.out.println(<span class="string">"--------------- LinkedBlockingQueue --------------"</span>);</div><div class="line">        <span class="comment">//阻塞队列   无长度限制队列</span></div><div class="line">        LinkedBlockingQueue&lt;String&gt; q = <span class="keyword">new</span> LinkedBlockingQueue&lt;String&gt;();</div><div class="line">        q.offer(<span class="string">"a"</span>);</div><div class="line">        q.offer(<span class="string">"b"</span>);</div><div class="line">        q.offer(<span class="string">"c"</span>);</div><div class="line">        q.offer(<span class="string">"d"</span>);</div><div class="line">        q.offer(<span class="string">"e"</span>);</div><div class="line">        q.add(<span class="string">"f"</span>);</div><div class="line">        System.out.println(<span class="string">"总长度  &gt;&gt;  "</span>+q.size());</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (Iterator iterator = q.iterator(); iterator.hasNext(); ) &#123;</div><div class="line">            String string = (String) iterator.next();</div><div class="line">            System.out.print(string+<span class="string">" -- "</span>);</div><div class="line">        &#125;</div><div class="line">        System.out.println();</div><div class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">        <span class="comment">//在 q 的队列中取三个元素放到list 队列里</span></div><div class="line">        System.out.println(q.drainTo(list, <span class="number">3</span>));</div><div class="line">        System.out.println(<span class="string">"取出LinkedBlockingQueue数据放到list列表的长度为   &gt;&gt;  "</span>+list.size());</div><div class="line">        <span class="keyword">for</span> (String string : list) &#123;</div><div class="line">            System.out.print(string + <span class="string">" -- "</span>);</div><div class="line">        &#125;</div><div class="line">        System.out.println();</div><div class="line">        System.out.println(<span class="string">"--------------- SynchronousQueue --------------"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">final</span> SynchronousQueue&lt;String&gt; q1 = <span class="keyword">new</span> SynchronousQueue&lt;String&gt;();</div><div class="line">        Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line"></div><div class="line">                    System.out.println(Thread.currentThread().getName()+<span class="string">"取数据  "</span>+ q1.take());</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        t1.start();</div><div class="line">        Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                q1.add(<span class="string">"b"</span>);</div><div class="line">                System.out.println(Thread.currentThread().getName() +<span class="string">"加入数据  b"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        t2.start();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>打印结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">--------------- ArrayBlockingQueue --------------</div><div class="line">false</div><div class="line">所有数据  &gt;&gt;  [a, b, c, d, e]</div><div class="line">--------------- LinkedBlockingQueue --------------</div><div class="line">总长度  &gt;&gt;  6</div><div class="line">a -- b -- c -- d -- e -- f -- </div><div class="line">3</div><div class="line">取出LinkedBlockingQueue数据放到list列表的长度为   &gt;&gt;  3</div><div class="line">a -- b -- c -- </div><div class="line">--------------- SynchronousQueue --------------</div><div class="line">Thread-1加入数据  b</div><div class="line">Thread-0取数据  b</div></pre></td></tr></table></figure></p>
+<h5 id="PriorityBlockingQueue-案例"><a href="#PriorityBlockingQueue-案例" class="headerlink" title="PriorityBlockingQueue 案例"></a><strong>PriorityBlockingQueue 案例</strong></h5><p>Task.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Task</span>&gt;</span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id ;</div><div class="line">	<span class="keyword">private</span> String name;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> id;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.id = id;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> name;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.name = name;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Task task)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.id &gt; task.id ? <span class="number">1</span> : (<span class="keyword">this</span>.id &lt; task.id ? -<span class="number">1</span> : <span class="number">0</span>);  </div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.id + <span class="string">","</span> + <span class="keyword">this</span>.name;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>UsePriorityBlockingQueue.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UsePriorityBlockingQueue</span> </span>&#123;</div><div class="line"></div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		</div><div class="line">		</div><div class="line">		PriorityBlockingQueue&lt;Task&gt; q2 = <span class="keyword">new</span> PriorityBlockingQueue&lt;Task&gt;();</div><div class="line">		</div><div class="line">		Task t1 = <span class="keyword">new</span> Task();</div><div class="line">		t1.setId(<span class="number">3</span>);</div><div class="line">		t1.setName(<span class="string">"id为3"</span>);</div><div class="line">		Task t2 = <span class="keyword">new</span> Task();</div><div class="line">		t2.setId(<span class="number">4</span>);</div><div class="line">		t2.setName(<span class="string">"id为4"</span>);</div><div class="line">		Task t3 = <span class="keyword">new</span> Task();</div><div class="line">		t3.setId(<span class="number">1</span>);</div><div class="line">		t3.setName(<span class="string">"id为1"</span>);</div><div class="line">		Task t4 = <span class="keyword">new</span> Task();</div><div class="line">		t4.setId(<span class="number">2</span>);</div><div class="line">		t4.setName(<span class="string">"id为2"</span>);</div><div class="line">		</div><div class="line">		<span class="comment">//return this.id &gt; task.id ? 1 : 0;</span></div><div class="line">		q2.add(t1);	<span class="comment">//3</span></div><div class="line">		q2.add(t2);	<span class="comment">//4</span></div><div class="line">		q2.add(t3);  <span class="comment">//1</span></div><div class="line">		q2.add(t4);</div><div class="line">		</div><div class="line">		<span class="comment">// 1 3 4</span></div><div class="line">		<span class="comment">//第一次取值时候是取最小的后面不做排序</span></div><div class="line">		System.out.println(<span class="string">"容器："</span> + q2);  <span class="comment">//[1,id为1, 2,id为2, 3,id为3, 4,id为4]</span></div><div class="line">		<span class="comment">//拿出一个元素后  又会取一个最小的出来 放在第一个</span></div><div class="line">		System.out.println(q2.take().getId());</div><div class="line">		System.out.println(<span class="string">"容器："</span> + q2);    <span class="comment">//[2,id为2, 4,id为4, 3,id为3]</span></div><div class="line">		System.out.println(q2.take().getId());</div><div class="line">		System.out.println(<span class="string">"容器："</span> + q2);  <span class="comment">//[3,id为3, 4,id为4]</span></div><div class="line">		</div><div class="line"></div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打印结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">容器：[1,id为1, 2,id为2, 3,id为3, 4,id为4]</div><div class="line">1</div><div class="line">容器：[2,id为2, 4,id为4, 3,id为3]</div><div class="line">2</div><div class="line">容器：[3,id为3, 4,id为4]</div></pre></td></tr></table></figure></p>
+<h5 id="DelayQueue-案例"><a href="#DelayQueue-案例" class="headerlink" title="DelayQueue 案例 "></a><strong>DelayQueue 案例 </strong></h5><p>Wangmin.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wangmin</span> <span class="keyword">implements</span> <span class="title">Delayed</span> </span>&#123;  </div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String name;  </div><div class="line">    <span class="comment">//身份证  </span></div><div class="line">    <span class="keyword">private</span> String id;  </div><div class="line">    <span class="comment">//截止时间  </span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> endTime;  </div><div class="line">    <span class="comment">//定义时间工具类</span></div><div class="line">    <span class="keyword">private</span> TimeUnit timeUnit = TimeUnit.SECONDS;</div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Wangmin</span><span class="params">(String name,String id,<span class="keyword">long</span> endTime)</span></span>&#123;  </div><div class="line">        <span class="keyword">this</span>.name=name;  </div><div class="line">        <span class="keyword">this</span>.id=id;  </div><div class="line">        <span class="keyword">this</span>.endTime = endTime;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span></span>&#123;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.id;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="comment">/** </span></div><div class="line"><span class="comment">     * 用来判断是否到了截止时间 </span></div><div class="line"><span class="comment">     */</span>  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getDelay</span><span class="params">(TimeUnit unit)</span> </span>&#123; </div><div class="line">        <span class="comment">//return unit.convert(endTime, TimeUnit.MILLISECONDS) - unit.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS);</span></div><div class="line">    	<span class="keyword">return</span> endTime - System.currentTimeMillis();</div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="comment">/** </span></div><div class="line"><span class="comment">     * 相互批较排序用 </span></div><div class="line"><span class="comment">     */</span>  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Delayed delayed)</span> </span>&#123;  </div><div class="line">    	Wangmin w = (Wangmin)delayed;  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getDelay(<span class="keyword">this</span>.timeUnit) - w.getDelay(<span class="keyword">this</span>.timeUnit) &gt; <span class="number">0</span> ? <span class="number">1</span>:<span class="number">0</span>;  </div><div class="line">    &#125;  </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>WangBa.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WangBa</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;  </div><div class="line">    </div><div class="line">    <span class="keyword">private</span> DelayQueue&lt;Wangmin&gt; queue = <span class="keyword">new</span> DelayQueue&lt;Wangmin&gt;();  </div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> yinye =<span class="keyword">true</span>;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shangji</span><span class="params">(String name,String id,<span class="keyword">int</span> money)</span></span>&#123;  </div><div class="line">        Wangmin man = <span class="keyword">new</span> Wangmin(name, id, <span class="number">1000</span> * money + System.currentTimeMillis());  </div><div class="line">        System.out.println(<span class="string">"网名"</span>+man.getName()+<span class="string">" 身份证"</span>+man.getId()+<span class="string">"交钱"</span>+money+<span class="string">"块,开始上机..."</span>);  </div><div class="line">        <span class="keyword">this</span>.queue.add(man);  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xiaji</span><span class="params">(Wangmin man)</span></span>&#123;  </div><div class="line">        System.out.println(<span class="string">"网名"</span>+man.getName()+<span class="string">" 身份证"</span>+man.getId()+<span class="string">"时间到下机..."</span>);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">while</span>(yinye)&#123;  </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                Wangmin man = queue.take();  </div><div class="line">                xiaji(man);  </div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;  </div><div class="line">        <span class="keyword">try</span>&#123;  </div><div class="line">            System.out.println(<span class="string">"网吧开始营业"</span>);  </div><div class="line">            WangBa siyu = <span class="keyword">new</span> WangBa();  </div><div class="line">            Thread shangwang = <span class="keyword">new</span> Thread(siyu);  </div><div class="line">            shangwang.start();  </div><div class="line">              </div><div class="line">            siyu.shangji(<span class="string">"路人甲"</span>, <span class="string">"123"</span>, <span class="number">1</span>);  </div><div class="line">            siyu.shangji(<span class="string">"路人乙"</span>, <span class="string">"234"</span>, <span class="number">10</span>);  </div><div class="line">            siyu.shangji(<span class="string">"路人丙"</span>, <span class="string">"345"</span>, <span class="number">5</span>);  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">catch</span>(Exception e)&#123;  </div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;  </div><div class="line">  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打印结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">网吧开始营业</div><div class="line">网名路人甲 身份证123交钱1块,开始上机...</div><div class="line">网名路人乙 身份证234交钱10块,开始上机...</div><div class="line">网名路人丙 身份证345交钱5块,开始上机...</div><div class="line">网名路人甲 身份证123时间到下机...</div><div class="line">网名路人丙 身份证345时间到下机...</div><div class="line">网名路人乙 身份证234时间到下机...</div></pre></td></tr></table></figure></p>
+<h4 id="BlockingQueue-接口的重要方法"><a href="#BlockingQueue-接口的重要方法" class="headerlink" title="BlockingQueue 接口的重要方法"></a><strong>BlockingQueue 接口的重要方法</strong></h4><h5 id="放入数据："><a href="#放入数据：" class="headerlink" title="放入数据："></a><strong>放入数据：</strong></h5><p>offer(anObject):表示如果可能的话，将anObject加到BlockingQueue里，即如果BlockingQueue 可以容纳，则返回true，否则返回false．（本方法不阻蹇当前执行方法的线程）</p>
+<p>offer(E 0，long timeout, TimeUnit unit),可以设定等待的时间，如果在指定的时间内，还不能往队列中加入BlockingQueue,则返回失败。</p>
+<p>put(anObject):把anObject加到BlockingQueue里，如果BlockQueue没有空间，则调用此方法的线程被阻断直到BlokingQue里面有空间再继续，</p>
+<p>#####<strong>获取数据：</strong><br>poll(time)：取走BlokingQueue里排在首位的对象，若不能立即取出，则可以等time参数规定的时间，取不到时返回null</p>
+<p>poll(long timeout, Timeunit unit):从blockingQueue取出一个队首的对象，如果在指定时间内，队列一旦有数据可取，则立即返回队列中的数据。否则知道时间超时还没有数据可取，返回失败。</p>
+<p>take()：取走引BlockinQueue里排在首位的对象，若BlockingQueue为空，阻断进入等待状态直到BlckingQueue有新的数据被加入；</p>
+<p>drainTo()：一次性从BlockingQueue获取所有可用的数据对象（还可以指定获取数据的个数），通过该方法，可以提升获取数据效率：不需要多次分批加锁或释放锁。</p>
+<h4 id="Deque-双端队列"><a href="#Deque-双端队列" class="headerlink" title="Deque 双端队列"></a><strong>Deque 双端队列</strong></h4><p>Deque允许在队列的头部活尾部进行出队和入队操作。</p>
+<p>LinkedBlockingDeque是一个线程安全的双端队列实现，可以说他是最为复杂的一种队列，在内部实现维护了前端和后端节点，但是其没有实现读写分离，因此同一时间只能有一个线程对其讲行操作。在高并发中性能要远低于其他引。BlockingQueue。更要低于ConcurrentLinkedQueue，布jdk早期有一个非线程安全的Deque就是ArryDeque了， java6里添加了LinkBlockingDeque来弥补多线程场景下线程安全的问题。</p>
+<h5 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a><strong>案例</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseDeque</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">		LinkedBlockingDeque&lt;String&gt; dq = <span class="keyword">new</span> LinkedBlockingDeque&lt;String&gt;(<span class="number">10</span>);</div><div class="line">		dq.addFirst(<span class="string">"a"</span>);</div><div class="line">		dq.addFirst(<span class="string">"b"</span>);</div><div class="line">		dq.addFirst(<span class="string">"c"</span>);</div><div class="line">		dq.addFirst(<span class="string">"d"</span>);</div><div class="line">		dq.addFirst(<span class="string">"e"</span>);</div><div class="line">		dq.addLast(<span class="string">"f"</span>);</div><div class="line">		dq.addLast(<span class="string">"g"</span>);</div><div class="line">		dq.addLast(<span class="string">"h"</span>);</div><div class="line">		dq.addLast(<span class="string">"i"</span>);</div><div class="line">		dq.addLast(<span class="string">"j"</span>);</div><div class="line">		<span class="comment">//dq.offerFirst("k");</span></div><div class="line">		System.out.println(<span class="string">"查看头元素："</span> + dq.peekFirst());</div><div class="line">		System.out.println(<span class="string">"获取尾元素："</span> + dq.pollLast());</div><div class="line">		Object [] objs = dq.toArray();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; objs.length; i++) &#123;</div><div class="line">			System.out.print(objs[i] + <span class="string">" -- "</span>);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>打印结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">查看头元素：e</div><div class="line">获取尾元素：j</div><div class="line">e -- d -- c -- b -- a -- f -- g -- h -- i --</div></pre></td></tr></table></figure>
+<h5 id="LinkedBlockingDeque-方法说明"><a href="#LinkedBlockingDeque-方法说明" class="headerlink" title="LinkedBlockingDeque 方法说明"></a><strong>LinkedBlockingDeque 方法说明</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建一个容量为 Integer.MAX_VALUE 的 LinkedBlockingDeque。</span></div><div class="line">LinkedBlockingDeque()</div><div class="line"><span class="comment">// 创建一个容量为 Integer.MAX_VALUE 的 LinkedBlockingDeque，最初包含给定 collection 的元素，以该 collection 迭代器的遍历顺序添加。</span></div><div class="line">LinkedBlockingDeque(Collection&lt;? extends E&gt; c)</div><div class="line"><span class="comment">// 创建一个具有给定（固定）容量的 LinkedBlockingDeque。</span></div><div class="line">LinkedBlockingDeque(<span class="keyword">int</span> capacity)</div><div class="line"><span class="comment">// 在不违反容量限制的情况下，将指定的元素插入此双端队列的末尾。</span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 如果立即可行且不违反容量限制，则将指定的元素插入此双端队列的开头；如果当前没有空间可用，则抛出 IllegalStateException。</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 如果立即可行且不违反容量限制，则将指定的元素插入此双端队列的末尾；如果当前没有空间可用，则抛出 IllegalStateException。</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">addLast</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 以原子方式 (atomically) 从此双端队列移除所有元素。</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 如果此双端队列包含指定的元素，则返回 true。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span></span></div><div class="line"><span class="function"><span class="comment">// 返回在此双端队列的元素上以逆向连续顺序进行迭代的迭代器。</span></span></div><div class="line"><span class="function">Iterator&lt;E&gt; <span class="title">descendingIterator</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 移除此队列中所有可用的元素，并将它们添加到给定 collection 中。</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">drainTo</span><span class="params">(Collection&lt;? <span class="keyword">super</span> E&gt; c)</span></span></div><div class="line"><span class="function"><span class="comment">// 最多从此队列中移除给定数量的可用元素，并将这些元素添加到给定 collection 中。</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">drainTo</span><span class="params">(Collection&lt;? <span class="keyword">super</span> E&gt; c, <span class="keyword">int</span> maxElements)</span></span></div><div class="line"><span class="function"><span class="comment">// 获取但不移除此双端队列表示的队列的头部。</span></span></div><div class="line"><span class="function">E <span class="title">element</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取，但不移除此双端队列的第一个元素。</span></span></div><div class="line"><span class="function">E <span class="title">getFirst</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取，但不移除此双端队列的最后一个元素。</span></span></div><div class="line"><span class="function">E <span class="title">getLast</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 返回在此双端队列元素上以恰当顺序进行迭代的迭代器。</span></span></div><div class="line"><span class="function">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 如果立即可行且不违反容量限制，则将指定的元素插入此双端队列表示的队列中（即此双端队列的尾部），并在成功时返回 true；如果当前没有空间可用，则返回 false。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 将指定的元素插入此双端队列表示的队列中（即此双端队列的尾部），必要时将在指定的等待时间内一直等待可用空间。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(E e, <span class="keyword">long</span> timeout, TimeUnit unit)</span></span></div><div class="line"><span class="function"><span class="comment">// 如果立即可行且不违反容量限制，则将指定的元素插入此双端队列的开头，并在成功时返回 true；如果当前没有空间可用，则返回 false。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offerFirst</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 将指定的元素插入此双端队列的开头，必要时将在指定的等待时间内等待可用空间。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offerFirst</span><span class="params">(E e, <span class="keyword">long</span> timeout, TimeUnit unit)</span></span></div><div class="line"><span class="function"><span class="comment">// 如果立即可行且不违反容量限制，则将指定的元素插入此双端队列的末尾，并在成功时返回 true；如果当前没有空间可用，则返回 false。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offerLast</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 将指定的元素插入此双端队列的末尾，必要时将在指定的等待时间内等待可用空间。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">offerLast</span><span class="params">(E e, <span class="keyword">long</span> timeout, TimeUnit unit)</span></span></div><div class="line"><span class="function"><span class="comment">// 获取但不移除此双端队列表示的队列的头部（即此双端队列的第一个元素）；如果此双端队列为空，则返回 null。</span></span></div><div class="line"><span class="function">E <span class="title">peek</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取，但不移除此双端队列的第一个元素；如果此双端队列为空，则返回 null。</span></span></div><div class="line"><span class="function">E <span class="title">peekFirst</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取，但不移除此双端队列的最后一个元素；如果此双端队列为空，则返回 null。</span></span></div><div class="line"><span class="function">E <span class="title">peekLast</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列表示的队列的头部（即此双端队列的第一个元素）；如果此双端队列为空，则返回 null。</span></span></div><div class="line"><span class="function">E <span class="title">poll</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列表示的队列的头部（即此双端队列的第一个元素），如有必要将在指定的等待时间内等待可用元素。</span></span></div><div class="line"><span class="function">E <span class="title">poll</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列的第一个元素；如果此双端队列为空，则返回 null。</span></span></div><div class="line"><span class="function">E <span class="title">pollFirst</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列的第一个元素，必要时将在指定的等待时间等待可用元素。</span></span></div><div class="line"><span class="function">E <span class="title">pollFirst</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列的最后一个元素；如果此双端队列为空，则返回 null。</span></span></div><div class="line"><span class="function">E <span class="title">pollLast</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列的最后一个元素，必要时将在指定的等待时间内等待可用元素。</span></span></div><div class="line"><span class="function">E <span class="title">pollLast</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span></span></div><div class="line"><span class="function"><span class="comment">// 从此双端队列所表示的堆栈中弹出一个元素。</span></span></div><div class="line"><span class="function">E <span class="title">pop</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 将元素推入此双端队列表示的栈。</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 将指定的元素插入此双端队列表示的队列中（即此双端队列的尾部），必要时将一直等待可用空间。</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 将指定的元素插入此双端队列的开头，必要时将一直等待可用空间。</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">putFirst</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 将指定的元素插入此双端队列的末尾，必要时将一直等待可用空间。</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">putLast</span><span class="params">(E e)</span></span></div><div class="line"><span class="function"><span class="comment">// 返回理想情况下（没有内存和资源约束）此双端队列可不受阻塞地接受的额外元素数。</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">remainingCapacity</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列表示的队列的头部。</span></span></div><div class="line"><span class="function">E <span class="title">remove</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 从此双端队列移除第一次出现的指定元素。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列第一个元素。</span></span></div><div class="line"><span class="function">E <span class="title">removeFirst</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 从此双端队列移除第一次出现的指定元素。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">removeFirstOccurrence</span><span class="params">(Object o)</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列的最后一个元素。</span></span></div><div class="line"><span class="function">E <span class="title">removeLast</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 从此双端队列移除最后一次出现的指定元素。</span></span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">removeLastOccurrence</span><span class="params">(Object o)</span></span></div><div class="line"><span class="function"><span class="comment">// 返回此双端队列中的元素数。</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列表示的队列的头部（即此双端队列的第一个元素），必要时将一直等待可用元素。</span></span></div><div class="line"><span class="function">E <span class="title">take</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列的第一个元素，必要时将一直等待可用元素。</span></span></div><div class="line"><span class="function">E <span class="title">takeFirst</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 获取并移除此双端队列的最后一个元素，必要时将一直等待可用元素。</span></span></div><div class="line"><span class="function">E <span class="title">takeLast</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 返回以恰当顺序（从第一个元素到最后一个元素）包含此双端队列所有元素的数组。</span></span></div><div class="line"><span class="function">Object[] <span class="title">toArray</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 返回以恰当顺序包含此双端队列所有元素的数组；返回数组的运行时类型是指定数组的运行时类型。</span></span></div><div class="line"><span class="function">&lt;T&gt; T[] <span class="title">toArray</span><span class="params">(T[] a)</span></span></div><div class="line"><span class="function"><span class="comment">// 返回此 collection 的字符串表示形式。</span></span></div><div class="line"><span class="function">String <span class="title">toString</span><span class="params">()</span></span></div></pre></td></tr></table></figure>
+<p>源代码：<a href="https://github.com/hfbin/Thread_Socket/tree/master/Thread/coll013" target="_blank" rel="external">https://github.com/hfbin/Thread_Socket/tree/master/Thread/coll013</a></p>
+<p>转发者必须注明转发链接</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/线程安全/" <i class="fa fa-tag"></i> 线程安全</a>
+          
+            <a href="/tags/java/" <i class="fa fa-tag"></i> java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/19/java线程安全之同步类容器与并发类容器（十二）/" rel="next" title="java线程安全之同步类容器与并发类容器（十二）">
+                <i class="fa fa-chevron-left"></i> java线程安全之同步类容器与并发类容器（十二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/20/java线程安全之多线程的设计模式（十四）/" rel="prev" title="java线程安全之多线程的设计模式（十四）">
+                java线程安全之多线程的设计模式（十四） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发Queue"><span class="nav-number">1.</span> <span class="nav-text">并发Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ConcurrentLinkedQueue"><span class="nav-number">1.0.1.</span> <span class="nav-text">ConcurrentLinkedQueue</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概念理解"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">概念理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#案例"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">案例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BlockingQueue接口"><span class="nav-number">1.0.2.</span> <span class="nav-text">BlockingQueue接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ArrayBlockingQueue、LinkedBlockingQueue、synchronousQueue案例"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">ArrayBlockingQueue、LinkedBlockingQueue、synchronousQueue案例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PriorityBlockingQueue-案例"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">PriorityBlockingQueue 案例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DelayQueue-案例"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">DelayQueue 案例 </span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BlockingQueue-接口的重要方法"><span class="nav-number">1.0.3.</span> <span class="nav-text">BlockingQueue 接口的重要方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#放入数据："><span class="nav-number">1.0.3.1.</span> <span class="nav-text">放入数据：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deque-双端队列"><span class="nav-number">1.0.4.</span> <span class="nav-text">Deque 双端队列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#案例-1"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LinkedBlockingDeque-方法说明"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">LinkedBlockingDeque 方法说明</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>

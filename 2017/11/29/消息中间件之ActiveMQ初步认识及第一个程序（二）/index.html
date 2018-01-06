@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ActiveMQ,java,消息中间件," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="1 ActiveMQ 简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ActiveMQ是Apache出品，最流行的，能力强劲的开源消息总线。 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ActiveMQ是一个完全支持JMS1.1和J2EE 1．4规范的JMS Provider现，尽管JMS规范出台己经是很久的事情了，但是JMS在当今的J2EE">
+<meta name="keywords" content="ActiveMQ,java,消息中间件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消息中间件之ActiveMQ初步认识及第一个程序（二）">
+<meta property="og:url" content="http://yoursite.com/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="1 ActiveMQ 简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ActiveMQ是Apache出品，最流行的，能力强劲的开源消息总线。 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ActiveMQ是一个完全支持JMS1.1和J2EE 1．4规范的JMS Provider现，尽管JMS规范出台己经是很久的事情了，但是JMS在当今的J2EE">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img.blog.csdn.net/20171129160837655?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171129160858644?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171129160949491?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171129161007665?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171129161020262?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-01-06T06:10:54.036Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="消息中间件之ActiveMQ初步认识及第一个程序（二）">
+<meta name="twitter:description" content="1 ActiveMQ 简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ActiveMQ是Apache出品，最流行的，能力强劲的开源消息总线。 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;ActiveMQ是一个完全支持JMS1.1和J2EE 1．4规范的JMS Provider现，尽管JMS规范出台己经是很久的事情了，但是JMS在当今的J2EE">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171129160837655?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>消息中间件之ActiveMQ初步认识及第一个程序（二） | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">消息中间件之ActiveMQ初步认识及第一个程序（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-29T16:30:08+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/消息中间件/" itemprop="url" rel="index">
+                    <span itemprop="name">消息中间件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-ActiveMQ-简介"><a href="#1-ActiveMQ-简介" class="headerlink" title="1 ActiveMQ 简介"></a><strong>1 ActiveMQ 简介</strong></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ActiveMQ是Apache出品，最流行的，能力强劲的开源消息总线。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ActiveMQ是一个完全支持JMS1.1和J2EE 1．4规范的JMS Provider现，尽管JMS规范出台己经是很久的事情了，但是JMS在当今的J2EE应用中间仍然扮演着特殊的地位，可以说ActiveMQ在业界应用最广泛，当然如果想要有更强大的性能和海量数据处理能力，ActiveMQ还需要不断的升级版本，80%以上的业务我们使用ActiveMQ以及足够满足需求，当然后续如天猫、淘宝网这种大型的电商网站，尤其是双11这种特殊时间，ActiveMQ需要进行很复杂的优化源码以及架构设计才能完成，后面我还会介绍更强大的分布式消息中间件，RocketMQ，可以说ActiveMQ是核心，是基础，所以我们必须要掌握好。</p>
+<h4 id="1-ActiveMQ-Windows-安装说明"><a href="#1-ActiveMQ-Windows-安装说明" class="headerlink" title="1 ActiveMQ Windows 安装说明"></a><strong>1 ActiveMQ Windows 安装说明</strong></h4><p>由于这个是windows的安装这里我不做太多说明。</p>
+<p>下载链接（目前是最新版）：<a href="http://activemq.apache.org/activemq-5152-release.html" target="_blank" rel="external">http://activemq.apache.org/activemq-5152-release.html</a></p>
+<p>安装完后的目录：</p>
+<p><img src="http://img.blog.csdn.net/20171129160837655?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这时我们启动ActiveMQ,进入bin目录一个32位的一个64位的，我的机子是64位的，打开64位的文件夹找的activemq.bat双击启动。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认的范围问路径是：<a href="http://localhost:8161" target="_blank" rel="external">http://localhost:8161</a> 注意这里端口是8161这个可以自己改，这时你在浏览器访问时，会弹出一个登陆的界面，默认用户名密码都是<code>admin</code>。</p>
+<p>登陆进去如图：</p>
+<p><img src="http://img.blog.csdn.net/20171129160858644?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h5 id="1-1-如何修改端口？"><a href="#1-1-如何修改端口？" class="headerlink" title="1.1 如何修改端口？"></a><strong>1.1 如何修改端口？</strong></h5><p>打开conf目录找到jetty.xml文件，打开文件，大概在110行左右。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jettyPort"</span> <span class="attr">class</span>=<span class="string">"org.apache.activemq.web.WebConsolePort"</span> <span class="attr">init-method</span>=<span class="string">"start"</span>&gt;</span></div><div class="line">         <span class="comment">&lt;!-- the default port number for the web console --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"host"</span> <span class="attr">value</span>=<span class="string">"0.0.0.0"</span>/&gt;</span></div><div class="line">    <span class="comment">&lt;!--改成一个自己电脑不占用的端口（其实改不改都无所谓，自己知道有这回事就好）--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"port"</span> <span class="attr">value</span>=<span class="string">"8161"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="1-2-如何修改用户名跟密码？"><a href="#1-2-如何修改用户名跟密码？" class="headerlink" title="1.2 如何修改用户名跟密码？"></a><strong>1.2 如何修改用户名跟密码？</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打开conf目录找到jetty-realm.properties文件，打开文件，看到底部，改成自己用户名密码即可（其实改不改都无所谓，自己知道有这回事就好）。</p>
+<p>记得如果你改了，一定要重新启动 ！！！</p>
+<h4 id="2-ActiveMQ-Hello-World"><a href="#2-ActiveMQ-Hello-World" class="headerlink" title="2 ActiveMQ Hello World"></a><strong>2 ActiveMQ Hello World</strong></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们首先写一个简单的HelloWorld示例，让大家感受下ActiveMQ ,我们的要实现接受者和发送者两部分代码的编写。</p>
+<p>步骤如下(这个步骤都是固定的)：Sendert/Receivert</p>
+<p>第一步：建立ConnectionFactory工厂对象，需要填入用户名、密码、以及要连接的地址，均使用默认即可，默认端囗为“tcp://localhost:61616” </p>
+<p>第二步，通过ConnectionFactory工厂对象我们创建一个Connection连接，并且调用Connection的start方法开启连接，Connection默认是关闭的。</p>
+<p>第三步，过Connection对象创建Session会话（上下文环境对象），用于接收消息，参数配置1为是否启用是事务，参数配置2为签收模式，一般我们设置自动签收。</p>
+<p>第四步：通过Session创建Destination对象,指的是一个客户端用来指定生产消息目标和消费消息来源的对象，在PTP模式中，Destination被称作Queue即队列：在Pub/Sub模式，Destination被称作Topic及主题。在程序中可以使用多个Queue和Topic。</p>
+<p>第五步：我们需要通过Session对象创建消息的发送和接收对象（生产者和消费者） MessageProducer/MessageConsumer。</p>
+<p>第六步：我们可以使用MessageProducer的setDeIiveryMode方法为其设置持久化特性和非持久化特性（DeliveryMode），消费端这部分不用写，我们稍后详细介绍。</p>
+<p>第七步：最后我们使用JMS范的TextMessage形式创建数据（通过Session对象），并用MessageProducer的send方法发送数据同理客户端使用receive方法进行接收数据。最后不要忘记关闭Connection连接</p>
+<p>生产端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sender</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> JMSException </span>&#123;</div><div class="line">        </div><div class="line">        <span class="comment">//1 建立ConnectionFactory工厂对象，需要填入用户名、密码、以及要连接的地址，均使用默认即可，默认端囗为“tcp://localhost:61616”</span></div><div class="line">        <span class="comment">// 由于这里我们还没有设置 用户名 密码 这里使用默认，在下一节我会介绍这个用户名密码如何设置</span></div><div class="line">        ActiveMQConnectionFactory activeMQConnectionFactory = <span class="keyword">new</span> ActiveMQConnectionFactory(</div><div class="line">                ActiveMQConnectionFactory.DEFAULT_USER,</div><div class="line">                ActiveMQConnectionFactory.DEFAULT_PASSWORD,</div><div class="line">                <span class="string">"tcp://localhost:61616"</span></div><div class="line">        );</div><div class="line">        </div><div class="line">        <span class="comment">//2通过ConnectionFactory工厂对象我们创建一个Connection连接，并且调用Connection的start方法开启连接，Connection默认是关闭的。</span></div><div class="line">        Connection connection = activeMQConnectionFactory.createConnection();</div><div class="line">        connection.start();</div><div class="line">        </div><div class="line">        <span class="comment">//3 过Connection对象创建Session会话（上下文环境对象），用于接收消息，参数配置1为是否启用是事务，参数配置2为签收模式，一般我们设置自动签收。</span></div><div class="line">        Session session = connection.createSession(Boolean.FALSE , Session.AUTO_ACKNOWLEDGE);</div><div class="line">        </div><div class="line">        <span class="comment">//4通过Session创建Destination对象,指的是一个客户端用来指定生产消息目标和消费消息来源的对象，在PTP模式中，Destination被称作Queue即队列：在Pub/Sub模式，Destination被称作Topic及主题。在程序中可以使用多个Queue和Topic。</span></div><div class="line">        Destination destination = (Destination) session.createQueue(<span class="string">"queue"</span>);</div><div class="line">        </div><div class="line">        <span class="comment">//5我们需要通过Session对象创建消息的发送和接收对象（生产者和消费者） MessageProducer/MessageConsumer。</span></div><div class="line">        MessageProducer producer = session.createProducer(destination);</div><div class="line">        </div><div class="line">        <span class="comment">//6我们可以使用MessageProducer的setDeIiveryMode方法为其设置持久化特性和非持久化特性（DeliveryMode），消费端这部分不用写，我们稍后详细介绍。</span></div><div class="line">        producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);</div><div class="line">       </div><div class="line">        <span class="comment">//7最后我们使用JMS范的TextMessage形式创建数据（通过Session对象），并用MessageProducer的send方法发送数据同理客户端使用receive方法进行接收数据。</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">            TextMessage textMessage = session.createTextMessage();</div><div class="line">            textMessage.setText(<span class="string">"I Tell You &gt;&gt;&gt; "</span>+i);</div><div class="line">            producer.send(textMessage);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//最后不要忘记关闭Connection连接</span></div><div class="line">        <span class="keyword">if</span> (connection!=<span class="keyword">null</span>)&#123;</div><div class="line">            connection.close();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>消费端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Receiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span>  Exception</span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">//1</span></div><div class="line">        ActiveMQConnectionFactory activeMQConnectionFactory = <span class="keyword">new</span> ActiveMQConnectionFactory(</div><div class="line">                ActiveMQConnectionFactory.DEFAULT_USER,</div><div class="line">                ActiveMQConnectionFactory.DEFAULT_PASSWORD,</div><div class="line">                <span class="string">"tcp://localhost:61616"</span></div><div class="line">        );</div><div class="line"></div><div class="line">        <span class="comment">//2</span></div><div class="line">        Connection connection = activeMQConnectionFactory.createConnection();</div><div class="line">        connection.start();</div><div class="line"></div><div class="line">        <span class="comment">//3</span></div><div class="line">        Session session = connection.createSession(Boolean.FALSE , Session.AUTO_ACKNOWLEDGE);</div><div class="line"></div><div class="line">        <span class="comment">//4</span></div><div class="line">        Destination destination = (Destination) session.createQueue(<span class="string">"queue"</span>);</div><div class="line"></div><div class="line">        <span class="comment">//5</span></div><div class="line">        MessageConsumer producer = session.createConsumer(destination);</div><div class="line">       </div><div class="line">        <span class="comment">//7</span></div><div class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line"></div><div class="line">            TextMessage receive = (TextMessage) producer.receive();</div><div class="line">            <span class="keyword">if</span> (receive==<span class="keyword">null</span>) <span class="keyword">break</span>;</div><div class="line">            System.out.println(<span class="string">"收到的内容 &gt;&gt;&gt;  "</span> +receive.getText());</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="keyword">if</span> (connection!=<span class="keyword">null</span>)&#123;</div><div class="line">            connection.close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>启动生产端，在浏览器访问：<a href="http://localhost:8161/admin/queues.jsp" target="_blank" rel="external">http://localhost:8161/admin/queues.jsp</a> 查看我们的数据,如图：</p>
+<p><img src="http://img.blog.csdn.net/20171129160949491?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>好我们启动消费端，控制台打印如下：</p>
+<p><img src="http://img.blog.csdn.net/20171129161007665?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>再次访问<a href="http://localhost:8161/admin/queues.jsp，如图（注意参数的变化）：" target="_blank" rel="external">http://localhost:8161/admin/queues.jsp，如图（注意参数的变化）：</a></p>
+<p><img src="http://img.blog.csdn.net/20171129161020262?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h4 id="3-ActiveMQ-安全机制"><a href="#3-ActiveMQ-安全机制" class="headerlink" title="3 ActiveMQ 安全机制"></a><strong>3 ActiveMQ 安全机制</strong></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在安装时候我已经教大家如何修改那个ActiveMQ的Web管理界面的密码了，在这不说了。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这主要说的是ActiveMQ应该设置有安全机制，只有符合验证的用户才能进行发送和获取消息。其实刚刚在Hello Wolrd 第一步中我就给大家提示过用户名跟密码使用的是默认的，现在我教大家如何改成自己的。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在conf目录下找到acivemq.xml,打开文件，在大概126行中加入(在broker结束标签上)：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">simpleAuthenticationPlugin</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">users</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">authenticationUser</span> <span class="attr">username</span>=<span class="string">"hfbin"</span> <span class="attr">password</span>=<span class="string">"hfbin"</span> <span class="attr">groups</span>=<span class="string">"users,admins"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">users</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">simpleAuthenticationPlugin</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个时候你改了这里，那个生产/消费端中第一步就不能使用默认用户名和密码了，更改如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory(</div><div class="line">        &quot;hfbin&quot;,</div><div class="line">        &quot;hfbin&quot;,</div><div class="line">        &quot;tcp://localhost:61616&quot;</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<h4 id="4-方法使用"><a href="#4-方法使用" class="headerlink" title="4 方法使用"></a><strong>4 方法使用</strong></h4><h5 id="4-1-Conection方法使用"><a href="#4-1-Conection方法使用" class="headerlink" title="4.1 Conection方法使用"></a><strong>4.1 Conection方法使用</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在成功创建正确的ConectionFactory后，下一步将是创建一个连接，它是JMS定义的一个接囗。ConectionFactory负责返回可以与底层消息传递系统进行通信的 Connectionn实现。通常客户端只使用单一连接。根据JMS文档，Connection的目的是“利用JMS提供者封装开放的连接”，以及表示“客户端与提供者服务例程之间的开放TCP/IP套接字”。该文档还指出Connection应该是进行客户端身份验证的地方等等。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当一一个Connection被创建时，它的传输默认是关闭的，必须使用start方法开启。一个Connection可以建立一个或多个的Session。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当一个程序执行完成后，必须关闭之前创建Connection，否则ActiveMQ不能释放资源，关闭一个Connection同样也关闭了Session，MessageProducer和 MessageConsumer。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">Connection <span class="title">createConnection</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="function">Connection <span class="title">createConnection</span><span class="params">(String userName，String password)</span></span>;</div></pre></td></tr></table></figure>
+<h5 id="4-2-Session方法使用"><a href="#4-2-Session方法使用" class="headerlink" title="4.2 Session方法使用"></a><strong>4.2 Session方法使用</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一旦从ConectionFactory中获得一个Connection，必须从Connection中创建一个或者多个Session。Session是一个发送或接收消息线程，可以使用Session创建 MessageProducer, MessageConsumer和Message。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Session可以被事务化，也可以不被事务化，通常， 可以通过向Connection上的适当创建方法传递一个布尔参数对此进行设置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Session <span class="title">createsession</span><span class="params">(<span class="keyword">boolean</span> transacted ， <span class="keyword">int</span> acknowledgeMode)</span></span>;</div></pre></td></tr></table></figure>
+<p>其中transacted为使用事务标识，acknowledgeMode为签收模式。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结束事务有两种方法：提交或者回滚。当一个事务提交，消息被处理。如果事务中有个步骤操作失败，事务就回滚，这个事务中已执行的动作将被撤销。在发送消息最后也必要使用session.commit()方法表示提交事务。如果你设置为false则不同提交事务，如果是true则使用session.commit()方法提交事务。</p>
+<p>最后必须要使用签收模式有三种形式：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Session.AUTO_ACKNOWLEDGE 当客户端从receive或onMessage成功返回时。Session自动签收客户端的这条消息的收条。（建议使用自动签收模式）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Session.CLIENT_ACKNOWLEDGE客户端通过调用消息（Message）的ackonwledge方法签收消息。在这种情况下，签收发生在Session层面：签收一个已消费的消息会自动的签收这个Session所有已消费消息的收条。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Session.DUPS_OK_ACKNOWLEDGE此选项指示Session不必确保对传送消息的签收。它可能引起消息的重复，但降低了Session的开销，所以只有客户端能容忍重复的消息，才能使用。</p>
+<h5 id="4-3-MessageProducer方法使用"><a href="#4-3-MessageProducer方法使用" class="headerlink" title="4.3 MessageProducer方法使用"></a><strong>4.3 MessageProducer方法使用</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MessageProducer：MessageProducer是一个由Session创建的对象，用来向Destination发送消息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">(Message message)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">(Message message, <span class="keyword">int</span> deliveryMode, <span class="keyword">int</span> priority, <span class="keyword">long</span> timeToLive)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">(Destination destination, Message message)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">(Destination destination, Message message, <span class="keyword">int</span> deliveryMode, <span class="keyword">int</span> priority, <span class="keyword">long</span> timeToLive)</span></span>;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中deliveryMode为传输模式，priority为消息优先级，timeToLive为消息过期时间。ActiverMQ支持两种消息传送模式：PERSISTENT和PERSISTENT两种。如果不指定传输模式，那么默认的是持久性消息。如果容忍消息丢失，那么使用非持久性消息可以改善性能和减少存储的开销。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;消息优先级从0-9是个级别，0-4是普通消息，5-9是加急消息。如果不指定优先级，默认为4。需要注意的是，JMS并不一定保证按照优先级的顺序提交消息，建议使用事务，这样的准确性更高，我已经测试过，基本上按照优先级消费。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用优先级必须要在activemq.xml文件中添加如下配置（大概在44行，在policyEntries标签内加入）：<code>&lt;policyEntry queue=&quot;queue1&quot; prioritizedMessages=&quot;true&quot; /&gt;</code>这里queue要跟程序中<code>session.createQueue(&quot;queue1&quot;)</code>里面参数一致。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认情况下，消息永远不会过期，如果消息在指定周期内，则失去意义，那么可以设置过期时间，时间单位为毫秒。</p>
+<h5 id="4-4-MessageComsumer方法使用"><a href="#4-4-MessageComsumer方法使用" class="headerlink" title="4.4 MessageComsumer方法使用"></a><strong>4.4 MessageComsumer方法使用</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MessageConsumer是由一个Session创建的对象，用来从Destination接收消息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function">MessageProducer <span class="title">createProducer</span><span class="params">(Destination destination)</span></span>;</div><div class="line"></div><div class="line"><span class="function">MessageConsumer <span class="title">createConsumer</span><span class="params">(Destination destination)</span></span>;</div><div class="line"></div><div class="line"><span class="function">MessageConsumer <span class="title">createConsumer</span><span class="params">(Destination destination, String messageSelector)</span></span>;</div><div class="line"></div><div class="line"><span class="function">MessageConsumer <span class="title">createConsumer</span><span class="params">(Destination destination, String name, <span class="keyword">boolean</span> noLocal)</span></span>;</div><div class="line"></div><div class="line"><span class="function">TopicSubscriber <span class="title">createDurableSubscriber</span><span class="params">(Topic topic, String name)</span></span>;</div><div class="line"></div><div class="line"><span class="function">TopicSubscriber <span class="title">createDurableSubscriber</span><span class="params">(Topic topic, String name, String messageSelector, <span class="keyword">boolean</span> noLocal)</span></span>;</div></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中messageSelector为消息选择器，noLocal标志默认为false，当设置为true时限制消费者只能接收和自己相同的连接（Connection）所发布的消息，此标志只适用于主题，不适用于队列；name标识订阅主题所对应的订阅名称，持久订阅时需要设置此参数。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Public final String SELECTOR = “name = ‘hfbin’”;该选择器检查了传入消息Name属性，并确定了这个属性的值是否等于hfbin，如果等于，则消息被消费，否者该消息会被忽略。</p>
+<p>消息的同步和异步接收：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;消息的同步接收是指客户端主动去接收消息，客户端可以采用MessageConsumer的 receive方法去接收下一个消息。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function">Message <span class="title">receive</span><span class="params">()</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">Message <span class="title">receive</span><span class="params">(<span class="keyword">long</span> timeout)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">Message <span class="title">receiveNoWait</span><span class="params">()</span></span></div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;消息的异步接收是指当消息到达时，ActiveMQ主动通知客户端，可以通过注册一个实现MessageListener接囗的的对象到MessageConsumer。MessageListener只有一个必须实现的方法一一onMessage，它只接收一个参数，即Message。在为每个发送Destination的消息实现onMessage时，将调用该方法。</p>
+<h5 id="4-5-Message方法使用"><a href="#4-5-Message方法使用" class="headerlink" title="4.5 Message方法使用"></a><strong>4.5 Message方法使用</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JMS程序的最终目的是生产和消费的消息能被其他程序使用，JMS的Message是一个即简单又不灵活性的基本格式，允许创建不同平台上的符合非JMS程序格式的消息，Message由以下几部分组成：消息头，属性和消息体。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function">BlobMessage <span class="title">createBlobMessage</span><span class="params">(File file)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">Blobtaessage <span class="title">createBIobMessage</span><span class="params">(InputStream in)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">BlobMessage <span class="title">createBIobMessage</span><span class="params">(URL url)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">BlobMessage <span class="title">createBIobMessage</span><span class="params">(URL url, <span class="keyword">boolean</span> deletedByBroker)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">BytesMessage <span class="title">createBytesMessage</span><span class="params">()</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">MapMessage <span class="title">createMapMessage</span><span class="params">()</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">Message <span class="title">createMessage</span><span class="params">()</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">ObjectMessage <span class="title">createObjectMessage</span><span class="params">()</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">ObjectMessage <span class="title">createObjectMessage</span><span class="params">(SeriaIizabIe object)</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">TextMessage <span class="title">createTextMessage</span><span class="params">()</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">TextMessage <span class="title">createTextaessage</span><span class="params">(String text)</span></span></div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们一般会在接收端通过instanceof方法去区别数据类型。</p>
+<p>这里我就不一一举例说明上面的这些方法使用了，想试的自己动手，根据我的Hello World那个程序改就好了。</p>
+<p>转发者必须注明转发链接</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ActiveMQ/" <i class="fa fa-tag"></i> ActiveMQ</a>
+          
+            <a href="/tags/java/" <i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/消息中间件/" <i class="fa fa-tag"></i> 消息中间件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/29/消息中间件之JMS概念理解篇（一）/" rel="next" title="消息中间件之JMS概念理解篇（一）">
+                <i class="fa fa-chevron-left"></i> 消息中间件之JMS概念理解篇（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/29/消息中间件之ActiveMQ PTP和PUB-SUB模式实例（三）/" rel="prev" title="消息中间件之ActiveMQ PTP和PUB/SUB模式实例（三）">
+                消息中间件之ActiveMQ PTP和PUB/SUB模式实例（三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-ActiveMQ-简介"><span class="nav-number">1.</span> <span class="nav-text">1 ActiveMQ 简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-ActiveMQ-Windows-安装说明"><span class="nav-number">2.</span> <span class="nav-text">1 ActiveMQ Windows 安装说明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-如何修改端口？"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 如何修改端口？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-如何修改用户名跟密码？"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 如何修改用户名跟密码？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-ActiveMQ-Hello-World"><span class="nav-number">3.</span> <span class="nav-text">2 ActiveMQ Hello World</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ActiveMQ-安全机制"><span class="nav-number">4.</span> <span class="nav-text">3 ActiveMQ 安全机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-方法使用"><span class="nav-number">5.</span> <span class="nav-text">4 方法使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-Conection方法使用"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Conection方法使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-Session方法使用"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Session方法使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-MessageProducer方法使用"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 MessageProducer方法使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-MessageComsumer方法使用"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 MessageComsumer方法使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-5-Message方法使用"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 Message方法使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hadoop,HDFS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="FS Shell命令创建目录  shell&amp;gt;hadoop fs –mkdir /user 列表  shell&amp;gt;hadoop fs –ls / 查看文件内容  shell&amp;gt;hadoop fs –cat /input/file.txt 上传文件  shell&amp;gt;hadoop fs –put 本地文件 远程目录 获取文件 shell&amp;gt; hadoop fs –get 远程文件">
+<meta name="keywords" content="Hadoop,HDFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FS Shell命令与JAVA实现操作HDFS文件">
+<meta property="og:url" content="http://yoursite.com/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="FS Shell命令创建目录  shell&amp;gt;hadoop fs –mkdir /user 列表  shell&amp;gt;hadoop fs –ls / 查看文件内容  shell&amp;gt;hadoop fs –cat /input/file.txt 上传文件  shell&amp;gt;hadoop fs –put 本地文件 远程目录 获取文件 shell&amp;gt; hadoop fs –get 远程文件">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-01-06T06:29:32.351Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FS Shell命令与JAVA实现操作HDFS文件">
+<meta name="twitter:description" content="FS Shell命令创建目录  shell&amp;gt;hadoop fs –mkdir /user 列表  shell&amp;gt;hadoop fs –ls / 查看文件内容  shell&amp;gt;hadoop fs –cat /input/file.txt 上传文件  shell&amp;gt;hadoop fs –put 本地文件 远程目录 获取文件 shell&amp;gt; hadoop fs –get 远程文件">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>FS Shell命令与JAVA实现操作HDFS文件 | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">FS Shell命令与JAVA实现操作HDFS文件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-25T10:41:46+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="FS-Shell命令"><a href="#FS-Shell命令" class="headerlink" title="FS Shell命令"></a><strong>FS Shell命令</strong></h4><p>创建目录 </p>
+<pre><code>shell&gt;hadoop fs –mkdir /user
+</code></pre><p>列表 </p>
+<pre><code>shell&gt;hadoop fs –ls /
+</code></pre><p>查看文件内容 </p>
+<pre><code>shell&gt;hadoop fs –cat /input/file.txt
+</code></pre><p>上传文件 </p>
+<pre><code>shell&gt;hadoop fs –put 本地文件 远程目录
+</code></pre><p>获取文件</p>
+<pre><code>shell&gt; hadoop fs –get 远程文件 本地目录
+</code></pre><p>移动文件 </p>
+<pre><code>shell&gt;hadoop fs –mv远程文件1 … 远程文件n 远程目录
+</code></pre><p>复制文件 </p>
+<pre><code>shell&gt;hadoop fs –cp 远程文件1 … 远程文件n 远程目录
+</code></pre><p>删除文件 </p>
+<pre><code>shell&gt;hadoop fs –rmr 目录/文件
+</code></pre><p><strong>测试文件命令</strong><br>文件是否存在   </p>
+<pre><code>shell&gt;hadoop fs –test –e 文件   // 存在返回0
+</code></pre><p>文件是否0字节 </p>
+<pre><code>shell&gt;hadoop fs –test –z 文件   //是0返回0
+</code></pre><p>文件是否为目录 </p>
+<pre><code>shell&gt;hadoop fs –test –d 文件    //是目录返回1，否则返回0    
+</code></pre><p>显示目录中所有文件大小 </p>
+<pre><code>shell&gt;hadoop fs –du 目录/文件  //目录统计总大小，文件统计大小
+</code></pre><p>清空回收站 </p>
+<pre><code>shell&gt;hadoop fs -expunge 
+</code></pre><h4 id="JAVA操作HDFS的API"><a href="#JAVA操作HDFS的API" class="headerlink" title="JAVA操作HDFS的API"></a><strong>JAVA操作HDFS的API</strong></h4><h5 id="hadoop文件系统API说明与编程步骤"><a href="#hadoop文件系统API说明与编程步骤" class="headerlink" title="hadoop文件系统API说明与编程步骤"></a><strong>hadoop文件系统API说明与编程步骤</strong></h5><p><strong>Hadoop提供的文件系统的API</strong></p>
+<p>1、    Configuration 类(org.apache.hadoop.conf包)：封装了一个客户端或服务器的配置文件</p>
+<p>Configuration():</p>
+<pre><code>默认加载core-default.xml,该配置文件设置从本地文件读取。
+默认也会加载自定义的core-site.xml，设置配置文件从hdfs中读取，但是此文件需要放到 eclipse的 src目录，系统也会自动读取。最好也放log4j.properties 
+</code></pre><p>注：如果其它的配置文件如hdfs-site.xml,mapred-site.xml需要手动加载读取，记载方法是conf.addResource(“hdfs-site.xml”)格式。如果单独改变参数，conf.set(参数名,值)</p>
+<p>2、    IOUtils类(org.apache.hadoop.io包)：Hadoop提供的IO工具类</p>
+<pre><code>copyBytes(InputStream 输入流, OutputStream 输出流, int 缓存大小, boolean  是否关闭输入输出流)：从输入流中读取数据到输出流,关闭输入输出流也可以使用IOUtils工具提供的closeStream(in)方法来关闭。
+</code></pre><p>3、Path类(org.apache.hadoop.fs)：一个文件被视为Path对象，该对象由文件的URI实例化。</p>
+<pre><code>Path(String uri):构建一个path对象
+</code></pre><p>4、FileSystem类(org.apache.hadoop.fs包)：代表一个文件系统，可以对文件进行操作。</p>
+<pre><code>static FileSystem get(Configuration conf):创建一个带有配置对象conf的FileSystem对象
+
+   static FileSystem get(URI uri, Configuration conf):创建带有URI和Conf的FileSystem对象 
+
+ 注：如果在uri中指定hdfs的前缀，那么就不需要在eclipse中加载core-site.xml文件了。
+</code></pre><p>例:</p>
+<pre><code>FileSystem.get(URI.create(“hdfs://hfbin1:9000”),conf)
+InputStream open(path path):打开一个文件作为输入字节流 
+FSDataOutputStream create(Path path)：创建一个文件，返回值是一个输出流。
+void copyFromLocalFile(Path 本地文件,Path hdfs目录)：从本地上传到hdfs
+copyToLocalFil e(Path hdfs文件,Path hdfs文件)
+boolean delete(Path path,Boolean 是否递归删除)：删除文件/目录，通常参数2为true
+boolean rename(path from, path to)：重命名，等价于fs shell命令的mv
+FileStatus getFileStatus(Path f)：查询文件的详细信息，包括大小，权限，块大小等。
+FileStatus[] listStatus(Path f)：列出目录的内容，返回文件的详细信息数组。
+</code></pre><p>5、FileStatus类():代表文件的详细信息</p>
+<pre><code>文件全路径： fileStatus.getPath()
+文件块大小： fileStatus.getBlockSize()
+文件长度： fileStatus.getLen()
+副本数量： fileStatus.getReplication()
+用户： fileStatus.getOwner()
+用户组： fileStatus.getGroup()
+权限： fileStatus.getPermission().toString()
+</code></pre><p>6、java.net.URI</p>
+<pre><code>create(String prefix):创建一个带有prefix前缀的uri对象
+</code></pre><p><strong>使用FileSystem API编程步骤</strong></p>
+<p>1、    获取Configuration对象</p>
+<pre><code>Configuration conf = new Configuration();    //默认加载core-default.xml
+//conf.addResource(&quot;core-site.xml&quot;);         //默认从eclipse的src加载core-site.xml（这个文件可以到hadoop里面配置文件copy出来）
+//conf.set(“fs.defaultFS”, “hdfs://hfbin1:9000/”); //也可以这么写不需要加载
+</code></pre><p>2、    获取文件系统的实例FileSystem对象</p>
+<pre><code>FileSystem fs = FileSystem.get(conf);
+// FileSystem.get(URI.create(&quot;hdfs://hfbin1:9000&quot;), conf);//如果复制core-site.xml到src下了，需要的路径时不需要指定前缀，若core-site.xml没有加到src下则需要前缀。
+</code></pre><p>3、    使用FileSystem对象操作文件</p>
+<pre><code>打开 open
+创建 create
+上传 copyFromLocalFile
+下载  copyToLocalFile
+删除 delelte
+重命名 rename
+文件详细信息 getFileStatus
+</code></pre><h5 id="使用hadoop提供的文件系统API操作数据（读增删改名复制和文件详细信息）"><a href="#使用hadoop提供的文件系统API操作数据（读增删改名复制和文件详细信息）" class="headerlink" title="使用hadoop提供的文件系统API操作数据（读增删改名复制和文件详细信息）"></a><strong>使用hadoop提供的文件系统API操作数据（读增删改名复制和文件详细信息）</strong></h5><p><strong>读取文件内容打印在控制台</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.hfbin;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileSystem;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.IOUtils;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemCat</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">//1、获取Configuration对象</span></div><div class="line">		Configuration conf = <span class="keyword">new</span> Configuration();</div><div class="line">		<span class="comment">//conf.addResource("core-site.xml");//已经自动从本地src目录加了。</span></div><div class="line">		InputStream in = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">//2、获取文件系统的实例FileSystem对象</span></div><div class="line">			<span class="comment">//FileSystem fs = FileSystem.get(URI.create("hdfs://node1:9000"), conf);//不需要core-site.xml制定前缀</span></div><div class="line">			FileSystem fs = FileSystem.get(conf);<span class="comment">//需要core-site.xml制定前缀</span></div><div class="line">			<span class="comment">//3、使用FileSystem对象操作文件：打开一个文件作为输入字节流</span></div><div class="line">			in = fs.open(<span class="keyword">new</span> Path(<span class="string">"/music/music1.txt"</span>)); 	<span class="comment">//例如：/input2/file4.txt</span></div><div class="line">			IOUtils.copyBytes(in, System.out, <span class="number">4096</span>, <span class="keyword">false</span>);</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;			</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			IOUtils.closeStream(in);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>都是按照步骤来操作的上面都有备注，在这里我就另外说一下IOUtils.copyBytes()方法参数的意思：</p>
+<pre><code>第一个参数 in:  是FSDataInputStream类的对象，是有关读取文件的类，也就是所谓“输入流”
+第二个参数 out:  是FSDataOutputStream类的对象，是有关文件写入的类，也就是“输出流”（上面我是使用System.out将内容在控制台输出）
+第三个参数 4096  表示用来拷贝的buffer大小（buffer是缓冲区）
+第四个参数 false  表明拷贝完成后我们并不关闭拷贝源可拷贝目的地
+</code></pre><p><strong>创建文件并将Hello World写进文件中</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemCreate</span> </span>&#123;	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;		</div><div class="line">		Configuration conf = <span class="keyword">new</span> Configuration();</div><div class="line">		FileSystem fs = FileSystem.get(conf);		</div><div class="line">		String filename = <span class="string">"/input2/file.txt"</span>;</div><div class="line">		FSDataOutputStream outputStream = fs.create(<span class="keyword">new</span> Path(filename));<span class="comment">//创建一个文件</span></div><div class="line">		InputStream in = <span class="keyword">new</span> ByteArrayInputStream(<span class="string">"Hello World"</span>.getBytes(<span class="string">"utf-8"</span>));</div><div class="line">		IOUtils.copyBytes(in, outputStream, <span class="number">4096</span>, <span class="keyword">true</span>);		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>将本文件上传到hdfs</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemCopy</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;		</div><div class="line">		Configuration conf = <span class="keyword">new</span> Configuration();</div><div class="line">		FileSystem fs = FileSystem.get(conf);		</div><div class="line">		fs.copyFromLocalFile(<span class="keyword">new</span> Path(<span class="string">"/home/hduser/file/file1"</span>), <span class="keyword">new</span> Path(<span class="string">"/output"</span>));<span class="comment">//从本地上传到hdfs	 (第一个参数是本地路径，第二个参数是hdf文件路径)</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>删除一个文件</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemDelete</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		String uri=<span class="string">"/input/file1"</span>;</div><div class="line">		Configuration conf = <span class="keyword">new</span> Configuration();		</div><div class="line">		FileSystem fs = FileSystem.get(conf);</div><div class="line">		Path f=<span class="keyword">new</span> Path(uri);	</div><div class="line">		fs.delete(f,<span class="keyword">true</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>重命名/移动文件</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemRename</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		String fromFile=<span class="string">"/input2/file1"</span>;<span class="comment">//</span></div><div class="line">		String toFile=<span class="string">"/input2/file1new"</span>;<span class="comment">//</span></div><div class="line">		Configuration conf = <span class="keyword">new</span> Configuration();		</div><div class="line">		FileSystem fs = FileSystem.get(conf);</div><div class="line">		Path fromPath=<span class="keyword">new</span> Path(fromFile);</div><div class="line">		Path toPath=<span class="keyword">new</span> Path(toFile);		</div><div class="line">		fs.rename(fromPath, toPath);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取文件信息</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileSystemGetStatus</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		String uri=args[<span class="number">0</span>];<span class="comment">//如：/input2/file1.txt</span></div><div class="line">		Configuration conf = <span class="keyword">new</span> Configuration();		</div><div class="line">		FileSystem fs = FileSystem.get(conf);</div><div class="line">		Path f=<span class="keyword">new</span> Path(uri);</div><div class="line">		FileStatus stat=fs.getFileStatus(f);</div><div class="line">		System.out.println(<span class="string">"文件路径："</span>+stat.getPath());				</div><div class="line">		System.out.println(<span class="string">"文件块大小："</span>+stat.getBlockSize());</div><div class="line">		System.out.println(<span class="string">"文件大小："</span>+stat.getLen());</div><div class="line">		System.out.println(<span class="string">"副本数量："</span>+stat.getReplication());</div><div class="line">		System.out.println(<span class="string">"用户："</span>+stat.getOwner());</div><div class="line">		System.out.println(<span class="string">"用户组："</span>+stat.getGroup());</div><div class="line">		System.out.println(<span class="string">"权限："</span>+stat.getPermission().toString());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>到这就讲解完毕了！！！感谢各位老铁的阅读</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" <i class="fa fa-tag"></i> Hadoop</a>
+          
+            <a href="/tags/HDFS/" <i class="fa fa-tag"></i> HDFS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/20/从零开始配置hadoop集群环境/" rel="next" title="从零开始配置hadoop集群环境">
+                <i class="fa fa-chevron-left"></i> 从零开始配置hadoop集群环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#FS-Shell命令"><span class="nav-number">1.</span> <span class="nav-text">FS Shell命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JAVA操作HDFS的API"><span class="nav-number">2.</span> <span class="nav-text">JAVA操作HDFS的API</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hadoop文件系统API说明与编程步骤"><span class="nav-number">2.1.</span> <span class="nav-text">hadoop文件系统API说明与编程步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用hadoop提供的文件系统API操作数据（读增删改名复制和文件详细信息）"><span class="nav-number">2.2.</span> <span class="nav-text">使用hadoop提供的文件系统API操作数据（读增删改名复制和文件详细信息）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>

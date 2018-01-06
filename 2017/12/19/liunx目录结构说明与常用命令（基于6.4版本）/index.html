@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="liunx," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="根目录结构bin        用户可执行的命令,除此之外,还有 /user/bin, /bin, /user/local/bin sbin        系统管理员执行的命令， 除此之外, 还有/user/sbin, /bin, /user/local/sbin lib        库文件(32位)， 除此之外, 还有/user/lib, /bin, /user/local/lib lib64">
+<meta name="keywords" content="liunx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="liunx目录结构说明与常用命令（基于6.4版本）">
+<meta property="og:url" content="http://yoursite.com/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="根目录结构bin        用户可执行的命令,除此之外,还有 /user/bin, /bin, /user/local/bin sbin        系统管理员执行的命令， 除此之外, 还有/user/sbin, /bin, /user/local/sbin lib        库文件(32位)， 除此之外, 还有/user/lib, /bin, /user/local/lib lib64">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-01-06T06:24:53.049Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="liunx目录结构说明与常用命令（基于6.4版本）">
+<meta name="twitter:description" content="根目录结构bin        用户可执行的命令,除此之外,还有 /user/bin, /bin, /user/local/bin sbin        系统管理员执行的命令， 除此之外, 还有/user/sbin, /bin, /user/local/sbin lib        库文件(32位)， 除此之外, 还有/user/lib, /bin, /user/local/lib lib64">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>liunx目录结构说明与常用命令（基于6.4版本） | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">liunx目录结构说明与常用命令（基于6.4版本）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-19T10:07:44+08:00">
+                2017-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/liunx/" itemprop="url" rel="index">
+                    <span itemprop="name">liunx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="根目录结构"><a href="#根目录结构" class="headerlink" title="根目录结构"></a><strong>根目录结构</strong></h4><p>bin        用户可执行的命令,除此之外,还有 /user/bin, /bin, /user/local/bin</p>
+<p>sbin        系统管理员执行的命令， 除此之外, 还有/user/sbin, /bin, /user/local/sbin</p>
+<p>lib        库文件(32位)， 除此之外, 还有/user/lib, /bin, /user/local/lib</p>
+<p>lib64        库文件(64位)， 除此之外, 还有/user/lib64, /bin, /user/local/lib64</p>
+<p>etc        配置文件</p>
+<p>usr        应用程序目录</p>
+<p>var        服务器数据，日志等，伪文件系统</p>
+<p>boot        启动目录</p>
+<p>dev        设备文件目录</p>
+<p>cgroup        6b版本的新特性，资源控制，做系统优化用。</p>
+<p>tmp        临时文件目录</p>
+<p>proc        虚拟的文件系统，进程和内存信息，不是实际存储在磁盘上的。</p>
+<p>sys        它和proc很像，但目录比较干净。区别是,它比proc多包含了一些内核参数等。而且它是真是存在的，而proc是虚拟的。</p>
+<p>root        root的家目录</p>
+<p>home        普通用户家目录</p>
+<p>media        媒介目录</p>
+<p>mnt        以前放软驱的，现在一般用来我们想挂什么就挂什么的目录.</p>
+<p>opt        放第三方软件。</p>
+<p>selinux        selinux的组建。</p>
+<p>misc和net    autofs服务使用的目录</p>
+<p>srv        服务器数据目录。我们常用的是var,所以这个常常为空。</p>
+<p>lost+found    文件系统维护自己系统的。例如文件重启丢失了，那么可以在这里找回。</p>
+<p>swap        交换分区</p>
+<p>shm        共享内存</p>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a><strong>常用命令</strong></h4><p>cd : 进到目录下</p>
+<pre><code>&gt;cd /home :进到/home目录下
+&gt;cd .. :进到上一级目录
+&gt;cd ~ :进到家目录,和直接输入cd相同     
+&gt;例： cd /etc/
+</code></pre><p>pwd:显示当前所有的目录.</p>
+<p>cat  : 查看文件内容</p>
+<pre><code>&gt;cat /root/install.log
+&gt;cat -n /root/install.log 显示行号(所有行)
+&gt;cat -n /root/install.log|more 分页查看,首先显示第一页，看下一页按空格键，退出按q
+</code></pre><p>more : 查看文件（分页)</p>
+<pre><code>&gt;空格 向下翻页
+&gt;b    向上翻页
+&gt;q    退出
+</code></pre><p>head :默认显示前10行</p>
+<pre><code>&gt;head -n 30 /root/install.log 显示前30行
+&gt;cat -n /root/install.log | head -n 10 显示带有行号的前10行
+</code></pre><p>tail :默认后10行</p>
+<pre><code>&gt;tail -n 10 /root/install.log    显示后10行数据
+&gt;tail -f /root/install.log 动态的显示文件。
+</code></pre><p>touch:创建文件</p>
+<pre><code>&gt;cd ~:进到家目录
+&gt;touch cc.txt
+</code></pre><p>mkdir:创建目录</p>
+<pre><code>&gt;mkdir abcd
+&gt;mkdir -p xx/yy：递归创建
+&gt;mkdir -pv kk/nn    -p 递归  -v 显示过程
+</code></pre><p>cp 源文件地址 目标地址</p>
+<pre><code>&gt;cp /root/install.log /tmp/ll.txt  拷贝过程中 重命名文件
+复制目录        
+&gt;cp -r /root/abcd/ /tmp/     -r 递归 recursive
+&gt;cp -r /root/abcd/ /tmp/aaaa   
+</code></pre><p>mv 源文件地址 目标地址 移动或重命名目录</p>
+<pre><code>&gt;mv /root/yy.txt  /tmp/
+&gt;mv cc.txt kk.txt   重命名文件(当前目录下)
+</code></pre><p>rm -rf :删除文件和目录</p>
+<pre><code>&gt;rm -rf 1.txt
+&gt;rm -rf /tmp/
+</code></pre><p><strong>vim/vi 编辑命令</strong></p>
+<p>命令模式：控制屏幕光标的移动，删除，撤销，复制 , 粘贴，选择<br>    进入编辑模式：    </p>
+<pre><code>&gt;i：字符前面插入
+a：字符后面插入
+o：下一行插入
+I：行首插入
+A：行尾插入
+O：在上一行插入
+</code></pre><p>进入到末行模式：冒号<br>编辑模式：输入内容<br>进入命令模式：按键盘esc<br>末行模式：保存，退出，查找，替换<br>打开文件：vi [文件名]<br>保存并退出：wq<br>退出但不保存：q!<br>保存:w<br>ZZ：强制保存退出</p>
+<p>命令模式（移动，删除，撤销，复制,粘贴，选择）<br>移动：方法1用上下左右键 方法2：h/j/k/l</p>
+<blockquote>
+<p>gg 到第一行的行首<br>   G  到最后一行的行首<br>   G$  到最后一行的行尾<br>   ^ 到行首<br>   $ 到行尾<br>   5gg:跳到第5行</p>
+</blockquote>
+<p>删除</p>
+<blockquote>
+<p> x:删除一个字符<br>  dd：剪切/删除1行。<br>  5dd:剪切/删除5行。<br>  d^:删除当前字符到行首<br>  d$:从当前字符删除到末尾<br>  dG：删除当前行到尾行。<br>  dgg:删除当前行到首行 </p>
+</blockquote>
+<p>撤销</p>
+<blockquote>
+<p>u:撤销上一次的操作</p>
+<p>重做<br>ctrl+r:重做</p>
+</blockquote>
+<p>复制</p>
+<blockquote>
+<p>yy:复制1行<br>  5yy:复制5行</p>
+</blockquote>
+<p>粘贴</p>
+<blockquote>
+<p>p: 粘贴</p>
+</blockquote>
+<p><strong>末行模式(工作模式)</strong></p>
+<p>查找</p>
+<pre><code>&gt;:/xxx: 从上往下查找字符串xxx
+      &gt; n:下一个符合的字符串（向下）
+       &gt;N:下一个符合的字符串（向上）
+&gt;:?xxx: 从下往上查找字符串xxx
+</code></pre><p>替换</p>
+<blockquote>
+<p>：%s/zhang3/li4/g<br>%表示所有行，s表示替换 , g控制这一行，如果不写g,则会发现只有每一行的第1个符合条件的字符串替换。</p>
+<p>：3,8/zhang3/li4/g<br>第3行到第8行替换</p>
+<p>：3,8/zhang3/li4/gc<br>加了一个c, 会问答形式</p>
+<p>在一个文件中，所有开头都加入#<br>:%s/^/#/g</p>
+<p>把文件中所有空格去掉<br>:%s/ //g</p>
+<p>所有开头空格去掉<br>:%s/^ //g</p>
+<p>所有变成1行<br>:%s/\n//g</p>
+<p>删除换行<br>:g/^\s*$/d</p>
+</blockquote>
+<p>行号</p>
+<pre><code>&gt;设置行号：set nu或者set number
+取消行号:set nonu或 set nonumber
+</code></pre><p>自动缩进 </p>
+<pre><code>&gt;set autoindent
+set noautoindent
+</code></pre><p>设置制表符</p>
+<pre><code>&gt;set tabstop=8         全局调配
+set softtabstop=4    前面的不做调整，后面的制表符调整
+</code></pre><p><strong>用户管理</strong></p>
+<p> 进入图形界面<br> system-config-users</p>
+<p>创建用户<br>useradd zhang3<br>passwd zhang3      设置密码    </p>
+<p>创建组<br>groupadd game</p>
+<p>修改用户组<br>usermod -g 用户组 用户名</p>
+<p>创建用户同时指定组<br>useradd -g game wang5</p>
+<p><strong>文件权限</strong></p>
+<p>ls -l中显示的内容如下：</p>
+<p>-rwxrw-r– 1 zhang3 sport 1213 Feb 2 09:39 1.txt</p>
+<ul>
+<li><p>10个字符确定不同用户能对文件干什么</p>
+</li>
+<li><p>第一个字符代表文件（-）、目录（d），链接（l）</p>
+</li>
+<li><p>其余字符每3个一组（rwx），读权限r（4）、写权限w（2）、执行权限x（1）,-表示不具有该项权限</p>
+</li>
+<li><p>第一组rwx：文件所有者的权限是读、写和执行</p>
+</li>
+<li><p>第二组rw-：与文件所有者同一组的用户的权限是读、写但不能执行</p>
+</li>
+<li>第三组r–：不与文件所有者同组的其他用户的权限是读不能写和执行<br>目录没有-x权限，则无法对目录执行任何命令。甚至无法cd进入目录</li>
+</ul>
+<p>也可用数字表示为：r=4，w=2，x=1  因此rwx=4+2+1=7</p>
+<ul>
+<li>1 表示连接的文件数</li>
+<li>zhang3 表示用户</li>
+<li>sport 表示用户所在的组</li>
+<li>1213 表示文件大小（字节）</li>
+<li>Feb 2 09:39 表示最后修改日期</li>
+<li>1.txt 表示文件名 </li>
+</ul>
+<p><strong>改变文件权限的命令</strong></p>
+<p>创建文件/目录，默认全是 644（rw-r-xr-x）</p>
+<p>chmod 改变文件或目录的权限</p>
+<pre><code>chmod 755 abc：赋予abc权限rwxr-xr-x
+chmod u=rwx，g=rx，o=rx abc：同上u=用户权限，g=组权限，o=不同组其他用户权限
+chmod u-x，g+w abc：给abc去除用户执行的权限，增加组写的权限
+chmod a+r abc：给所有用户添加读的权限
+chmod u+r 文件/目录 
+chmod u+r,g-w 文件/目录 同时修改用户和组
+chmod u+r,g-w,o+rw 文件/目录
+chmod ugo+rwx 文件/目录
+chmod a+rw 文件/目录
+chmod u=r 文件/目录
+chmod u=rw,g=x 文件/目录
+chmod ugo=rwx 文件/目录
+chmod a=rwx 文件/目录
+</code></pre><p><strong>改变文件所有者（chown）和用户组（chgrp）命令</strong><br>chown robin 文件/目录     修改用户<br>chgrp film 文件/目录     修改组<br>chown .film  文件/目录    修改组<br>chown robin.film 文件/目录 修改组合用户</p>
+<p>上面的.也可以换成:</p>
+<p>从上面看出，chown既可以改组，也可以改用户。</p>
+<p>chown -R robin.film test/<br>递归修改目录和内部所有文件的所属组和拥有者<br>chmod -R 777 test/<br>递归修改目录和内部所有文件的权限</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/liunx/" <i class="fa fa-tag"></i> liunx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/02/Zookeeper+ActiveMQ集群搭建/" rel="next" title="Zookeeper+ActiveMQ集群搭建">
+                <i class="fa fa-chevron-left"></i> Zookeeper+ActiveMQ集群搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/20/从零开始配置hadoop集群环境/" rel="prev" title="从零开始配置hadoop集群环境">
+                从零开始配置hadoop集群环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#根目录结构"><span class="nav-number">1.</span> <span class="nav-text">根目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>

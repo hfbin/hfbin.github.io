@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="线程安全,java," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Concurrent.util常用类CyclicBarrier使用：假设有只有的一个场景：每个线程代表一个跑步运动员，当运动员都准备好后，才一起出发，只要有一个人没有准备好，大家都等待。 工作中场景：比如你多台机器想同时准备好了，再去干分布式计算等等。案例：12345678910111213141516171819202122232425262728293031323334353637383940">
+<meta name="keywords" content="线程安全,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java线程安全之Concurrent.util常用类（十六）">
+<meta property="og:url" content="http://yoursite.com/2017/11/20/java线程安全之Concurrent.util常用类（十六）/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="Concurrent.util常用类CyclicBarrier使用：假设有只有的一个场景：每个线程代表一个跑步运动员，当运动员都准备好后，才一起出发，只要有一个人没有准备好，大家都等待。 工作中场景：比如你多台机器想同时准备好了，再去干分布式计算等等。案例：12345678910111213141516171819202122232425262728293031323334353637383940">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-01-06T06:11:03.232Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java线程安全之Concurrent.util常用类（十六）">
+<meta name="twitter:description" content="Concurrent.util常用类CyclicBarrier使用：假设有只有的一个场景：每个线程代表一个跑步运动员，当运动员都准备好后，才一起出发，只要有一个人没有准备好，大家都等待。 工作中场景：比如你多台机器想同时准备好了，再去干分布式计算等等。案例：12345678910111213141516171819202122232425262728293031323334353637383940">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/20/java线程安全之Concurrent.util常用类（十六）/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>java线程安全之Concurrent.util常用类（十六） | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/java线程安全之Concurrent.util常用类（十六）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java线程安全之Concurrent.util常用类（十六）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-20T14:38:20+08:00">
+                2017-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/线程安全/" itemprop="url" rel="index">
+                    <span itemprop="name">线程安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/20/java线程安全之Concurrent.util常用类（十六）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/20/java线程安全之Concurrent.util常用类（十六）/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Concurrent-util常用类"><a href="#Concurrent-util常用类" class="headerlink" title="Concurrent.util常用类"></a><strong>Concurrent.util常用类</strong></h3><h4 id="CyclicBarrier使用："><a href="#CyclicBarrier使用：" class="headerlink" title="CyclicBarrier使用："></a>CyclicBarrier使用：</h4><p>假设有只有的一个场景：每个线程代表一个跑步运动员，当运动员都准备好后，才一起出发，只要有一个人没有准备好，大家都等待。</p>
+<p>工作中场景：比如你多台机器想同时准备好了，再去干分布式计算等等。<br>案例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseCyclicBarrier</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;  </div><div class="line">	    <span class="keyword">private</span> CyclicBarrier barrier;  </div><div class="line">	    <span class="keyword">private</span> String name;  </div><div class="line">	    </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="title">Runner</span><span class="params">(CyclicBarrier barrier, String name)</span> </span>&#123;  </div><div class="line">	        <span class="keyword">this</span>.barrier = barrier;  </div><div class="line">	        <span class="keyword">this</span>.name = name;  </div><div class="line">	    &#125;  </div><div class="line">	    <span class="meta">@Override</span>  </div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </div><div class="line">	        <span class="keyword">try</span> &#123;  </div><div class="line">	        	<span class="comment">//随机休眠0-5秒</span></div><div class="line">	            Thread.sleep(<span class="number">1000</span> * (<span class="keyword">new</span> Random()).nextInt(<span class="number">5</span>));  </div><div class="line">	            System.out.println(name + <span class="string">" 准备OK."</span>); </div><div class="line">	            <span class="comment">//等待</span></div><div class="line">	            barrier.await();  </div><div class="line">	        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">	            e.printStackTrace();  </div><div class="line">	        &#125; <span class="keyword">catch</span> (BrokenBarrierException e) &#123;  </div><div class="line">	            e.printStackTrace();  </div><div class="line">	        &#125;  </div><div class="line">	        System.out.println(name + <span class="string">" Go!!"</span>);  </div><div class="line">	    &#125;  </div><div class="line">	&#125; </div><div class="line">	</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;  </div><div class="line">        CyclicBarrier barrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">3</span>);  <span class="comment">// 3 </span></div><div class="line">		<span class="comment">//3个固定的线程池</span></div><div class="line">        ExecutorService executor = Executors.newFixedThreadPool(<span class="number">3</span>);  </div><div class="line">        </div><div class="line">        executor.submit(<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runner(barrier, <span class="string">"hfbin-01"</span>)));  </div><div class="line">        executor.submit(<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runner(barrier, <span class="string">"hfbin-02"</span>)));  </div><div class="line">        executor.submit(<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runner(barrier, <span class="string">"hfbin-03"</span>)));  </div><div class="line">  </div><div class="line">        executor.shutdown();  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打印答案(注意看打印的顺序)：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hfbin-<span class="number">01</span> 准备OK.</div><div class="line">hfbin-<span class="number">02</span> 准备OK.</div><div class="line">hfbin-<span class="number">03</span> 准备OK.</div><div class="line">hfbin-<span class="number">03</span> Go!!</div><div class="line">hfbin-<span class="number">01</span> Go!!</div><div class="line">hfbin-<span class="number">02</span> Go!!</div></pre></td></tr></table></figure></p>
+<h4 id="CountDownLacth使用："><a href="#CountDownLacth使用：" class="headerlink" title="CountDownLacth使用："></a>CountDownLacth使用：</h4><p>他经常用于监听某些初始化操作，等初始化执行完毕后，通知主线程继续工。</p>
+<p>案例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseCountDownLatch</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		</div><div class="line">		<span class="keyword">final</span> CountDownLatch countDown = <span class="keyword">new</span> CountDownLatch(<span class="number">2</span>);</div><div class="line">		</div><div class="line">		Thread t1 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					System.out.println(<span class="string">"进入线程t1"</span> + <span class="string">"等待其他线程处理完成..."</span>);</div><div class="line">					<span class="comment">//等待countDown发出通知即可继续执行下面代码</span></div><div class="line">					countDown.await();</div><div class="line">					System.out.println(<span class="string">"t1线程继续执行..."</span>);</div><div class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;,<span class="string">"t1"</span>);</div><div class="line">		</div><div class="line">		Thread t2 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					System.out.println(<span class="string">"t2线程进行初始化操作..."</span>);</div><div class="line">					Thread.sleep(<span class="number">3000</span>);</div><div class="line">					System.out.println(<span class="string">"t2线程初始化完毕，通知t1线程继续..."</span>);</div><div class="line">					countDown.countDown();</div><div class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		Thread t3 = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					System.out.println(<span class="string">"t3线程进行初始化操作..."</span>);</div><div class="line">					Thread.sleep(<span class="number">4000</span>);</div><div class="line">					System.out.println(<span class="string">"t3线程初始化完毕，通知t1线程继续..."</span>);</div><div class="line">					countDown.countDown();</div><div class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">		</div><div class="line">		t1.start();</div><div class="line">		t2.start();</div><div class="line">		t3.start();</div><div class="line">		</div><div class="line">		</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打印答案：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">进入线程t1等待其他线程处理完成...</div><div class="line">t2线程进行初始化操作...</div><div class="line">t3线程进行初始化操作...</div><div class="line">t2线程初始化完毕，通知t1线程继续...</div><div class="line">t3线程初始化完毕，通知t1线程继续...</div><div class="line">t1线程继续执行...</div></pre></td></tr></table></figure></p>
+<p>t1使用 await() 这个方法会处于阻塞状态 需要等待t2 t3 countDown()执行完成后才能继续执行 t1 被阻塞后面的代码</p>
+<p>也就是：t1 需要等 t2 t3 执行完成之后才能执行 </p>
+<p>注意：CountDownLatch countDown = new CountDownLatch(2); 这里用到多少个countDown()，CountDownLatch()里面参数就写多少个。</p>
+<p>注意：CyclicBarrier和CountDownLacth的区别</p>
+<p>CountDownLacth 属于一个线程等待，其他n个线程发出通知 ，然后再执行等待的线程。（针对一个线程）</p>
+<p>CyclicBarrier 多个线程参与阻塞。（针对多个线程）</p>
+<h4 id="Callable和Future使用"><a href="#Callable和Future使用" class="headerlink" title="Callable和Future使用"></a>Callable和Future使用</h4><p>这个例子其实是我们之前实现的Future 模式 。jdk给予我们一个实现的封装类，使用非常简单。<br>Future 模式非常适合在处理很耗时很长的业务逻辑时进行使用，可以有效的减少系统的响应时间，提高系统的吞吐量。</p>
+<p>案例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseFuture</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">String</span>&gt;</span>&#123;</div><div class="line">	<span class="keyword">private</span> String para;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">UseFuture</span><span class="params">(String para)</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.para = para;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line"><span class="comment">	 * 这里是真实的业务逻辑，其执行可能很慢</span></div><div class="line"><span class="comment">	 */</span></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="comment">//模拟执行耗时</span></div><div class="line">		Thread.sleep(<span class="number">5000</span>);</div><div class="line">		String result = <span class="keyword">this</span>.para + <span class="string">"处理完成"</span>;</div><div class="line">		<span class="keyword">return</span> result;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//主控制函数</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		String queryStr = <span class="string">"query-1"</span>;</div><div class="line">		String queryStr2 = <span class="string">"query-2"</span>;</div><div class="line">		<span class="comment">//构造FutureTask，并且传入需要真正进行业务逻辑处理的类,该类一定是实现了Callable接口的类</span></div><div class="line">		FutureTask&lt;String&gt; future = <span class="keyword">new</span> FutureTask&lt;String&gt;(<span class="keyword">new</span> UseFuture(queryStr));</div><div class="line">		</div><div class="line">		FutureTask&lt;String&gt; future2 = <span class="keyword">new</span> FutureTask&lt;String&gt;(<span class="keyword">new</span> UseFuture(queryStr2));</div><div class="line">		<span class="comment">//创建一个固定线程的线程池且线程数为2,</span></div><div class="line">		ExecutorService executor = Executors.newFixedThreadPool(<span class="number">2</span>);</div><div class="line">		<span class="comment">//这里提交任务future,则开启线程执行RealData的call()方法执行</span></div><div class="line">		<span class="comment">//submit和execute的区别： 第一点是submit可以传入实现Callable接口的实例对象， 第二点是submit方法有返回值</span></div><div class="line">		</div><div class="line">		<span class="comment">//执行完成后 f1 f2 都会为空</span></div><div class="line">		Future f1 = executor.submit(future);		<span class="comment">//单独启动一个线程去执行的</span></div><div class="line">		Future f2 = executor.submit(future2);</div><div class="line">		System.out.println(<span class="string">"f1 请求完毕  = "</span>+f1.get());</div><div class="line">		System.out.println(<span class="string">"请求完毕"</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">//这里可以做额外的数据操作，也就是主程序执行其他业务逻辑</span></div><div class="line">			System.out.println(<span class="string">"处理实际的业务逻辑..."</span>);</div><div class="line">			Thread.sleep(<span class="number">1000</span>);</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//调用获取数据方法,如果call()方法没有执行完成,则依然会进行等待</span></div><div class="line">		System.out.println(<span class="string">"数据："</span> + future.get());</div><div class="line">		System.out.println(<span class="string">"数据："</span> + future2.get());</div><div class="line">		</div><div class="line">		executor.shutdown();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>打印结果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">f1 请求完毕  = <span class="keyword">null</span></div><div class="line">请求完毕</div><div class="line">处理实际的业务逻辑...</div><div class="line">数据：query-<span class="number">1</span>处理完成</div><div class="line">数据：query-<span class="number">2</span>处理完成</div></pre></td></tr></table></figure></p>
+<h4 id="Semaphore-使用"><a href="#Semaphore-使用" class="headerlink" title="Semaphore 使用"></a><strong>Semaphore 使用</strong></h4><p>在Semaphone信号量非常适合高并发访问，新系统在上线之前，要对系统的访问量进行评估，当然这个值肯定不是随便拍拍脑袋就能想出来的，是经过以往的经验、数据、历年的访问量，己经推广力度讲行一个合理的评估，当然评估标推不能太大也不能太小，太大的话投入的资源达不到实际效果，纯粹浪费资源，太小的话，某个时间点一个高峰值的访问量上来直接可以压垮系统<br>相关概念：</p>
+<p>PV（view)网站的总访何量，页面浏览量或点击量，用户每刷新一，次就会被记录一次。</p>
+<p>UV (unique Visitor)访网网站的一台申客户端为一个访客，一般来讲，时间上以00：00-24：00之内相同ip的客户端只记录一次。</p>
+<p>QPS（query per second）即每秒查询数，qps很大程度上代表了系统业务上的繁忙程度，每次请求的背后，可能对应着多次磁盘I/O，多次网络请求，多个cpu时间片等。我们通过qps可以非常直观的了解当前系统业务情况，一旦当前超过所设定的预警阀值，可以考虑加机器对集群扩容，以免压力过大导致宕机，可以根据前期的压力测试得到估值，在结合后期综合运维清况，估算出值。</p>
+<p>RT (response time)即请求的响应时间，这个指标非常关键，直接说明前端用户的体验，因此任何系统都想降低rt时间。当然还涉及cpu、内存、网络、磁盘等情况，更细节的问很多，如select、update、delete/ps等数据库层面的统计。</p>
+<p>容量评估：一般来说通过开发、运维、测试、以及业务等相关人员．綜合出系统的一系列阈值，然后我们根据关键阈值如qps、rt等，对系统讲行有效的变更。一般来讲．我们讲行多轮压力测试以后，可以对系统讲行峰值评估，采用所谓的80/20原则，即80％的访网请求将在20％的时间内达到。这样我们可以根据系统对应PV计算出峰值 qps。</p>
+<p>峰值qps= (总PV ×80％）/（60 × 60× 24 ×20％）</p>
+<p>然后在将总的峰值qps除以单台机器所能承受的最高的qps值，就是所需要机器的数量：机器数=总的峰值qps /压测得出的单机极限qps </p>
+<p>当然不排除系统在上线前进行大型促销活动，或者双十一、双十二热点事件、遭受到DDos攻击等情况，系统的开发和运维人员急需要了解当前系统运行的状态和负载情况，一般都会有后台系统去维护。</p>
+<p>Semaphone可以控制系统的流量:<br>拿到信号量的钱程可以讲入，否则就等待.通过acquire()和rekease()获取和释放访同许可。</p>
+<p>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseSemaphore</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        <span class="comment">// 线程池  </span></div><div class="line">        ExecutorService exec = Executors.newCachedThreadPool();  </div><div class="line">        <span class="comment">// 只能5个线程同时访问  </span></div><div class="line">        <span class="keyword">final</span> Semaphore semp = <span class="keyword">new</span> Semaphore(<span class="number">5</span>);  </div><div class="line">        <span class="comment">// 模拟20个客户端访问  </span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; <span class="number">20</span>; index++) &#123;  </div><div class="line">            <span class="keyword">final</span> <span class="keyword">int</span> NO = index;  </div><div class="line">            Runnable run = <span class="keyword">new</span> Runnable() &#123;  </div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </div><div class="line">                    <span class="keyword">try</span> &#123;  </div><div class="line">                        <span class="comment">// 获取许可  </span></div><div class="line">                        semp.acquire();  </div><div class="line">                        System.out.println(<span class="string">"Accessing: "</span> + NO);  </div><div class="line">                        <span class="comment">//模拟实际业务逻辑</span></div><div class="line">                        Thread.sleep((<span class="keyword">long</span>) (Math.random() * <span class="number">10000</span>));  </div><div class="line">                        <span class="comment">// 访问完后，释放  </span></div><div class="line">                        semp.release();  </div><div class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                    &#125;  </div><div class="line">                &#125;  </div><div class="line">            &#125;;  </div><div class="line">            exec.execute(run);  </div><div class="line">        &#125; </div><div class="line">        </div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">			Thread.sleep(<span class="number">10</span>);</div><div class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">        </div><div class="line">        <span class="comment">//System.out.println(semp.getQueueLength());</span></div><div class="line">        </div><div class="line">        <span class="comment">// 退出线程池  </span></div><div class="line">        exec.shutdown();  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>打印的结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">Accessing: <span class="number">0</span></div><div class="line">Accessing: <span class="number">1</span></div><div class="line">Accessing: <span class="number">2</span></div><div class="line">Accessing: <span class="number">3</span></div><div class="line">Accessing: <span class="number">4</span></div><div class="line">Accessing: <span class="number">5</span></div><div class="line">Accessing: <span class="number">6</span></div><div class="line">Accessing: <span class="number">7</span></div><div class="line">Accessing: <span class="number">8</span></div><div class="line">Accessing: <span class="number">9</span></div><div class="line">Accessing: <span class="number">10</span></div><div class="line">Accessing: <span class="number">11</span></div><div class="line">Accessing: <span class="number">12</span></div><div class="line">Accessing: <span class="number">13</span></div><div class="line">Accessing: <span class="number">14</span></div><div class="line">Accessing: <span class="number">15</span></div><div class="line">Accessing: <span class="number">16</span></div><div class="line">Accessing: <span class="number">19</span></div><div class="line">Accessing: <span class="number">17</span></div><div class="line">Accessing: <span class="number">18</span></div></pre></td></tr></table></figure></p>
+<p>源代码：<a href="https://github.com/hfbin/Thread_Socket/tree/master/Thread/concurrent019" target="_blank" rel="external">https://github.com/hfbin/Thread_Socket/tree/master/Thread/concurrent019</a></p>
+<p>转发者必须注明转发链接</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/线程安全/" <i class="fa fa-tag"></i> 线程安全</a>
+          
+            <a href="/tags/java/" <i class="fa fa-tag"></i> java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/20/java线程安全之Executor框架及自定义线程池（十五）/" rel="next" title="java线程安全之Executor框架及自定义线程池（十五）">
+                <i class="fa fa-chevron-left"></i> java线程安全之Executor框架及自定义线程池（十五）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/20/java线程安全之重入锁、锁与等待通知、读写锁（十七）/" rel="prev" title="java线程安全之重入锁、锁与等待通知、读写锁（十七）">
+                java线程安全之重入锁、锁与等待通知、读写锁（十七） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Concurrent-util常用类"><span class="nav-number">1.</span> <span class="nav-text">Concurrent.util常用类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CyclicBarrier使用："><span class="nav-number">1.1.</span> <span class="nav-text">CyclicBarrier使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CountDownLacth使用："><span class="nav-number">1.2.</span> <span class="nav-text">CountDownLacth使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Callable和Future使用"><span class="nav-number">1.3.</span> <span class="nav-text">Callable和Future使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Semaphore-使用"><span class="nav-number">1.4.</span> <span class="nav-text">Semaphore 使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>

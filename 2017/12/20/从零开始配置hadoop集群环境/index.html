@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hadoop," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service iptables save shell&amp;gt;setenforce">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始配置hadoop集群环境">
+<meta property="og:url" content="http://yoursite.com/2017/12/20/从零开始配置hadoop集群环境/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service iptables save shell&amp;gt;setenforce">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223134751933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223110550365?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223110633295?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223110646735?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223110655801?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223110705439?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223110954031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223111035444?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223111118661?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223111129827?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223111139851?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223111152375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223111205468?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223113600820?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223130621247?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223130659445?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223130723053?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223130801918?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223130816324?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223131225949?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223131322168?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223131357970?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223131535051?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223131742714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223134322221?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223133710586?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223133951715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223134008623?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-01-06T06:27:07.897Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从零开始配置hadoop集群环境">
+<meta name="twitter:description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service iptables save shell&amp;gt;setenforce">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171223134751933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/12/20/从零开始配置hadoop集群环境/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>从零开始配置hadoop集群环境 | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/从零开始配置hadoop集群环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从零开始配置hadoop集群环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-20T10:28:00+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/20/从零开始配置hadoop集群环境/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/20/从零开始配置hadoop集群环境/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5>一张图了解hadoop集群环境架构</h5>
+
+<p><img src="http://img.blog.csdn.net/20171223134751933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>（其它废话我就不多说了，直接上）</p>
+<p>这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。</p>
+<h4 id="1-配置网络和计算机名字"><a href="#1-配置网络和计算机名字" class="headerlink" title="1.配置网络和计算机名字"></a><strong>1.配置网络和计算机名字</strong></h4><h5 id="1-关闭防火墙和selinux"><a href="#1-关闭防火墙和selinux" class="headerlink" title="1) 关闭防火墙和selinux"></a><strong>1) 关闭防火墙和selinux</strong></h5><pre><code>shell&gt;iptables -F
+shell&gt;service iptables save
+shell&gt;setenforce 0
+shell&gt;vim /etc/selinux/config 修改SELINUX=disabled
+</code></pre><h5 id="2-配置计算机网络"><a href="#2-配置计算机网络" class="headerlink" title="2) 配置计算机网络"></a><strong>2) 配置计算机网络</strong></h5><pre><code>shell&gt;vim /etc/sysconfig/network-scripts/ifcfg-eth0
+</code></pre><p>内容如下：加//的表示要修改的地方 没有的自己加进去</p>
+<blockquote>
+<p>DEVICE=eth0<br>HWADDR=00:0C:29:57:A1:42<br>TYPE=Ethernet<br>ONBOOT=yes //<br>NM_CONTROLLED=no//关闭，yes表示修改后不必重启网卡立刻生效。会带来隐患<br>BOOTPROTO=static    //静态分配ip，不要用DHCP分配<br>IPADDR=172.16.100.101 //<br>GATEWAY=172.16.100.2 //</p>
+</blockquote>
+<p>重启网卡</p>
+<pre><code>shell&gt;service network restart 
+</code></pre><p>测试：查看ip</p>
+<pre><code>shell&gt;ifconfig 查看ip地址
+</code></pre><p>如图：<br><img src="http://img.blog.csdn.net/20171223110550365?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>此时你在本地ping虚拟机时候还是ping不通的，看下一步。</p>
+<h5 id="3-配置vmware的网卡"><a href="#3-配置vmware的网卡" class="headerlink" title="3) 配置vmware的网卡"></a><strong>3) 配置vmware的网卡</strong></h5><p><img src="http://img.blog.csdn.net/20171223110633295?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20171223110646735?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这里网关ip必须与/etc/sysconfig/network-scripts/ifcfg-eth0中的GATEWAY的ip一致。</p>
+<p><img src="http://img.blog.csdn.net/20171223110655801?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>如果本虚拟机是克隆的，查看一下配置的mac地址和虚拟机分配的mac地址是否一致</p>
+<p><img src="http://img.blog.csdn.net/20171223110705439?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这里如果还是ping不同那就要到本地网络里去重启一下VMnet8网络。</p>
+<p>NAT方式如果仍然上不去网另留言。</p>
+<h5 id="4-配置计算机名字"><a href="#4-配置计算机名字" class="headerlink" title="4) 配置计算机名字"></a><strong>4) 配置计算机名字</strong></h5><p>临时修改</p>
+<pre><code>shell&gt;hostname hfbin1  
+</code></pre><p>永久修改（需要重启,如果执行了临时修改，不需要重启）</p>
+<pre><code>shell&gt;vim /etc/sysconfig/network 
+</code></pre><h4 id="2-安装JDK和Hadoop"><a href="#2-安装JDK和Hadoop" class="headerlink" title="2 安装JDK和Hadoop"></a><strong>2 安装JDK和Hadoop</strong></h4><p>JDK和Hadoop包百度云链接：<a href="https://pan.baidu.com/s/1pLEAAa3" target="_blank" rel="external">https://pan.baidu.com/s/1pLEAAa3</a> 密码：gymn</p>
+<h5 id="2-1-安装jdk1-7-0-71"><a href="#2-1-安装jdk1-7-0-71" class="headerlink" title="2.1    安装jdk1.7.0.71"></a><strong>2.1    安装jdk1.7.0.71</strong></h5><p><strong>卸载旧的jdk</strong></p>
+<pre><code>shell&gt;rpm -qa | grep jdk
+</code></pre><p>执行命令显示内容如下：</p>
+<p>java-1.6.0-openjdk-1.6.0.0-1.50.1.11.5.el6_3.i686</p>
+<p>java-1.7.0-openjdk-1.7.0.9-2.3.4.1.el6_3.i686</p>
+<p>卸载jdk:</p>
+<pre><code>shell&gt;rpm -e --nodeps java-1.6.0-openjdk-1.6.0.0-1.50.1.11.5.el6_3.i686
+shell&gt;rpm -e --nodeps java-1.7.0-openjdk-1.7.0.9-2.3.4.1.el6_3.i686
+</code></pre><p>如图：<br> <img src="http://img.blog.csdn.net/20171223110954031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>2、    安装新的jdk，要求1.7以上版本(从现在开始我使用xshell工具链接虚拟机不用进入虚拟机里面操作了)。</strong></p>
+<p>这里要装VMware tool 工具才能将文件往虚拟机拖，不过上面你要是网络配通了，可以使用winscp/xftp工具将文件上传到虚拟机上，在这我就不说明了，这里我将文件上传到了/opt目录中。</p>
+<p>进入opt目录</p>
+<pre><code>shell&gt;cd /opt
+</code></pre><p>执行安装：</p>
+<pre><code>shell&gt;rpm –ivh jdk-7u67-linux_64.rpm
+</code></pre><p>   <img src="http://img.blog.csdn.net/20171223111035444?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>3、    配置jdk环境变量</strong><br>修改/etc/profile<br>shell&gt; vim  /etc/profile<br>在末尾加入：</p>
+<pre><code>export JAVA_HOME=/usr/java/jdk1.7.0_67
+export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+export PATH=.:$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+</code></pre><p> <img src="http://img.blog.csdn.net/20171223111118661?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>进入终端，输入 source /etc/profile 使刚刚修改的环境变量生效。</p>
+<pre><code>shell&gt;source /etc/profile
+</code></pre><p>测试是否成功：</p>
+<pre><code>shell&gt;java –version //1.7.0.67
+shell&gt;javac –version //1.70.67
+</code></pre><p> <img src="http://img.blog.csdn.net/20171223111129827?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h5 id="2-2-创建用户hduser和组hadoop"><a href="#2-2-创建用户hduser和组hadoop" class="headerlink" title="2.2    创建用户hduser和组hadoop"></a><strong>2.2    创建用户hduser和组hadoop</strong></h5><pre><code>shell&gt;groupadd hadoop
+shell&gt;useradd –g hadoop hduser 
+</code></pre><p><img src="http://img.blog.csdn.net/20171223111139851?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>    shell&gt;passwd hduser<br> <img src="http://img.blog.csdn.net/20171223111152375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>修改vim /etc/sudoers,为hduser增加sudo权限</p>
+<pre><code>shell&gt;sudo vim /etc/sudoers
+</code></pre><p>输入密码，使用root权限才可以更改此文件。</p>
+<p>大概在99行，添加内容：</p>
+<pre><code>hduser  ALL=(ALL)  ALL  (大概99行)
+</code></pre><p> <img src="http://img.blog.csdn.net/20171223111205468?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>重启 </p>
+<pre><code>shell&gt;reboot
+</code></pre><p>重启，切换到hduser登陆</p>
+<h5 id="2-3-安装hadoop2-6-0"><a href="#2-3-安装hadoop2-6-0" class="headerlink" title="2.3    安装hadoop2.6.0"></a><strong>2.3    安装hadoop2.6.0</strong></h5><p>以后的身份用hduser，如果涉及到权限不够，用sudo</p>
+<p>先通过vmtools或winscp/xftp把hadoop-2.6.0.tar.gz传到linux的/home/hduser中</p>
+<p>解压:</p>
+<p>shell&gt;tar xvzf hadoop-2.6.0.tar.gz </p>
+<p>改名:</p>
+<p>shell&gt;mv hadoop-2.6.0   hadoop-2.6</p>
+<h5 id="2-4-配置hadoop的环境变量"><a href="#2-4-配置hadoop的环境变量" class="headerlink" title="2.4    配置hadoop的环境变量"></a><strong>2.4    配置hadoop的环境变量</strong></h5><p>shell&gt;vim /etc/profile</p>
+<p>在末尾加入下面环境：</p>
+<p>export HADOOP_HOME=/home/hduser/hadoop-2.6<br>export PATH=.:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin:\$PATH</p>
+<p>进入终端，输入 shell&gt;source /etc/profile 使刚刚修改的环境变量生效</p>
+<p>测试hadoop是否安装成功</p>
+<p>shell&gt;hadoop version</p>
+<p>如图：</p>
+<p><img src="http://img.blog.csdn.net/20171223113600820?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>看到图片信息即可安装成功。</p>
+<h4 id="3-安装ssh"><a href="#3-安装ssh" class="headerlink" title="3    安装ssh"></a><strong>3    安装ssh</strong></h4><p>1）    生成公钥和私钥</p>
+<pre><code>shell&gt;ssh-keygen  -t rsa         //在 /home/hduser/.ssh/目录下有两把钥匙，其中后缀.pub是公
+</code></pre><p>2）    在本机进行免密码登陆</p>
+<pre><code>shell&gt;ssh-copy-id localhost            //复制私钥到其它计算机，当前是本机 
+                                         //一会克隆完其它两台机器，还要再用此命令。
+</code></pre><p>测试，输入：</p>
+<pre><code>shell&gt;ssh localhost
+</code></pre><p>如果不需要密码则正确</p>
+<h4 id="4-配置完全分布式"><a href="#4-配置完全分布式" class="headerlink" title="4    配置完全分布式"></a><strong>4    配置完全分布式</strong></h4><h5 id="4-1-配置host映射文件"><a href="#4-1-配置host映射文件" class="headerlink" title="4.1    配置host映射文件"></a><strong>4.1    配置host映射文件</strong></h5><p>修改shell&gt;sudo vim /etc/hosts文件，做ip和主机名映射</p>
+<pre><code>172.16.100.101 hfbin1
+172.16.100.102 hfbin2
+172.16.100.103 hfbin3
+</code></pre><p>修改本机的主机名为hfbin1</p>
+<pre><code>shell&gt;hostname hfbin1             //临时修改，立刻起作用
+shell&gt;vim /etc/sysconfig/network    //永久修改，需要重启
+</code></pre><h5 id="4-2-克隆两台虚拟机-修改主机名和ip-注意mac地址"><a href="#4-2-克隆两台虚拟机-修改主机名和ip-注意mac地址" class="headerlink" title="4.2    克隆两台虚拟机,修改主机名和ip(注意mac地址)"></a><strong>4.2    克隆两台虚拟机,修改主机名和ip(注意mac地址)</strong></h5><p><strong>1） 克隆两台虚拟机，分别是hfbin2和hfbin3</strong><br> <img src="http://img.blog.csdn.net/20171223130621247?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>然后一直点下一步，下一步，然后选择“完整克隆”，之后选择存放目录，再点完成。<br>  <img src="http://img.blog.csdn.net/20171223130659445?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><strong>2)修改主机(ip和mac地址)</strong></p>
+<p>主机：</p>
+<pre><code>shell&gt;sudo vim /etc/sysconfig/network ，之后重启（不想重启需要再执行命令hostname）
+hostname=hfbin2（hfbin3）
+同时删除；NETWORKING=yes
+</code></pre><p>ip:  </p>
+<pre><code>shell&gt;sudo vim /etc/sysconfig/network-scripts/ifcfg-eth0
+IPADDR=172.16.100.102(172.16.100.103)
+HWADDR=？ 见下图
+</code></pre><p>mac: 还是在上面的文件中修改mac地址，要和vmware分配的一样。<br> <img src="http://img.blog.csdn.net/20171223130723053?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>克隆后的虚拟机，如果ip没有发现，先重启，还不行，执行以下步骤：</p>
+<blockquote>
+<p>1、    删除文件 shell&gt;rm -rf /etc/udev/rules.d/70-persistent-net.rules</p>
+<p>2、    修改hwaddr为实际的mac地址。shell&gt;vim /etc/sysconfig/network-scripts/ifcfg-eth0</p>
+<p>3、     shell&gt;reboot重启</p>
+</blockquote>
+<h5 id="4-3-设置ssh免登陆到其它主机"><a href="#4-3-设置ssh免登陆到其它主机" class="headerlink" title="4.3    设置ssh免登陆到其它主机"></a><strong>4.3    设置ssh免登陆到其它主机</strong></h5><p>把hfbin1的公钥复制到hfbin2和 hfbin3中，这样hfbin1可以免登录到其它两台主机上。</p>
+<pre><code>shell&gt;ssh-copy-id    hfbin2
+shell&gt;ssh-copy-id    hfbin3
+</code></pre><p>测试，在hfbin1输入：</p>
+<pre><code>shell&gt;ssh hfbin2
+shell&gt;ssh hfbin3
+</code></pre><p>如果不需要密码则正确（注意进入hfbin2或hfbin3想退出可以用shell&gt;exit ,即可）</p>
+<h5 id="4-4-修改hadoop的七个配置文件"><a href="#4-4-修改hadoop的七个配置文件" class="headerlink" title="4.4    修改hadoop的七个配置文件"></a><strong>4.4    修改hadoop的七个配置文件</strong></h5><p>这里只对hfbin1进行更改，hfbin2和hfbin3等一下直接copy进去即可。</p>
+<p>以下7个文件在hadoop的安装目录的etc下，也就是~/hadoop-2.6/etc/hadoop下</p>
+<p>1)Hadoop的环境配置，我们主要配置一下JDK路径。</p>
+<pre><code>shell&gt;vim hadoop-env.sh
+</code></pre><p>修改下面内容</p>
+<pre><code>export JAVA_HOME=/usr/java/jdk1.7.0_67
+</code></pre><p> <img src="http://img.blog.csdn.net/20171223130801918?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>2)Yarn框架环境配置，也要指定JDK路径。</p>
+<pre><code>shell&gt;vim yarn-env.sh
+</code></pre><p>修改下面内容</p>
+<pre><code>export JAVA_HOME=/usr/java/jdk1.7.0_67
+</code></pre><p> <img src="http://img.blog.csdn.net/20171223130816324?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>3)    增加slave节点，也就是DateNode节点。</p>
+<pre><code>shell&gt;vim slaves
+</code></pre><p>删除所有，加入下面内容</p>
+<pre><code>hfbin2
+hfbin3    
+</code></pre><p>4)Hdoop的全局配置。例如：客户端连接HDFS时，路径前缀和工作端口。</p>
+<pre><code>shell&gt;vim core-site.xml
+</code></pre><p>在configuration标签里加入下面内容：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://hfbin1:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/home/hduser/hadoop-2.6/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>5)HDFS的配置</p>
+<pre><code>shell&gt;vim hdfs-site.xml
+</code></pre><p>在configuration标签里加入下面内容：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hfbin1:50090<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/home/hduser/hadoop-2.6/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span> file:/home/hduser/hadoop-2.6/dfs/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.webhdfs.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>6)Mapreduce的配置</p>
+<pre><code>shell&gt;vim mapred-site.xml
+</code></pre><p>在configuration标签里加入下面内容：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hfbin1:10020<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.jobhistory.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span> hfbin1:19888<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>7)Yarn框架的配置Hadoop集群测试</p>
+<pre><code>shell&gt;vim yarn-site.xml
+</code></pre><p>在configuration标签里加入下面内容：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- Site specific YARN configuration properties --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services.mapreduce.shuffle.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.mapred.ShuffleHandler<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hfbin1:8032<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hfbin1:8030<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hfbin1:8035<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.admin.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hfbin1:8033<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.webapp.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hfbin1:8088<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>复制7个文件到hfbin2和hfbin3</p>
+<pre><code>shell&gt;scp -r /home/hduser/hadoop-2.6/etc/hadoop/ hduser@hfbin2:/home/hduser/hadoop-2.6/etc/
+shell&gt;scp -r /home/hduser/hadoop-2.6/etc/hadoop/ hduser@hfbin3:/home/hduser/hadoop-2.6/etc/
+</code></pre><h5 id="4-5-验证hadoop配置是否正确"><a href="#4-5-验证hadoop配置是否正确" class="headerlink" title="4.5    验证hadoop配置是否正确"></a><strong>4.5    验证hadoop配置是否正确</strong></h5><p><strong>1、    格式化master(namenode)的文件系统</strong></p>
+<pre><code>shell&gt; hdfs namenode –format
+</code></pre><p>注：如果已经格式化后，重新格式化，需要删除172.16.100.101、172.16.100.102、172.16.100.103节点的此目录下的文件：/home/hduser/hadoop-2.6/dfs</p>
+<p><strong>2、    启动dfs</strong></p>
+<pre><code>shell&gt;start-dfs.sh
+</code></pre><p><img src="http://img.blog.csdn.net/20171223131225949?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>如果出现WARN util.NativeCodeLoader: Unable：： to load native-hadoop library….</p>
+<p>解决：在shell&gt;vim /home/hduser/hadoop-2.6/etc/hadoop/log4j.properties文件中末尾添加</p>
+<pre><code>log4j.logger.org.apache.hadoop.util.NativeCodeLoader=ERROR
+</code></pre><p>3、    输入 jps查看进程</p>
+<pre><code>shell&gt;jps
+</code></pre><p><img src="http://img.blog.csdn.net/20171223131322168?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>4、    启动yarn</p>
+<pre><code>shell&gt;start-yarn.sh
+</code></pre><p><img src="http://img.blog.csdn.net/20171223131357970?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>5、    查看集群状态</p>
+<pre><code>shell&gt;hdfs dfsadmin -report
+</code></pre><p> <img src="http://img.blog.csdn.net/20171223131535051?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>6、    在浏览中查看dfs的运行状态</p>
+<pre><code>http://172.16.100.101:50070
+</code></pre><p><img src="http://img.blog.csdn.net/20171223131742714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>7、    停止hadoop</p>
+<pre><code>shell&gt;stop-all.sh
+</code></pre><h5 id="4-6-运行例子wordcount"><a href="#4-6-运行例子wordcount" class="headerlink" title="4.6    运行例子wordcount"></a><strong>4.6    运行例子wordcount</strong></h5><p>该例子为hadoop自带例子，统计出所有文件的单词的词频。</p>
+<p>如图：<br><img src="http://img.blog.csdn.net/20171223134322221?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>1)    创建文件file1和file2(放到目录/home/hduser/file)</p>
+<pre><code>shell&gt;mkdir file (在/home/hduser/下输入命令)
+shell&gt;vim file1
+加入下面内容：
+Hello World hi HADOOP
+shell&gt;vim file2
+加入下面内容：
+Hello Hadoop hi CHINA
+</code></pre><p>2)    启动hdfs，并且创建hdfs目录 /input3</p>
+<pre><code>shell&gt;start-dfs.sh
+shell&gt;start-yarn.sh
+shell&gt;hadoop  fs  -mkdir  /input3
+</code></pre><p>3)    把file1和file2放到hdfs的目录/input2/中。</p>
+<pre><code>shell&gt; hadoop fs  -put file* /input3
+</code></pre><p>4)    查看hdfs中是否有file和file2</p>
+<pre><code>shell&gt;hadoop fs  -ls /input3
+</code></pre><p><img src="http://img.blog.csdn.net/20171223133710586?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>5)    运行命令</p>
+<pre><code>shell&gt;hadoop jar /home/hduser/hadoop-2.6/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount  /input3/ /output3/wordcount1
+</code></pre><p>6)    查看输出文件</p>
+<pre><code>shell&gt;hadoop fs -ls /output3/wordcount1
+</code></pre><p><img src="http://img.blog.csdn.net/20171223133951715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<pre><code>shell&gt;hadoop fs -cat /output3/wordcount1/part-r-00000
+</code></pre><p><img src="http://img.blog.csdn.net/20171223134008623?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>后续我会写一篇关于<strong>hdfs命令</strong>的使用方法</p>
+<p></p><h3>目前到这hdoop集群搭建就完毕了</h3>有什么问题在下面留言即可<p></p>
+<p>转发者必须经同意才可以转发。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" <i class="fa fa-tag"></i> Hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/" rel="next" title="liunx目录结构说明与常用命令（基于6.4版本）">
+                <i class="fa fa-chevron-left"></i> liunx目录结构说明与常用命令（基于6.4版本）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/" rel="prev" title="FS Shell命令与JAVA实现操作HDFS文件">
+                FS Shell命令与JAVA实现操作HDFS文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">一张图了解hadoop集群环境架构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-配置网络和计算机名字"><span class="nav-number"></span> <span class="nav-text">1.配置网络和计算机名字</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-关闭防火墙和selinux"><span class="nav-number">1.</span> <span class="nav-text">1) 关闭防火墙和selinux</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-配置计算机网络"><span class="nav-number">2.</span> <span class="nav-text">2) 配置计算机网络</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-配置vmware的网卡"><span class="nav-number">3.</span> <span class="nav-text">3) 配置vmware的网卡</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-配置计算机名字"><span class="nav-number">4.</span> <span class="nav-text">4) 配置计算机名字</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装JDK和Hadoop"><span class="nav-number"></span> <span class="nav-text">2 安装JDK和Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-安装jdk1-7-0-71"><span class="nav-number">1.</span> <span class="nav-text">2.1    安装jdk1.7.0.71</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-创建用户hduser和组hadoop"><span class="nav-number">2.</span> <span class="nav-text">2.2    创建用户hduser和组hadoop</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-安装hadoop2-6-0"><span class="nav-number">3.</span> <span class="nav-text">2.3    安装hadoop2.6.0</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-配置hadoop的环境变量"><span class="nav-number">4.</span> <span class="nav-text">2.4    配置hadoop的环境变量</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-安装ssh"><span class="nav-number"></span> <span class="nav-text">3    安装ssh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-配置完全分布式"><span class="nav-number"></span> <span class="nav-text">4    配置完全分布式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-配置host映射文件"><span class="nav-number">1.</span> <span class="nav-text">4.1    配置host映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-克隆两台虚拟机-修改主机名和ip-注意mac地址"><span class="nav-number">2.</span> <span class="nav-text">4.2    克隆两台虚拟机,修改主机名和ip(注意mac地址)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-设置ssh免登陆到其它主机"><span class="nav-number">3.</span> <span class="nav-text">4.3    设置ssh免登陆到其它主机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-修改hadoop的七个配置文件"><span class="nav-number">4.</span> <span class="nav-text">4.4    修改hadoop的七个配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-5-验证hadoop配置是否正确"><span class="nav-number">5.</span> <span class="nav-text">4.5    验证hadoop配置是否正确</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-6-运行例子wordcount"><span class="nav-number">6.</span> <span class="nav-text">4.6    运行例子wordcount</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">目前到这hdoop集群搭建就完毕了</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>

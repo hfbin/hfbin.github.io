@@ -115,7 +115,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -379,10 +379,10 @@
         
           <div class="tag-cloud">
             <div class="tag-cloud-title">
-                9 tags in total
+                21 tags in total
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/Maven/" style="font-size: 12px; color: #ccc">Maven</a> <a href="/tags/Mybatis/" style="font-size: 12px; color: #ccc">Mybatis</a> <a href="/tags/SSM/" style="font-size: 12px; color: #ccc">SSM</a> <a href="/tags/Spring/" style="font-size: 12px; color: #ccc">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 12px; color: #ccc">SpringMVC</a> <a href="/tags/git/" style="font-size: 12px; color: #ccc">git</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/redis/" style="font-size: 12px; color: #ccc">redis</a> <a href="/tags/shiro/" style="font-size: 12px; color: #ccc">shiro</a>
+              <a href="/tags/ActiveMQ/" style="font-size: 18.75px; color: #868686">ActiveMQ</a> <a href="/tags/HDFS/" style="font-size: 12px; color: #ccc">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 14.25px; color: #b5b5b5">Hadoop</a> <a href="/tags/JMS/" style="font-size: 12px; color: #ccc">JMS</a> <a href="/tags/Maven/" style="font-size: 23.25px; color: #575757">Maven</a> <a href="/tags/Mybatis/" style="font-size: 23.25px; color: #575757">Mybatis</a> <a href="/tags/SSM/" style="font-size: 21px; color: #6f6f6f">SSM</a> <a href="/tags/Spring/" style="font-size: 21px; color: #6f6f6f">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 21px; color: #6f6f6f">SpringMVC</a> <a href="/tags/Zookeeper/" style="font-size: 12px; color: #ccc">Zookeeper</a> <a href="/tags/git/" style="font-size: 12px; color: #ccc">git</a> <a href="/tags/hexo/" style="font-size: 12px; color: #ccc">hexo</a> <a href="/tags/java/" style="font-size: 30px; color: #111">java</a> <a href="/tags/jdk/" style="font-size: 16.5px; color: #9d9d9d">jdk</a> <a href="/tags/liunx/" style="font-size: 18.75px; color: #868686">liunx</a> <a href="/tags/redis/" style="font-size: 12px; color: #ccc">redis</a> <a href="/tags/shiro/" style="font-size: 12px; color: #ccc">shiro</a> <a href="/tags/tomcat/" style="font-size: 16.5px; color: #9d9d9d">tomcat</a> <a href="/tags/消息中间件/" style="font-size: 18.75px; color: #868686">消息中间件</a> <a href="/tags/线程安全/" style="font-size: 27.75px; color: #282828">线程安全</a> <a href="/tags/网络编程/" style="font-size: 25.5px; color: #404040">网络编程</a>
             </div>
           </div>
         
@@ -438,7 +438,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -449,7 +449,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -460,7 +460,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -560,8 +560,8 @@
 </div>
 <div class="copyright" style="text-align: center !important;">
   
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -615,6 +615,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

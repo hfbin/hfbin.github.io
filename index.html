@@ -114,7 +114,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: true,
@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/04/shiro 简介/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/04/shiro 简介/" itemprop="url">shiro 简介</a></h1>
+                <a class="post-title-link" href="/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/" itemprop="url">FS Shell命令与JAVA实现操作HDFS文件</a></h1>
         
 
         <div class="post-meta">
@@ -404,8 +404,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-04T17:22:01+08:00">
-                2017-11-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-25T10:41:46+08:00">
+                2017-12-25
               </time>
             
 
@@ -427,8 +427,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/shiro/" itemprop="url" rel="index">
-                    <span itemprop="name">shiro</span>
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
                   </a>
                 </span>
 
@@ -446,8 +446,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/04/shiro 简介/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/04/shiro 简介/" class="cy_cmt_count" data-xid="2017/11/04/shiro 简介/" itemprop="commentsCount" ></span>
+                <a href="/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/" class="cy_cmt_count" data-xid="2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -477,12 +477,27 @@
       
         
           
-          最新资讯近日，在微软亚洲研究院与哈工大共同举办的第十九届“二十一世纪的计算”国际学术研讨会上， Peter Lee 博士作为微软全球资深副总裁， 也来到了现场。AI科技大本营非常有幸采访到这位微软研究院的核心领导之一。对话中，Peter Lee透露了很多信息。谈到微软在 AI 研究和 AI 产业化方面布局这个问题时，他表示微软对新技术、新机会非常重视，投入得非常多，微软现在领先 20 年。
-简介1、Apache Shiro 是Java  的一个安全（权限）框架2、Shiro 可以非常容易的开发出足够好的应用，其不仅可以用在JavaSE环境，也可以用JavaEE环境。3、Shiro可以完成：认证、授权、加密、会话管理、与Web 集成、缓存等。4、下载：http://shiro.apache.o
+          FS Shell命令创建目录 
+shell&gt;hadoop fs –mkdir /user
+列表 
+shell&gt;hadoop fs –ls /
+查看文件内容 
+shell&gt;hadoop fs –cat /input/file.txt
+上传文件 
+shell&gt;hadoop fs –put 本地文件 远程目录
+获取文件
+shell&gt; hadoop fs –get 远程文件 本地目录
+移动文件 
+shell&gt;hadoop fs –mv远程文件1 … 远程文件n 远程目录
+复制文件 
+shell&gt;hadoop fs –cp 远程文件1 … 远程文件n 远程目录
+删除文件 
+shell&gt;hadoop fs –rmr 目录/文件
+测试文件命令文件是否存在  
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/04/shiro 简介/#more" rel="contents">
+            <a class="btn" href="/2017/12/25/FS Shell命令与JAVA实现操作HDFS文件/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -533,7 +548,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/hexo+gitHub搭建个人独立博客(一) /">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/从零开始配置hadoop集群环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -552,7 +567,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/02/hexo+gitHub搭建个人独立博客(一) /" itemprop="url">hexo+gitHub搭建个人独立博客(一)</a></h1>
+                <a class="post-title-link" href="/2017/12/20/从零开始配置hadoop集群环境/" itemprop="url">从零开始配置hadoop集群环境</a></h1>
         
 
         <div class="post-meta">
@@ -564,8 +579,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-02T16:37:01+08:00">
-                2017-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-20T10:28:00+08:00">
+                2017-12-20
               </time>
             
 
@@ -587,8 +602,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
                   </a>
                 </span>
 
@@ -606,8 +621,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/02/hexo+gitHub搭建个人独立博客(一) /#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/02/hexo+gitHub搭建个人独立博客(一) /" class="cy_cmt_count" data-xid="2017/11/02/hexo+gitHub搭建个人独立博客(一) /" itemprop="commentsCount" ></span>
+                <a href="/2017/12/20/从零开始配置hadoop集群环境/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/12/20/从零开始配置hadoop集群环境/" class="cy_cmt_count" data-xid="2017/12/20/从零开始配置hadoop集群环境/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -637,12 +652,22 @@
       
         
           
-          最新资讯谷歌的一篇文章则着重说明了新成立的指导小组将如何“让MDN成为最好的Web参考文档，帮助我们更好地进行Web开发”。指导小组目前的成员包括微软、谷歌、Mozilla、三星和W3C。值得注意的是，苹果公司并没有参与这次发布声明。
-前言一直想要一个自己的独立博客，域名跟服务器到现在快买有一年了，由于种种原因最终还是没有搭建自己的博客，服务器差不多放一年了，快要发霉了。去逛gitHub时候发现好多人的项目里都有**.github.io慢慢研究，就偶然的发现Hexo这个优秀的静态博客框架，再搭配现在流行的gitHub，当然也可以放在Coding或码云，简直是完美写博客的黄金搭档（免费+方便）。我就百度好多教程，最后磕磕碰碰的搭建了起来。但是网上的教程多多少少都有点问题。就有了这个自己总结的教
+          一张图了解hadoop集群环境架构
+
+（其它废话我就不多说了，直接上）
+这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。
+1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&gt;iptables -F
+shell&gt;service iptables save
+shell&gt;setenforce 0
+shell&gt;vim /etc/selinux/config 修改SELINUX=disabled
+2) 配置计算机网络shell&gt;vim /etc/sysconfig/network-scripts/ifcfg-eth0
+内容如下：加//的表示要修改的地方 没有的自己加进去
+
+DE
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/02/hexo+gitHub搭建个人独立博客(一) /#more" rel="contents">
+            <a class="btn" href="/2017/12/20/从零开始配置hadoop集群环境/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -693,7 +718,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/常见配置redis.conf介绍 /">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -712,7 +737,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/01/常见配置redis.conf介绍 /" itemprop="url">常见配置redis.conf介绍</a></h1>
+                <a class="post-title-link" href="/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/" itemprop="url">liunx目录结构说明与常用命令（基于6.4版本）</a></h1>
         
 
         <div class="post-meta">
@@ -724,8 +749,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-01T16:37:01+08:00">
-                2017-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-19T10:07:44+08:00">
+                2017-12-19
               </time>
             
 
@@ -747,8 +772,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
+                  <a href="/categories/liunx/" itemprop="url" rel="index">
+                    <span itemprop="name">liunx</span>
                   </a>
                 </span>
 
@@ -766,8 +791,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/01/常见配置redis.conf介绍 /#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/01/常见配置redis.conf介绍 /" class="cy_cmt_count" data-xid="2017/11/01/常见配置redis.conf介绍 /" itemprop="commentsCount" ></span>
+                <a href="/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/" class="cy_cmt_count" data-xid="2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -797,35 +822,19 @@
       
         
           
-          参数说明redis.conf 配置项说明如下：
-Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程
-daemonize no
-
-
-
-
-当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定
-pidfile /var/run/redis.pid
-
-
-
-
-指定Redis监听端口，默认端口为6379，作者在自己的一篇博文中解释了为什么选用6379作为默认端口，因为6379在手机按键上MERZ对应的号码，而MERZ取自意大利歌女Alessia Merz的名字
-port 6379
-
-
-
-
-绑定的主机地址
-
-bind 127.0.0.1
-
-
-当 客户端闲置多长时间后关闭连接，如果指定为0，表示关
+          根目录结构bin        用户可执行的命令,除此之外,还有 /user/bin, /bin, /user/local/bin
+sbin        系统管理员执行的命令， 除此之外, 还有/user/sbin, /bin, /user/local/sbin
+lib        库文件(32位)， 除此之外, 还有/user/lib, /bin, /user/local/lib
+lib64        库文件(64位)， 除此之外, 还有/user/lib64, /bin, /user/local/lib64
+etc        配置文件
+usr        应用程序目录
+var        服务器数据，日志等，伪文件系统
+boot        启动目录
+dev      
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/01/常见配置redis.conf介绍 /#more" rel="contents">
+            <a class="btn" href="/2017/12/19/liunx目录结构说明与常用命令（基于6.4版本）/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -876,7 +885,7 @@ bind 127.0.0.1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/02/Zookeeper+ActiveMQ集群搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -895,7 +904,7 @@ bind 127.0.0.1
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/31/Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合/" itemprop="url">Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合</a></h1>
+                <a class="post-title-link" href="/2017/12/02/Zookeeper+ActiveMQ集群搭建/" itemprop="url">Zookeeper+ActiveMQ集群搭建</a></h1>
         
 
         <div class="post-meta">
@@ -907,8 +916,8 @@ bind 127.0.0.1
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-31T16:37:01+08:00">
-                2017-10-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-02T11:19:55+08:00">
+                2017-12-02
               </time>
             
 
@@ -930,8 +939,8 @@ bind 127.0.0.1
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SSM-Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM+Maven</span>
+                  <a href="/categories/Zookeeper-ActiveMQ/" itemprop="url" rel="index">
+                    <span itemprop="name">Zookeeper+ActiveMQ</span>
                   </a>
                 </span>
 
@@ -949,8 +958,8 @@ bind 127.0.0.1
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/10/31/Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/10/31/Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合/" class="cy_cmt_count" data-xid="2017/10/31/Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合/" itemprop="commentsCount" ></span>
+                <a href="/2017/12/02/Zookeeper+ActiveMQ集群搭建/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/12/02/Zookeeper+ActiveMQ集群搭建/" class="cy_cmt_count" data-xid="2017/12/02/Zookeeper+ActiveMQ集群搭建/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -980,12 +989,15 @@ bind 127.0.0.1
       
         
           
-          在整合之前先介绍一下Maven:
-Maven是一个项目管理工具，它包含了一个项目对象模型 (Project Object Model)，一组标准集合，一个项目生命周期(Project Lifecycle)，一个依赖管理系统(Dependency Management System)，和用来运行定义在生命周期阶段(phase)中插件(plugin)目标(goal)的逻辑。当你使用Maven的时候，你用一个明确定义的项目对象模型来描述你的项目，然后Maven可以应用横切的逻辑，这些逻辑来自一组共享的（或者自定义的）插件。 Maven 有一个生命周期，当你运行 mvn install 的时候被调用。这条命令告诉 Maven 执行一系列的有序的步骤，直到到达你指定的生命周期。遍历生命周期旅途中的一个
+          1 前言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用ZooKeeper实现的Master-Slave实现方式，是对ActiveMQ进行高可用的一种有效的解决方案，高可用的原理：使用ZooKeeper（集群）注册所有的ActiveMQ Broker。只有其中的一个Broker可以对外提供服务（也就是Master节点），其 他的Broker处于待机状态，被视为Slave。如果Master因故障而不能提供服务， 则利用ZooKeeper的内部选举机制会从Slave中选举出一个Broker充当Master节 点，继续对外提供服务。
+原理图：
+
+官方文档：http://activemq.apache.org/replicated-leveldb-store.html
+2
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/31/Maven+SSM（SpringMVC+Spring+Mybatis） 框架整合/#more" rel="contents">
+            <a class="btn" href="/2017/12/02/Zookeeper+ActiveMQ集群搭建/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1036,7 +1048,7 @@ Maven是一个项目管理工具，它包含了一个项目对象模型 (Project
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/31/基于liunx的git操作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/01/消息中间件之ActiveMQ整合Spring实现邮箱发送（四）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -1055,7 +1067,7 @@ Maven是一个项目管理工具，它包含了一个项目对象模型 (Project
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/31/基于liunx的git操作/" itemprop="url">基于liunx的git操作</a></h1>
+                <a class="post-title-link" href="/2017/12/01/消息中间件之ActiveMQ整合Spring实现邮箱发送（四）/" itemprop="url">消息中间件之ActiveMQ整合Spring实现邮箱发送（四）</a></h1>
         
 
         <div class="post-meta">
@@ -1067,8 +1079,8 @@ Maven是一个项目管理工具，它包含了一个项目对象模型 (Project
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-31T12:43:19+08:00">
-                2017-10-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-01T01:19:55+08:00">
+                2017-12-01
               </time>
             
 
@@ -1090,8 +1102,8 @@ Maven是一个项目管理工具，它包含了一个项目对象模型 (Project
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
+                  <a href="/categories/消息中间件/" itemprop="url" rel="index">
+                    <span itemprop="name">消息中间件</span>
                   </a>
                 </span>
 
@@ -1109,8 +1121,8 @@ Maven是一个项目管理工具，它包含了一个项目对象模型 (Project
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/10/31/基于liunx的git操作/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/10/31/基于liunx的git操作/" class="cy_cmt_count" data-xid="2017/10/31/基于liunx的git操作/" itemprop="commentsCount" ></span>
+                <a href="/2017/12/01/消息中间件之ActiveMQ整合Spring实现邮箱发送（四）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/12/01/消息中间件之ActiveMQ整合Spring实现邮箱发送（四）/" class="cy_cmt_count" data-xid="2017/12/01/消息中间件之ActiveMQ整合Spring实现邮箱发送（四）/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -1140,19 +1152,827 @@ Maven是一个项目管理工具，它包含了一个项目对象模型 (Project
       
         
           
-          在liunx下安装git
-yum install git 
+          前言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前面几篇文章介绍了ActiveMQ的使用，今天来点实际的使用ActiveMQ整合Spring实现异步邮箱发送。在讲之前先提两个问题，第一个问题ActiveMQ是如何与Spring整合的？第二个问题又是这样实现异步发送电子邮件的？好！带着这两个问题来看下面代码。
+实现模型图：
+工程目录：
 
-克隆GitHub上的项目到liunx下：第一步先复制链接第二步在liunx下克隆项目（最好先创建一个克隆的文件夹）：命令：git clone https://github.com/hfbin/ThirdPartyLogin.git
-Liunx环境下更新github项目  执行git commit 后：  ：wq 保存后：  本地提交 git push：输入用户名密码即可发布到GitHub上：
-到GitHub上查看项目是否更新
-大功告成 ！！！！
-转发者必须注明转发链接
-
-          
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分为两个项目一个为生产端（ActiveMQ-Provider）、一个为消费端（ActiveMQ-Consumer）。数据格式采用json，使用alibaba的fastjson来做格式转换。通过Spring提供的组件来实现邮箱发送。好废话不多说，上代码。
+使用ma
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/10/31/基于liunx的git操作/#more" rel="contents">
+            <a class="btn" href="/2017/12/01/消息中间件之ActiveMQ整合Spring实现邮箱发送（四）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/消息中间件之ActiveMQ PTP和PUB-SUB模式实例（三）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/29/消息中间件之ActiveMQ PTP和PUB-SUB模式实例（三）/" itemprop="url">消息中间件之ActiveMQ PTP和PUB/SUB模式实例（三）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-29T23:32:17+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/消息中间件/" itemprop="url" rel="index">
+                    <span itemprop="name">消息中间件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/29/消息中间件之ActiveMQ PTP和PUB-SUB模式实例（三）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/29/消息中间件之ActiveMQ PTP和PUB-SUB模式实例（三）/" class="cy_cmt_count" data-xid="2017/11/29/消息中间件之ActiveMQ PTP和PUB-SUB模式实例（三）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1 前言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在JMS那篇文章中我有提过消息通信模式，主要的模式有两种点对点（Point-to-Point）、发布-订阅（Publish/Subscribe），在那篇文章中我只是描述了一些理论性的东西，并没有实际的案例，这篇文章我将用案例来讨论这两个模式。
+2 点对点(P2P)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p2p的过程则理解起来比较简单。它好比是两个人打电话，这两个人是独享这一条通信链路的。一方发送消息，另外一方接收，就这么简单。它的通信场景如下图所示：
+
+2.1 案例生产端12345678910111213141516171819202122232425262728293031323
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/消息中间件之ActiveMQ PTP和PUB-SUB模式实例（三）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/" itemprop="url">消息中间件之ActiveMQ初步认识及第一个程序（二）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-29T16:30:08+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/消息中间件/" itemprop="url" rel="index">
+                    <span itemprop="name">消息中间件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/" class="cy_cmt_count" data-xid="2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1 ActiveMQ 简介&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ActiveMQ是Apache出品，最流行的，能力强劲的开源消息总线。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ActiveMQ是一个完全支持JMS1.1和J2EE 1．4规范的JMS Provider现，尽管JMS规范出台己经是很久的事情了，但是JMS在当今的J2EE应用中间仍然扮演着特殊的地位，可以说ActiveMQ在业界应用最广泛，当然如果想要有更强大的性能和海量数据处理能力，ActiveMQ还需要不断的升级版本，80%以上的业务我们使用ActiveMQ以及足够满足需求，当然后续如天猫、淘宝网这种大型的电商网站，尤其是双11这种特殊时间，ActiveMQ需要
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/消息中间件之ActiveMQ初步认识及第一个程序（二）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/29/消息中间件之JMS概念理解篇（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/29/消息中间件之JMS概念理解篇（一）/" itemprop="url">消息中间件之JMS概念理解篇（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-29T01:18:17+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/消息中间件/" itemprop="url" rel="index">
+                    <span itemprop="name">消息中间件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/29/消息中间件之JMS概念理解篇（一）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/29/消息中间件之JMS概念理解篇（一）/" class="cy_cmt_count" data-xid="2017/11/29/消息中间件之JMS概念理解篇（一）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1 背景 &amp; JMS概述&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前，CORBA、DCOM、RMI等RPC中间件技术己广泛应用于各个领域。但是面对規模和复杂度都越来越高的分布式系统，这些技术也显示出其局限性：
+（1）    同步信：客户发出调用后,必须等待服务对象完成处理并回结果后才能续执行；
+（2）    客户和服务对象的生命周期紧密耦合：客户进程和服务对象进程都必须正常运行；如果由于服务对象崩溃或者网故障导致客户的请求不可达，客户会接收到异常；
+（3）    点对点通信：客户的一次调用只发送给某个单独的目标对象。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;面向消息的中间件(Message Oriented Middle
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/消息中间件之JMS概念理解篇（一）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/java网络编程之Netty实战心跳检测（八）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/java网络编程之Netty实战心跳检测（八）/" itemprop="url">java网络编程之Netty实战心跳检测（八）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-27T12:05:11+08:00">
+                2017-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/27/java网络编程之Netty实战心跳检测（八）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/27/java网络编程之Netty实战心跳检测（八）/" class="cy_cmt_count" data-xid="2017/11/27/java网络编程之Netty实战心跳检测（八）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Netty实战心跳检测
+
+1 概念理解&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们使用Socket通信一般经常会处理多个服务器之间的心跳检测，一般来讲我们去维护服务器集群，肯定要有一台或（几台）服务器主机(Master)，然后还应该有N台(Slave)，那么我们的主机肯定要时时刻刻知道自己下面的从服务器的各方面情况。然后进行实时监控的功能。这个在分布式架构里叫做心跳检测或者说心跳监控。最佳处理方案我还是觉得是使用一些通信框架进行实现，我们的Netty就可以去做这样一件事。废话不多说直接上案例。
+2 案例&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在编写案例之前先说一下要加入jar包， 1、netty     2、log4j     
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/27/java网络编程之Netty实战心跳检测（八）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/java网络编程之Netty实战数据通信（七）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/27/java网络编程之Netty实战数据通信（七）/" itemprop="url">java网络编程之Netty实战数据通信（七）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-27T01:01:11+08:00">
+                2017-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/27/java网络编程之Netty实战数据通信（七）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/27/java网络编程之Netty实战数据通信（七）/" class="cy_cmt_count" data-xid="2017/11/27/java网络编程之Netty实战数据通信（七）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Netty最佳实战数据通信
+
+1 分析&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们需要了解下在真正项目应用中如何去考虚Netty的使用，大体上对于一参数设置都是根据服务器性能决定的。这个不是最主要的。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们要考虑的问题是两台机器（甚至多台）使用Netty的怎样进行通信，我把他分为三种：
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一种，使用长连接通道不断开的形式进行通信，也就是服务器和客户端的通道一直处于开启状态，如果服务器性能足够好，并且我们的客户端数量也比较少的情况下，我还是推荐这种方式的。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/27/java网络编程之Netty实战数据通信（七）/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1193,6 +2013,10 @@ Liunx环境下更新github项目  执行git commit 后：  ：wq 保存后：  �
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1236,7 +2060,7 @@ Liunx环境下更新github项目  执行git commit 后：  ：wq 保存后：  �
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1247,7 +2071,7 @@ Liunx环境下更新github项目  执行git commit 后：  ：wq 保存后：  �
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1258,7 +2082,7 @@ Liunx环境下更新github项目  执行git commit 后：  ：wq 保存后：  �
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1358,8 +2182,8 @@ Liunx环境下更新github项目  执行git commit 后：  ：wq 保存后：  �
 </div>
 <div class="copyright" style="text-align: center !important;">
   
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1413,6 +2237,8 @@ Liunx环境下更新github项目  执行git commit 后：  ：wq 保存后：  �
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     

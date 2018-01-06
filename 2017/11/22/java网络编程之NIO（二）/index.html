@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,网络编程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="NIO类库简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在介绍NIO编程之前，我们首先需要澄清一个概念，NIO到底是什么的简称？有人称之为New IO，因为它相对于之前的IO类库是新增的，所以被称为New IO，这是它的官方叫法。但是，由于之前老的IO类库是阻塞IO，New IO类库的目标就是要让JAVA支持非阻塞IO，所以，更多的人喜欢称之为非阻塞IO（Non-bl">
+<meta name="keywords" content="java,网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java网络编程之NIO（二）">
+<meta property="og:url" content="http://yoursite.com/2017/11/22/java网络编程之NIO（二）/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="NIO类库简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在介绍NIO编程之前，我们首先需要澄清一个概念，NIO到底是什么的简称？有人称之为New IO，因为它相对于之前的IO类库是新增的，所以被称为New IO，这是它的官方叫法。但是，由于之前老的IO类库是阻塞IO，New IO类库的目标就是要让JAVA支持非阻塞IO，所以，更多的人喜欢称之为非阻塞IO（Non-bl">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img.blog.csdn.net/20171123004537500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171122233643749?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171122233743061?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171122233752780?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171122233802108?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171122233813794?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-01-06T06:11:03.871Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java网络编程之NIO（二）">
+<meta name="twitter:description" content="NIO类库简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在介绍NIO编程之前，我们首先需要澄清一个概念，NIO到底是什么的简称？有人称之为New IO，因为它相对于之前的IO类库是新增的，所以被称为New IO，这是它的官方叫法。但是，由于之前老的IO类库是阻塞IO，New IO类库的目标就是要让JAVA支持非阻塞IO，所以，更多的人喜欢称之为非阻塞IO（Non-bl">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171123004537500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/22/java网络编程之NIO（二）/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>java网络编程之NIO（二） | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/java网络编程之NIO（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java网络编程之NIO（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-22T23:40:17+08:00">
+                2017-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/22/java网络编程之NIO（二）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/22/java网络编程之NIO（二）/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="NIO类库简介"><a href="#NIO类库简介" class="headerlink" title="NIO类库简介"></a><strong>NIO类库简介</strong></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在介绍NIO编程之前，我们首先需要澄清一个概念，NIO到底是什么的简称？有人称之为New IO，因为它相对于之前的IO类库是新增的，所以被称为New IO，这是它的官方叫法。但是，由于之前老的IO类库是阻塞IO，New IO类库的目标就是要让JAVA支持非阻塞IO，所以，更多的人喜欢称之为非阻塞IO（Non-block IO），由于非阻塞IO更能够体现NIO的特点，所以本书使用的NIO都指的是非阻塞IO。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与Socket类和ServerSocket类相对应，NIO也提供了SocketChannel和ServerSocketChannel两种不同的套接字通道实现。这两种新增的通道都支持阻塞和非阻塞两种模式。阻塞模式使用非常简单，但是性能和可靠性都不好，非阻塞模式正好相反。开发人员一般可以根据自己的需要来选择合适的模式，一般来说，低负载、低并发的应用程序可以选择同步阻塞IO以降低编程复杂度。但是对于高负载、高并发的网络应用，需要使用NIO的非阻塞模式进行开发。</p>
+<p>NIO模型图：</p>
+<p><img src="http://img.blog.csdn.net/20171123004537500?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>学习NIO编程，我们首先要了解几个概念：</p>
+<p>Buffer（缓冲区）、Channel (管道、通道）Selector（选择器、多路复用器）</p>
+<p>下面我会一一介绍：</p>
+<h5 id="Buffer（缓冲区）"><a href="#Buffer（缓冲区）" class="headerlink" title="Buffer（缓冲区）"></a><strong>Buffer（缓冲区）</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer是一个对象，它包含一些要写入或者要读取的数据。在NIO类库中加入Buffer对象，体现了新库与原IO的一个重要的区别。在面向流的IO中，可以将数据直接写入或读取到Stream对象中。在NIO库中，所有数据都是用缓冲区处理的（读写）。缓冲区实质上是一个数组，通常它是一个字节数组(ByteBuffer)，也可以使用他类型的数组。这个数组为缓冲区提供了数据的访问读写等操作属性，如位置、容量、上限等概念，参考api文档。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer类型：我们最常用的就是ByteBuffer，实际上每一种java基木类型都对于了一种缓存区（除了Boolean类型）,如下所示：</p>
+<blockquote>
+<p>ByteBuffer：字节缓冲区<br>CharBuffer：字符缓冲区<br>ShortBuffer：短整型缓冲区<br>IntBuffer：整形缓冲区<br>LongBuffer：长整形缓冲区<br>FloatBuffer：浮点型缓冲区<br>DoubleBuffer：双精度浮点型缓冲区</p>
+</blockquote>
+<p>缓冲区的类图继承关系如下所示：<br><img src="http://img.blog.csdn.net/20171122233643749?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每一个Buffer类都是Buffer接口的一个子实例。除了 ByteBuffer，每一个 Buffer 类都有完全一样的操作，只是它们所处理的数据类型不一样。因为大多数标准I/O操作都使用ByteBuffer，所以它除了具有一般缓冲区的操作之外还提供一些特有的操作，方便网络读写。</p>
+<p>下面有个小例子介绍Buffer类型使用。虽然不是很详细但是足够你了解使用了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestBuffer</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">//Buffer很恶心你慢慢研究就会发现他的恶心之处  ， 好了 下面好好享受Buffer</span></div><div class="line">		<span class="comment">// 1 基本操作</span></div><div class="line">		<span class="comment">//创建指定长度的缓冲区</span></div><div class="line">		IntBuffer buf = IntBuffer.allocate(<span class="number">10</span>);</div><div class="line">		buf.put(<span class="number">13</span>);<span class="comment">// position位置：0 - &gt; 1</span></div><div class="line">		buf.put(<span class="number">21</span>);<span class="comment">// position位置：1 - &gt; 2</span></div><div class="line">		buf.put(<span class="number">35</span>);<span class="comment">// position位置：2 - &gt; 3</span></div><div class="line">		<span class="comment">//把位置复位为0，也就是position位置：3 - &gt; 0   建议每次put()完数据都flip()一下。</span></div><div class="line">		buf.flip();</div><div class="line">		System.out.println(<span class="string">"使用flip复位："</span> + buf);</div><div class="line">		System.out.println(<span class="string">"容量为: "</span> + buf.capacity());	<span class="comment">//容量一旦初始化后不允许改变（warp方法包裹数组除外）</span></div><div class="line">		System.out.println(<span class="string">"限制为: "</span> + buf.limit());		<span class="comment">//由于只装载了三个元素,所以可读取或者操作的元素为3 则limit=3</span></div><div class="line">		</div><div class="line">		</div><div class="line">		System.out.println(<span class="string">"获取下标为1的元素："</span> + buf.get(<span class="number">1</span>));</div><div class="line">		System.out.println(<span class="string">"get(index)方法，position位置不改变："</span> + buf);</div><div class="line">		buf.put(<span class="number">1</span>, <span class="number">4</span>); <span class="comment">//下标为1的参数变为4    12 --&gt;  4</span></div><div class="line">		buf.flip();</div><div class="line">		System.out.println(<span class="string">"put(index, change)方法，position位置不变："</span> + buf);;</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; buf.limit(); i++) &#123;</div><div class="line">			<span class="comment">//调用get方法会使其缓冲区位置（position）向后递增一位</span></div><div class="line">			System.out.print(buf.get() + <span class="string">"\t"</span>);</div><div class="line">		&#125;</div><div class="line">		System.out.println(<span class="string">"\n"</span>+<span class="string">"buf对象遍历之后为: "</span> + buf);</div><div class="line">		</div><div class="line">		<span class="comment">// 2 wrap方法使用</span></div><div class="line">		<span class="comment">/**</span></div><div class="line"><span class="comment">		//  wrap方法会包裹一个数组: 一般这种用法不会先初始化缓存对象的长度，因为没有意义，最后还会被wrap所包裹的数组覆盖掉。 </span></div><div class="line"><span class="comment">		//  并且wrap方法修改缓冲区对象的时候，数组本身也会跟着发生变化。                     </span></div><div class="line"><span class="comment">		int[] arr = new int[]&#123;1,2,5&#125;;</span></div><div class="line"><span class="comment">		IntBuffer buf1 = IntBuffer.wrap(arr);</span></div><div class="line"><span class="comment">		System.out.println(buf1);</span></div><div class="line"><span class="comment">		</span></div><div class="line"><span class="comment">		IntBuffer buf2 = IntBuffer.wrap(arr, 0 , 2);</span></div><div class="line"><span class="comment">		//这样使用表示容量为数组arr的长度，但是可操作的元素只有实际进入缓存区的元素长度</span></div><div class="line"><span class="comment">		System.out.println(buf2);</span></div><div class="line"><span class="comment">		*/</span></div><div class="line">		</div><div class="line">		</div><div class="line">		<span class="comment">// 3 其他方法</span></div><div class="line">		<span class="comment">/**</span></div><div class="line"><span class="comment">		IntBuffer buf1 = IntBuffer.allocate(10);</span></div><div class="line"><span class="comment">		int[] arr = new int[]&#123;1,2,5&#125;;</span></div><div class="line"><span class="comment">		buf1.put(arr);</span></div><div class="line"><span class="comment">		System.out.println(buf1);</span></div><div class="line"><span class="comment">		//一种复制方法</span></div><div class="line"><span class="comment">		IntBuffer buf3 = buf1.duplicate();</span></div><div class="line"><span class="comment">		System.out.println(buf3);</span></div><div class="line"><span class="comment">		</span></div><div class="line"><span class="comment">		//设置buf1的位置属性</span></div><div class="line"><span class="comment">		//buf1.position(0);</span></div><div class="line"><span class="comment">		buf1.flip();</span></div><div class="line"><span class="comment">		System.out.println(buf1);</span></div><div class="line"><span class="comment">		</span></div><div class="line"><span class="comment">		System.out.println("可读数据为：" + buf1.remaining());</span></div><div class="line"><span class="comment">		</span></div><div class="line"><span class="comment">		int[] arr2 = new int[buf1.remaining()];</span></div><div class="line"><span class="comment">		//将缓冲区数据放入arr2数组中去</span></div><div class="line"><span class="comment">		buf1.get(arr2);</span></div><div class="line"><span class="comment">		for(int i : arr2)&#123;</span></div><div class="line"><span class="comment">			System.out.print(Integer.toString(i) + ",");</span></div><div class="line"><span class="comment">		&#125;</span></div><div class="line"><span class="comment">		*/</span></div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="Channel-管道、通道）"><a href="#Channel-管道、通道）" class="headerlink" title="Channel (管道、通道）"></a><strong>Channel (管道、通道）</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通道(Channel)，它就像自来水管道一样，网络数据通过Channel读取和写入，通道与流不同之处在于通道是双向的，而流只是一个方向上移动（一个流必须是Inputstream或OutputStream的子类），而通道可以用于读、写或者二者同时进行，最关键的是可以与多路复用器结合起来，有多种的状态位，方便多路复用器去识别。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;事实上通道分为两大类，一类是网络读写的(SelectableChanneI)，一类是用于文件操作的(FileChannel)，我们使用MJSocketChanneI和ServerSockerChannel都是SelectableChannel的子类。</p>
+<h5 id="Selector（选择器、多路复用器）"><a href="#Selector（选择器、多路复用器）" class="headerlink" title="Selector（选择器、多路复用器）"></a><strong>Selector（选择器、多路复用器）</strong></h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多路复用器(Selector)，他是NIO编程的基础，非常重要。多路复用器提供选择己经就绪的任务的能力。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简单说，就是Selctor会不断地轮询注册在其上的通道(Channel)，如果某个通道发生了读写操作，这个通道就处于就绪状态，会被Selector轮询出来，然后通过SelectionKey可以取得就绪的Channel集合，从而进行后续的IO操作。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个多路复用器(Selector)可以负责成千上万Channel通道，没有上限，这也是JDK使用了epoll代了传统的select实现，获得连接句柄没有限制。这也就意味着我们只要一个线程负的轮询，就可以接入成千上万个客户端，这是JDK NIO库的巨大进步。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selector线程就类似一个管理者(Master)，管理了成千上万个管道，然后轮询那个管道的数据己经准备好，通知cpu执行IO的读取或写入操作。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Selector模式：当IO事件（管道）注册到选择器以后，Selector会分配给和个管道一个key值，相当于标签。Selector选择器是以轮询的方式进行查找注册的所有IO事件（管道），当我们的IO事件（管道）准备就绪后，select就会识别，会通过key值来找到相应的管道，进行相关的数据处理操作（从管道里读或写数据，写到我们的数据缓冲区中）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每个管道都会对选择器进行注册不同的事件状态，以便选择器查找。</p>
+<p>SelectionKey.OP_CONNECT</p>
+<p>SelectionKey.OP_ACCEPT</p>
+<p>SelectionKey.OP_READ</p>
+<p>SelectionKey.OP_WRlTE</p>
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a><strong>案例</strong></h4><p>下面每一行代码基本上都有注释，看不懂也正常api确实有点恶心特别是buffer。祝你好运，开启读代码模式。</p>
+<p>server.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">	<span class="comment">//1 多路复用器（管理所有的通道）</span></div><div class="line">	<span class="keyword">private</span> Selector seletor;</div><div class="line">	<span class="comment">//2 建立缓冲区</span></div><div class="line">	<span class="keyword">private</span> ByteBuffer readBuf = ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line">	<span class="comment">//3 </span></div><div class="line">	<span class="keyword">private</span> ByteBuffer writeBuf = ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Server</span><span class="params">(<span class="keyword">int</span> port)</span></span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">//1 打开路复用器</span></div><div class="line">			<span class="keyword">this</span>.seletor = Selector.open();</div><div class="line">			<span class="comment">//2 打开服务器通道</span></div><div class="line">			ServerSocketChannel ssc = ServerSocketChannel.open();</div><div class="line">			<span class="comment">//3 设置服务器通道为非阻塞模式</span></div><div class="line">			ssc.configureBlocking(<span class="keyword">false</span>);</div><div class="line">			<span class="comment">//4 绑定地址</span></div><div class="line">			ssc.bind(<span class="keyword">new</span> InetSocketAddress(port));</div><div class="line">			<span class="comment">//5 把服务器通道注册到多路复用器上，并且监听阻塞事件</span></div><div class="line">			ssc.register(<span class="keyword">this</span>.seletor, SelectionKey.OP_ACCEPT);</div><div class="line">			</div><div class="line">			System.out.println(<span class="string">"Server start, port :"</span> + port);</div><div class="line">			</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="comment">//1 必须要让多路复用器开始监听</span></div><div class="line">				<span class="keyword">this</span>.seletor.select();</div><div class="line">				<span class="comment">//2 返回多路复用器已经选择的结果集</span></div><div class="line">				Iterator&lt;SelectionKey&gt; keys = <span class="keyword">this</span>.seletor.selectedKeys().iterator();</div><div class="line">				<span class="comment">//System.out.println("keys = "+ keys);</span></div><div class="line">				<span class="comment">//3 进行遍历</span></div><div class="line">				<span class="keyword">while</span>(keys.hasNext())&#123;</div><div class="line">					<span class="comment">//4 获取一个选择的元素</span></div><div class="line">					SelectionKey key = keys.next();</div><div class="line">					<span class="comment">//5 直接从容器中移除就可以了</span></div><div class="line">					keys.remove();</div><div class="line">					<span class="comment">//6 如果是有效的</span></div><div class="line">					<span class="keyword">if</span>(key.isValid())&#123;</div><div class="line">						<span class="comment">//7 如果为阻塞状态</span></div><div class="line">						<span class="keyword">if</span>(key.isAcceptable())&#123;</div><div class="line">							<span class="keyword">this</span>.accept(key);</div><div class="line">						&#125;</div><div class="line">						<span class="comment">//8 如果为可读状态</span></div><div class="line">						<span class="keyword">if</span>(key.isReadable())&#123;</div><div class="line">							<span class="keyword">this</span>.read(key);</div><div class="line">						&#125;</div><div class="line">						<span class="comment">//9 写数据</span></div><div class="line">						<span class="keyword">if</span>(key.isWritable())&#123;</div><div class="line">							<span class="comment">//this.write(key); //ssc</span></div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">					</div><div class="line">				&#125;</div><div class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(SelectionKey key)</span></span>&#123;</div><div class="line">		<span class="comment">//ServerSocketChannel ssc =  (ServerSocketChannel) key.channel();</span></div><div class="line">		<span class="comment">//ssc.register(this.seletor, SelectionKey.OP_WRITE);</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(SelectionKey key)</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">//1 清空缓冲区旧的数据</span></div><div class="line">			<span class="keyword">this</span>.readBuf.clear();</div><div class="line">			<span class="comment">//2 获取之前注册的socket通道对象</span></div><div class="line">			SocketChannel sc = (SocketChannel) key.channel();</div><div class="line">			<span class="comment">//3 读取数据</span></div><div class="line">			<span class="keyword">int</span> count = sc.read(<span class="keyword">this</span>.readBuf);</div><div class="line">			<span class="comment">//4 如果没有数据</span></div><div class="line">			<span class="keyword">if</span>(count == -<span class="number">1</span>)&#123;</div><div class="line">				key.channel().close();</div><div class="line">				key.cancel();</div><div class="line">				<span class="keyword">return</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="comment">//5 有数据则进行读取 读取之前需要进行复位方法(把position 和limit进行复位)</span></div><div class="line">			<span class="keyword">this</span>.readBuf.flip();</div><div class="line">			<span class="comment">//6 根据缓冲区的数据长度创建相应大小的byte数组，接收缓冲区的数据</span></div><div class="line">			<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="keyword">this</span>.readBuf.remaining()];</div><div class="line">			<span class="comment">//7 接收缓冲区数据</span></div><div class="line">			<span class="keyword">this</span>.readBuf.get(bytes);</div><div class="line">			<span class="comment">//8 打印结果</span></div><div class="line">			String body = <span class="keyword">new</span> String(bytes).trim();</div><div class="line"></div><div class="line">			System.out.println(<span class="string">"收到客户端内容 : "</span> + body);</div><div class="line">			</div><div class="line">			<span class="comment">// 9..可以写回给客户端数据 </span></div><div class="line">			</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(SelectionKey key)</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">//1 获取服务通道</span></div><div class="line">			ServerSocketChannel ssc =  (ServerSocketChannel) key.channel();</div><div class="line">			<span class="comment">//2 执行阻塞方法</span></div><div class="line">			SocketChannel sc = ssc.accept();</div><div class="line">			<span class="comment">//3 设置阻塞模式</span></div><div class="line">			sc.configureBlocking(<span class="keyword">false</span>);</div><div class="line">			<span class="comment">//4 注册到多路复用器上，并设置读取标识</span></div><div class="line">			sc.register(<span class="keyword">this</span>.seletor, SelectionKey.OP_READ);</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		</div><div class="line">		<span class="keyword">new</span> Thread(<span class="keyword">new</span> Server(<span class="number">8765</span>)).start();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Client.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">//需要一个Selector </span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		</div><div class="line">		<span class="comment">//创建连接的地址</span></div><div class="line">		InetSocketAddress address = <span class="keyword">new</span> InetSocketAddress(<span class="string">"127.0.0.1"</span>, <span class="number">8765</span>);</div><div class="line">		</div><div class="line">		<span class="comment">//声明连接通道</span></div><div class="line">		SocketChannel sc = <span class="keyword">null</span>;</div><div class="line">		</div><div class="line">		<span class="comment">//建立缓冲区</span></div><div class="line">		ByteBuffer buf = ByteBuffer.allocate(<span class="number">1024</span>);</div><div class="line">		</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">//打开通道da'd</span></div><div class="line">			sc = SocketChannel.open();</div><div class="line">			<span class="comment">//进行连接</span></div><div class="line">			sc.connect(address);</div><div class="line">			</div><div class="line">			<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">				System.out.println(<span class="string">"请输入你要发给服务端的内容 ： "</span>);</div><div class="line">				<span class="comment">//定义一个字节数组，然后使用系统录入功能：</span></div><div class="line">				<span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">				System.in.read(bytes);</div><div class="line">				</div><div class="line">				<span class="comment">//把数据放到缓冲区中</span></div><div class="line">				buf.put(bytes);</div><div class="line">				<span class="comment">//对缓冲区进行复位</span></div><div class="line">				 buf.flip();</div><div class="line">				<span class="comment">//写出数据</span></div><div class="line">				sc.write(buf);</div><div class="line">				<span class="comment">//清空缓冲区数据</span></div><div class="line">				buf.clear();</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">if</span>(sc != <span class="keyword">null</span>)&#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					sc.close();</div><div class="line">				&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>客户端运行结果：</p>
+<p><img src="http://img.blog.csdn.net/20171122233743061?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>客户端运行结果：</p>
+<p><img src="http://img.blog.csdn.net/20171122233752780?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>在客户端发一条信息服务端：</p>
+<p><img src="http://img.blog.csdn.net/20171122233802108?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>服务端接收到客户端的信息：</p>
+<p><img src="http://img.blog.csdn.net/20171122233813794?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;看完代码相信大家都会觉得NIO编程难度确实比同步阻塞BIO大很多，我们的NIO例程并没有考虑“半包读”和“半包写”，如果加上这些，代码将会更加复杂。NIO代码既然这么复杂，为什么它的应用却越来越广泛呢，使用NIO编程的优点总结如下：</p>
+<p>1、客户端发起的连接操作是异步的，可以通过在多路复用器注册OP_CONNECT等待后续结果，不需要像之前的客户端那样被同步阻塞；</p>
+<p>2、 SocketChannel的读写操作都是异步的，如果没有可读写的数据它不会同步等待，直接返回，这样IO通信线程就可以处理其它的链路，不需要同步等待这个链路可用；</p>
+<p>3、  线程模型的优化：由于JDK的Selector在Linux等主流操作系统上通过epoll实现，它没有连接句柄数的限制（只受限于操作系统的最大句柄数或者对单个进程的句柄限制），这意味着一个Selector线程可以同时处理成千上万个客户端连接，而且性能不会随着客户端的增加而线性下降，因此，它非常适合做高性能、高负载的网络服务器。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JDK1.7升级了NIO类库，升级后的NIO类库被称为NIO2.0，引人注目的是Java正式提供了异步文件IO操作，同时提供了与Unix网络编程事件驱动IO对应的AIO。下一章介绍AIO。</p>
+<p>转发者必须注明转发链接</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" <i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/网络编程/" <i class="fa fa-tag"></i> 网络编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/22/java网络编程之传统IO与伪异步IO（一）/" rel="next" title="java网络编程之传统IO与伪异步IO（一）">
+                <i class="fa fa-chevron-left"></i> java网络编程之传统IO与伪异步IO（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/23/java网络编程之AIO即NIO2.0（三）/" rel="prev" title="java网络编程之AIO/NIO2.0（三）">
+                java网络编程之AIO/NIO2.0（三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#NIO类库简介"><span class="nav-number">1.</span> <span class="nav-text">NIO类库简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Buffer（缓冲区）"><span class="nav-number">1.1.</span> <span class="nav-text">Buffer（缓冲区）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Channel-管道、通道）"><span class="nav-number">1.2.</span> <span class="nav-text">Channel (管道、通道）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Selector（选择器、多路复用器）"><span class="nav-number">1.3.</span> <span class="nav-text">Selector（选择器、多路复用器）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#案例"><span class="nav-number">2.</span> <span class="nav-text">案例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>
