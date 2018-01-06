@@ -1044,7 +1044,7 @@ pre .javascript .function {
   right: 30px;
   z-index: 1050;
   padding: 0 6px;
-  width: 24px;
+  width: initial;
   background: #222;
   font-size: 12px;
   opacity: 1;
@@ -1147,7 +1147,7 @@ pre .javascript .function {
 .site-subtitle {
   margin-top: 10px;
   font-size: 13px;
-  color: #0c106c;
+  color: #1e7446;
   display: inline !important;
   top: 6px !important;
   z-index: 1;
@@ -1269,11 +1269,13 @@ pre .javascript .function {
   transition-delay: 0s;
   margin-bottom: 5px;
   text-align: center !important;
+  color: #f75252 !important;
 }
 .menu .menu-item a:hover {
-  border-bottom: 1px solid #222;
   background: none !important;
   opacity: 1;
+  color: #fb2727 !important;
+  border-bottom: 1px solid #ea2020 !important;
 }
 @media (max-width: 767px) {
   .menu .menu-item .fa {
@@ -2138,7 +2140,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #2b4ae2;
+  background: #b18ac7;
 }
 .links-of-blogroll {
   font-size: 13px;
