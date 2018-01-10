@@ -96,13 +96,13 @@
 
 
 
-<meta name="description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service iptables save shell&amp;gt;setenforce">
+<meta name="description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx（rhel-server-6.4，一定要注意是liunx版本是6的）虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service">
 <meta name="keywords" content="Hadoop">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从零开始配置hadoop集群环境">
 <meta property="og:url" content="http://yoursite.com/2017/12/20/从零开始配置hadoop集群环境/index.html">
 <meta property="og:site_name" content="Hfbin Blog">
-<meta property="og:description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service iptables save shell&amp;gt;setenforce">
+<meta property="og:description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx（rhel-server-6.4，一定要注意是liunx版本是6的）虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20171223134751933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20171223110550365?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
@@ -132,10 +132,10 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20171223133710586?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20171223133951715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20171223134008623?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-01-06T06:27:07.897Z">
+<meta property="og:updated_time" content="2018-01-10T14:50:02.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从零开始配置hadoop集群环境">
-<meta name="twitter:description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service iptables save shell&amp;gt;setenforce">
+<meta name="twitter:description" content="一张图了解hadoop集群环境架构  （其它废话我就不多说了，直接上） 这里在VMware装liunx（rhel-server-6.4，一定要注意是liunx版本是6的）虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&amp;gt;iptables -F shell&amp;gt;service">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20171223134751933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -510,7 +510,7 @@
         <h5>一张图了解hadoop集群环境架构</h5>
 
 <p><img src="http://img.blog.csdn.net/20171223134751933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>（其它废话我就不多说了，直接上）</p>
-<p>这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。</p>
+<p>这里在VMware装liunx（rhel-server-6.4，一定要注意是liunx版本是6的）虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。</p>
 <h4 id="1-配置网络和计算机名字"><a href="#1-配置网络和计算机名字" class="headerlink" title="1.配置网络和计算机名字"></a><strong>1.配置网络和计算机名字</strong></h4><h5 id="1-关闭防火墙和selinux"><a href="#1-关闭防火墙和selinux" class="headerlink" title="1) 关闭防火墙和selinux"></a><strong>1) 关闭防火墙和selinux</strong></h5><pre><code>shell&gt;iptables -F
 shell&gt;service iptables save
 shell&gt;setenforce 0

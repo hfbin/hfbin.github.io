@@ -980,15 +980,12 @@ HDFS概念理解hdfs架构图如下：
           一张图了解hadoop集群环境架构
 
 （其它废话我就不多说了，直接上）
-这里在VMware装liunx虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。
+这里在VMware装liunx（rhel-server-6.4，一定要注意是liunx版本是6的）虚拟机我就不多说了，需要的留言，有必的话留要的话我会另写一篇文章在VMware装liunx虚拟机。
 1.配置网络和计算机名字1) 关闭防火墙和selinuxshell&gt;iptables -F
 shell&gt;service iptables save
 shell&gt;setenforce 0
 shell&gt;vim /etc/selinux/config 修改SELINUX=disabled
-2) 配置计算机网络shell&gt;vim /etc/sysconfig/network-scripts/ifcfg-eth0
-内容如下：加//的表示要修改的地方 没有的自己加进去
-
-DE
+2) 配置计算机网络shell&gt;vim /etc/sysconfig/network-scripts/ifcfg-e
           ...
           <!--noindex-->
           <div class="post-button text-center">
