@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java系列视频教程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/162.html?mc_marking=0e3785bb64ff082e0fe94900fd9b9ed6&amp;amp;mc_channel=syb12高并发、高性能、高可用必经之路,基于一个完整电商项目进行架构演进，覆盖Tomcat集群+Nginx负载均衡+Redis分布式等核心技能点。 第1章 课程介绍与前置项目回顾">
+<meta name="keywords" content="java系列视频教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式">
+<meta property="og:url" content="http://yoursite.com/2018/02/21/buy-Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/162.html?mc_marking=0e3785bb64ff082e0fe94900fd9b9ed6&amp;amp;mc_channel=syb12高并发、高性能、高可用必经之路,基于一个完整电商项目进行架构演进，覆盖Tomcat集群+Nginx负载均衡+Redis分布式等核心技能点。 第1章 课程介绍与前置项目回顾">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img.blog.csdn.net/20180220185754228?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/20180220190126436?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/20180220190422562?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/20180220190431672?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/20180220190721774?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-02-21T14:27:04.418Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式">
+<meta name="twitter:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/162.html?mc_marking=0e3785bb64ff082e0fe94900fd9b9ed6&amp;amp;mc_channel=syb12高并发、高性能、高可用必经之路,基于一个完整电商项目进行架构演进，覆盖Tomcat集群+Nginx负载均衡+Redis分布式等核心技能点。 第1章 课程介绍与前置项目回顾">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20180220185754228?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/21/buy-Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式 | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/21/buy-Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-21T16:11:11+08:00">
+                2018-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java系列视频教程/" itemprop="url" rel="index">
+                    <span itemprop="name">java系列视频教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/02/21/buy-Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/02/21/buy-Java企业级电商项目架构演进之路 Tomcat集群与Redis分布式/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a>课程大纲</h4><p>来自慕课教程：<a href="https://coding.imooc.com/class/162.html?mc_marking=0e3785bb64ff082e0fe94900fd9b9ed6&amp;mc_channel=syb12" target="_blank" rel="external">https://coding.imooc.com/class/162.html?mc_marking=0e3785bb64ff082e0fe94900fd9b9ed6&amp;mc_channel=syb12</a><br><img src="http://img.blog.csdn.net/20180220185754228?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>高并发、高性能、高可用必经之路,基于一个完整电商项目进行架构演进，覆盖Tomcat集群+Nginx负载均衡+Redis分布式等核心技能点。</p>
+<h5 id="第1章-课程介绍与前置项目回顾【配合一期课程，效果最佳】"><a href="#第1章-课程介绍与前置项目回顾【配合一期课程，效果最佳】" class="headerlink" title="第1章 课程介绍与前置项目回顾【配合一期课程，效果最佳】"></a>第1章 课程介绍与前置项目回顾【配合一期课程，效果最佳】</h5><p>1-1 课程导学</p>
+<p>1-2 大型Java项目架构演进解析（学过一期的同学可跳过）</p>
+<p>1-3 一期课程与问答服务回顾（学过一期的同学可跳过）</p>
+<p>1-4 一期项目结构和代码回顾(学过一期的同学可跳过)</p>
+<p>1-5 课程使用系统及技术版本介绍（一期+二期）</p>
+<p>1-6 二期项目初始化</p>
+<h5 id="第2章-Lombok框架集成及原理解析"><a href="#第2章-Lombok框架集成及原理解析" class="headerlink" title="第2章 Lombok框架集成及原理解析"></a>第2章 Lombok框架集成及原理解析</h5><p>2-1 Lombok快速入门</p>
+<p>2-2 Lombok实战</p>
+<p>2-3 Lombok总结</p>
+<h5 id="第3章-Maven环境隔离应用场景及验证实战"><a href="#第3章-Maven环境隔离应用场景及验证实战" class="headerlink" title="第3章 Maven环境隔离应用场景及验证实战"></a>第3章 Maven环境隔离应用场景及验证实战</h5><p>3-1 Maven快速入门</p>
+<p>3-2 Maven实战</p>
+<p>3-3 Maven总结</p>
+<h5 id="第4章-Tomcat集群演进详解及环境搭建"><a href="#第4章-Tomcat集群演进详解及环境搭建" class="headerlink" title="第4章 Tomcat集群演进详解及环境搭建"></a>第4章 Tomcat集群演进详解及环境搭建</h5><p>4-1 Tomcat集群快速入门：集群概述与架构解析</p>
+<p>4-2 Tomcat集群快速入门：Tomcat单机部署多应用（linux，mac）</p>
+<p>4-3 Tomcat集群快速入门：Tomcat单机部署多应用（windows）</p>
+<p>4-4 Tomcat集群快速入门：Tomcat多机部署多应用（linux,mac,windows）</p>
+<p>4-5 Tomcat集群快速入门：Nginx负载均衡配置，常用策略，场景及特点</p>
+<p>4-6 Tomcat集群快速入门： Nginx+Tomcat搭建集群（linux，mac,windows）</p>
+<p>4-7 Tomcat和Ng配置回顾(linux,mac,windows)</p>
+<p>4-8 Tomcat集群实战-1(linux,mac)</p>
+<p>4-9 Tomcat集群实战-2(linux,mac)</p>
+<p>4-10 Tomcat集群实战-3（windows）</p>
+<p>4-11 Tomcat集群总结</p>
+<h5 id="第5章-Redis基础强化"><a href="#第5章-Redis基础强化" class="headerlink" title="第5章 Redis基础强化"></a>第5章 Redis基础强化</h5><p>5-1 Redis快速入门</p>
+<p>5-2 Redis安装-1（linux，mac)</p>
+<p>5-3 Redis安装-2（windows）</p>
+<p>5-4 Redis服务启动各种方式实战-1(linux,mac)</p>
+<p>5-5 Redis服务启动各种方式实战-2（windows）</p>
+<p>5-6 Redis基础命令实战</p>
+<p>5-7 Redis键命令实战</p>
+<p>5-8 Redis数据结构：String字符串</p>
+<p>5-9 Redis数据结构：哈希hash</p>
+<p>5-10 Redis数据结构：列表list</p>
+<p>5-11 Redis数据结构：集合set</p>
+<p>5-12 Redis数据结构：有序集合sortedset</p>
+<p>5-13 Redis基础总结</p>
+<h5 id="第6章-单点登录实战Coding及源码讲解"><a href="#第6章-单点登录实战Coding及源码讲解" class="headerlink" title="第6章 单点登录实战Coding及源码讲解"></a>第6章 单点登录实战Coding及源码讲解</h5><p>6-1 本章概要</p>
+<p>6-2 用户模块一期回顾与二期任务</p>
+<p>6-3 Redis连接池构建与测试-1</p>
+<p>6-4 Redis连接池构建与测试-2</p>
+<p>6-5 Jedis api封装与调试</p>
+<p>6-6 Jsonutil 封装及调试-1</p>
+<p>6-7 Jsonutil 封装及调试-2</p>
+<p>6-8 Jsonutil 封装及调试-3</p>
+<p>6-9 Jackson_objectmapper源码解析及调试</p>
+<p>6-10 单点登录Redis存储Session及Cookie场景介绍</p>
+<p>6-11 单点登录Redis存储Session及SessionId问题说明与集群实战-1</p>
+<p>6-12 单点登录Redis存储Session及SessionId问题说明与集群实战-2</p>
+<p>6-13 单点登录Redis存储Session及SessionId问题说明与集群实战-3</p>
+<p>6-14 单点登录Redis存储Session及SessionId问题说明与集群实战-4</p>
+<p>6-15 单点登录之SessionExpireFilter重置Session有效期</p>
+<p>6-16 用户Session相关模块重构</p>
+<p>6-17 GuavaCache迁移Redis缓存Coding</p>
+<p>6-18 本章小结</p>
+<h5 id="第7章-Redis分布式算法原理、分布式连接池实战及验证"><a href="#第7章-Redis分布式算法原理、分布式连接池实战及验证" class="headerlink" title="第7章 Redis分布式算法原理、分布式连接池实战及验证"></a>第7章 Redis分布式算法原理、分布式连接池实战及验证</h5><p>7-1 Redis分布式快速入门</p>
+<p>7-2 Redis分布式缓存环境搭建</p>
+<p>7-3 Redis分布式缓存Coding+配置文件修改</p>
+<p>7-4 Coding+集群分布式区别讲解</p>
+<p>7-5 本章小结</p>
+<h5 id="第8章-Spring-Session框架集成零侵入实现单点登录及源码解析"><a href="#第8章-Spring-Session框架集成零侵入实现单点登录及源码解析" class="headerlink" title="第8章 Spring Session框架集成零侵入实现单点登录及源码解析"></a>第8章 Spring Session框架集成零侵入实现单点登录及源码解析</h5><p>8-1 Spring Session快速入门</p>
+<p>8-2 Nginx_Tomcat_Redis环境启动及验证</p>
+<p>8-3 Redis_Desktop_Manager工具使用</p>
+<p>8-4 Spring Session官方介绍及spring框架学习方法</p>
+<p>8-5 Spring Session实战-1： 配置文件</p>
+<p>8-6 Spring Session实战-2：Debug<em>流程</em>缓存分析</p>
+<p>8-7 Spring Session实战-3：Cookie注入实战(上)</p>
+<p>8-8 Spring Session实战-4：Cookie注入实战(下)</p>
+<p>8-9 Spring Session框架集群验证</p>
+<p>8-10 Spring Session源码解析</p>
+<p>8-11 Spring Session总结</p>
+<h5 id="第9章-SpringMVC-全局异常处理"><a href="#第9章-SpringMVC-全局异常处理" class="headerlink" title="第9章 SpringMVC 全局异常处理"></a>第9章 SpringMVC 全局异常处理</h5><p>9-1 SpringMVC全局异常快速入门</p>
+<p>9-2 Spring及SpringMVC扫描包隔离及配置文件优化</p>
+<p>9-3 SpringMVC全局异常实战</p>
+<p>9-4 SpringMVC全局异常处理总结</p>
+<h5 id="第10章-SpringMVC-拦截器实现权限统一校验"><a href="#第10章-SpringMVC-拦截器实现权限统一校验" class="headerlink" title="第10章 SpringMVC 拦截器实现权限统一校验"></a>第10章 SpringMVC 拦截器实现权限统一校验</h5><p>10-1 SpringMVC拦截器快速入门</p>
+<p>10-2 一期要演进代码简单回顾</p>
+<p>10-3 SpringMVC拦截器配置及类初始化</p>
+<p>10-4 SpringMVC拦截器实战-1：执行流程讲解及调试</p>
+<p>10-5 SpringMVC拦截器实战-2：拦截器参数解析及登录信息获取</p>
+<p>10-6 SpringMVC拦截器实战-3：重置Response</p>
+<p>10-7 SpringMVC拦截器实战-4：解决拦截登录循环</p>
+<p>10-8 SpringMVC拦截器实战-5：富文本上传及自测验证</p>
+<p>10-9 SpringMVC拦截器实战-6：代码重构</p>
+<p>10-10 本章总结</p>
+<h5 id="第11章-SpringMVC-RESTful原理及改造实战"><a href="#第11章-SpringMVC-RESTful原理及改造实战" class="headerlink" title="第11章 SpringMVC RESTful原理及改造实战"></a>第11章 SpringMVC RESTful原理及改造实战</h5><p>11-1 SpringMVC_RESTful快速入门</p>
+<p>11-2 SpringMVC_RESTful配置及分析</p>
+<p>11-3 SpringMVC_RESTful产品详情页改造RESTful及自测验证</p>
+<p>11-4 SpringMVC_RESTful搜索List页改造RESTful及自测验证</p>
+<p>11-5 SpringMVC_RESTful总结</p>
+<h5 id="第12章-Spring-Schedule实现定时关单"><a href="#第12章-Spring-Schedule实现定时关单" class="headerlink" title="第12章 Spring Schedule实现定时关单"></a>第12章 Spring Schedule实现定时关单</h5><p>12-1 Spring Schedule定时关单快速入门</p>
+<p>12-2 Spring Schedule配置及初始化</p>
+<p>12-3 关闭订单</p>
+<p>12-4 Spring Schedule关闭订单</p>
+<p>12-5 Spring Schedule总结</p>
+<h5 id="第13章-Redis分布式锁原理"><a href="#第13章-Redis分布式锁原理" class="headerlink" title="第13章 Redis分布式锁原理"></a>第13章 Redis分布式锁原理</h5><p>13-1 Redis分布式锁原理解析</p>
+<h5 id="第14章-Spring-Schedule-Redis分布式锁构建分布式任务调度"><a href="#第14章-Spring-Schedule-Redis分布式锁构建分布式任务调度" class="headerlink" title="第14章 Spring Schedule+Redis分布式锁构建分布式任务调度"></a>第14章 Spring Schedule+Redis分布式锁构建分布式任务调度</h5><p>14-1 Spring Schedule+Redis分布式锁构建分布式任务调度概述</p>
+<p>14-2 分布式锁编写及调试分析</p>
+<p>14-3 分布式锁双重防死锁演进</p>
+<p>14-4 本章总结</p>
+<h5 id="第15章-Redisson框架讲解及项目集成"><a href="#第15章-Redisson框架讲解及项目集成" class="headerlink" title="第15章 Redisson框架讲解及项目集成"></a>第15章 Redisson框架讲解及项目集成</h5><p>15-1 Redisson框架快速入门</p>
+<p>15-2 Redisson框架官方介绍</p>
+<p>15-3 Redisson框架框架集成</p>
+<p>15-4 Redisson框架总结</p>
+<h5 id="第16章-Spring-Schedule-Redisson分布式锁构建分布式任务调度"><a href="#第16章-Spring-Schedule-Redisson分布式锁构建分布式任务调度" class="headerlink" title="第16章 Spring Schedule+Redisson分布式锁构建分布式任务调度"></a>第16章 Spring Schedule+Redisson分布式锁构建分布式任务调度</h5><p>16-1 本章概述</p>
+<p>16-2 Redisson初始化</p>
+<p>16-3 Redisson分布式锁实战-1：构建分布式锁</p>
+<p>16-4 Redisson分布式锁实战-2：解决wait_time之坑</p>
+<p>16-5 知识点扩展：Redis主从配置及验证</p>
+<p>16-6 Redisson分布式锁实战-3：Debug调试及锁讲解</p>
+<p>16-7 本章小结</p>
+<h5 id="第17章-云服务器线上部署及验证"><a href="#第17章-云服务器线上部署及验证" class="headerlink" title="第17章 云服务器线上部署及验证"></a>第17章 云服务器线上部署及验证</h5><p>17-1 云服务器部署快速入门</p>
+<p>17-2 发布之前的代码修改及环境配置</p>
+<p>17-3 发布之前任务梳理</p>
+<p>17-4 redis的配置及安装</p>
+<p>17-5 tomcat多实例配置及验证</p>
+<p>17-6 .nginx负载均衡配置及验证</p>
+<p>17-7 自动化发布脚本编写</p>
+<p>17-8 logback热加载及线上验证</p>
+<h5 id="第18章-课程回顾"><a href="#第18章-课程回顾" class="headerlink" title="第18章 课程回顾"></a>第18章 课程回顾</h5><p>18-1 课程总结</p>
+<h4 id="教程截图"><a href="#教程截图" class="headerlink" title="教程截图"></a>教程截图</h4><p><img src="http://img.blog.csdn.net/20180220190126436?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180220190422562?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180220190431672?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180220190721774?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h4 id="更多教程"><a href="#更多教程" class="headerlink" title="更多教程"></a>更多教程</h4><p>教程不断整理更新中，以上截图仅供参考，如需了解更多视频教程的详细信息请到如下地址查看：<a href="http://blog.csdn.net/qq_33524158/article/category/7460431" target="_blank" rel="external">http://blog.csdn.net/qq_33524158/article/category/7460431</a><br>教程分类说明：<a href="http://hfbin.cn/categories/" target="_blank" rel="external">http://hfbin.cn/categories/</a></p>
+<h4 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h4><p><a href="http://blog.csdn.net/qq_33524158/article/details/79340708" target="_blank" rel="external">关于教程、获取方式、温馨提示</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java系列视频教程/" <i class="fa fa-tag"></i> java系列视频教程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/21/buy-Java大牛 带你从0到上线开发企业级电商项目/" rel="next" title="Java大牛 带你从0到上线开发企业级电商项目">
+                <i class="fa fa-chevron-left"></i> Java大牛 带你从0到上线开发企业级电商项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#课程大纲"><span class="nav-number">1.</span> <span class="nav-text">课程大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第1章-课程介绍与前置项目回顾【配合一期课程，效果最佳】"><span class="nav-number">1.1.</span> <span class="nav-text">第1章 课程介绍与前置项目回顾【配合一期课程，效果最佳】</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第2章-Lombok框架集成及原理解析"><span class="nav-number">1.2.</span> <span class="nav-text">第2章 Lombok框架集成及原理解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第3章-Maven环境隔离应用场景及验证实战"><span class="nav-number">1.3.</span> <span class="nav-text">第3章 Maven环境隔离应用场景及验证实战</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第4章-Tomcat集群演进详解及环境搭建"><span class="nav-number">1.4.</span> <span class="nav-text">第4章 Tomcat集群演进详解及环境搭建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第5章-Redis基础强化"><span class="nav-number">1.5.</span> <span class="nav-text">第5章 Redis基础强化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第6章-单点登录实战Coding及源码讲解"><span class="nav-number">1.6.</span> <span class="nav-text">第6章 单点登录实战Coding及源码讲解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第7章-Redis分布式算法原理、分布式连接池实战及验证"><span class="nav-number">1.7.</span> <span class="nav-text">第7章 Redis分布式算法原理、分布式连接池实战及验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第8章-Spring-Session框架集成零侵入实现单点登录及源码解析"><span class="nav-number">1.8.</span> <span class="nav-text">第8章 Spring Session框架集成零侵入实现单点登录及源码解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第9章-SpringMVC-全局异常处理"><span class="nav-number">1.9.</span> <span class="nav-text">第9章 SpringMVC 全局异常处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第10章-SpringMVC-拦截器实现权限统一校验"><span class="nav-number">1.10.</span> <span class="nav-text">第10章 SpringMVC 拦截器实现权限统一校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第11章-SpringMVC-RESTful原理及改造实战"><span class="nav-number">1.11.</span> <span class="nav-text">第11章 SpringMVC RESTful原理及改造实战</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第12章-Spring-Schedule实现定时关单"><span class="nav-number">1.12.</span> <span class="nav-text">第12章 Spring Schedule实现定时关单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第13章-Redis分布式锁原理"><span class="nav-number">1.13.</span> <span class="nav-text">第13章 Redis分布式锁原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第14章-Spring-Schedule-Redis分布式锁构建分布式任务调度"><span class="nav-number">1.14.</span> <span class="nav-text">第14章 Spring Schedule+Redis分布式锁构建分布式任务调度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第15章-Redisson框架讲解及项目集成"><span class="nav-number">1.15.</span> <span class="nav-text">第15章 Redisson框架讲解及项目集成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第16章-Spring-Schedule-Redisson分布式锁构建分布式任务调度"><span class="nav-number">1.16.</span> <span class="nav-text">第16章 Spring Schedule+Redisson分布式锁构建分布式任务调度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第17章-云服务器线上部署及验证"><span class="nav-number">1.17.</span> <span class="nav-text">第17章 云服务器线上部署及验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第18章-课程回顾"><span class="nav-number">1.18.</span> <span class="nav-text">第18章 课程回顾</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#教程截图"><span class="nav-number">2.</span> <span class="nav-text">教程截图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多教程"><span class="nav-number">3.</span> <span class="nav-text">更多教程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取方式"><span class="nav-number">4.</span> <span class="nav-text">获取方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>
