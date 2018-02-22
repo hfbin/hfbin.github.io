@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="跨平台实战项目开发," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/89.html 第1章 开发准备（计划更新，对老用户免费） 1-1 项目介绍与开发计划 1-2 项目技术分解 1-3 项目结构介绍 1-4 项目底部导航菜单开发 1-5 Navigator的基本使用及页面间数据传递实现 1-6 自定义组件NavigationBar-1 1-7 自定义组件NavigationBar-">
+<meta name="keywords" content="跨平台实战项目开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="双平台真实开发GitHub App React Native技术全面掌握">
+<meta property="og:url" content="http://yoursite.com/2018/02/22/buy-双平台真实开发GitHub App React Native技术全面掌握/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/89.html 第1章 开发准备（计划更新，对老用户免费） 1-1 项目介绍与开发计划 1-2 项目技术分解 1-3 项目结构介绍 1-4 项目底部导航菜单开发 1-5 Navigator的基本使用及页面间数据传递实现 1-6 自定义组件NavigationBar-1 1-7 自定义组件NavigationBar-">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://img.blog.csdn.net/20180222160233909?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/2018022216024569?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/20180222160426470?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/20180222160434397?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/20180222160443216?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="http://img.blog.csdn.net/2018022216045336?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-02-22T08:10:50.788Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="双平台真实开发GitHub App React Native技术全面掌握">
+<meta name="twitter:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/89.html 第1章 开发准备（计划更新，对老用户免费） 1-1 项目介绍与开发计划 1-2 项目技术分解 1-3 项目结构介绍 1-4 项目底部导航菜单开发 1-5 Navigator的基本使用及页面间数据传递实现 1-6 自定义组件NavigationBar-1 1-7 自定义组件NavigationBar-">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20180222160233909?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/22/buy-双平台真实开发GitHub App React Native技术全面掌握/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>双平台真实开发GitHub App React Native技术全面掌握 | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/buy-双平台真实开发GitHub App React Native技术全面掌握/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">双平台真实开发GitHub App React Native技术全面掌握</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-22T16:52:11+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/跨平台实战项目开发/" itemprop="url" rel="index">
+                    <span itemprop="name">跨平台实战项目开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/02/22/buy-双平台真实开发GitHub App React Native技术全面掌握/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/02/22/buy-双平台真实开发GitHub App React Native技术全面掌握/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a>课程大纲</h4><p>来自慕课教程：<a href="https://coding.imooc.com/class/89.html" target="_blank" rel="external">https://coding.imooc.com/class/89.html</a><br><img src="http://img.blog.csdn.net/20180222160233909?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/2018022216024569?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>第1章 开发准备（计划更新，对老用户免费）</p>
+<p>1-1 项目介绍与开发计划</p>
+<p>1-2 项目技术分解</p>
+<p>1-3 项目结构介绍</p>
+<p>1-4 项目底部导航菜单开发</p>
+<p>1-5 Navigator的基本使用及页面间数据传递实现</p>
+<p>1-6 自定义组件NavigationBar-1</p>
+<p>1-7 自定义组件NavigationBar-2</p>
+<p>1-8 自定义组件NavigationBar-3</p>
+<p>第2章 项目基础功能开发（ListView、下拉刷新、上拉加载更多、APP启动引导流程）</p>
+<p>2-1 ListView列表、下拉刷新、上拉加载的基本使用</p>
+<p>2-2 网络编程利器-Fetch的基本使用</p>
+<p>2-3 网络编程利器-Fetch的轻量级封装</p>
+<p>2-4 项目启动引导流程实现</p>
+<p>第3章 Popular(最热）模块开发（AsyncStorage数据库技术、离线缓存）</p>
+<p>3-1 Popular(最热)模块的数据层设计</p>
+<p>3-2 Popular(最热)模块的列表页面实现-1</p>
+<p>3-3 Popular(最热)模块的列表页面实现-2</p>
+<p>3-4 Popular(最热)模块的列表页面实现-3</p>
+<p>3-5 AsyncStorage异步数据存储技术解析</p>
+<p>3-6 Popular(最热)模块的自定义标签功能实现-1</p>
+<p>3-7 Popular(最热)模块的自定义标签功能实现-2</p>
+<p>3-8 Popular(最热)模块的自定义标签功能实现-3</p>
+<p>3-9 Popular(最热)模块的自定义标签功能实现-4</p>
+<p>3-10 Popular(最热)模块的标签排序功能实现-1</p>
+<p>3-11 Popular(最热)模块的标签排序功能实现-2</p>
+<p>3-12 Popular(最热)模块的标签移除功能实现</p>
+<p>3-13 Popular(最热)模块的离线缓存功能实现</p>
+<p>3-14 WebView控件实现简单浏览器</p>
+<p>3-15 Popular(最热)模块的详情页功能实现</p>
+<p>第4章 Trending(趋势)模块开发（代码优化技巧、高复用代码设计）</p>
+<p>4-1 Trending(趋势)模块的数据接口实现原理及使用详解</p>
+<p>4-2 Trending(趋势)模块的数据层设计</p>
+<p>4-3 Trending(趋势)模块的列表页面实现</p>
+<p>4-4 Pop弹窗功能实现</p>
+<p>4-5 Trending(趋势)模块的自定义语言功能实现</p>
+<p>4-6 Trending(趋势)模块的自定义语言排序功能实现</p>
+<p>第5章 Favorite(收藏)模块开发（数据DAO层设计技巧，数据状态实时更新）</p>
+<p>5-1 为Popular(最热)模块的列表页添加收藏功能-1</p>
+<p>5-2 为Popular(最热)模块的列表页添加收藏功能-2</p>
+<p>5-3 Favorite(收藏)模块的收藏状态数据DAO层设计</p>
+<p>5-4 Favarite(收藏)模块的数据收藏状态实时更新</p>
+<p>5-5 为Trending(趋势)模块的列表页添加收藏功能</p>
+<p>5-6 为Popular(最热)与Trending(趋势)模块的详情页添加收藏的功能</p>
+<p>5-7 Favorite(收藏)模块列表页面基本实现与用户所收藏的项目数据获取</p>
+<p>5-8 Favorite(收藏)模块列表页面具体实现-1</p>
+<p>5-9 Favorite(收藏)模块列表页面具体实现-2</p>
+<p>第6章 My(我的)模块开发（代码提取技巧，组合模式应用技巧，数据异步刷新与动态添加）</p>
+<p>6-1 My(我的)模块分组列表页面实现-1</p>
+<p>6-2 My(我的)模块分组列表页面实现-2</p>
+<p>6-3 My(我的)模块分组列表页面实现-3</p>
+<p>6-4 My(我的)模块项目介绍页面简单实现（parallar-scroll-view）-1</p>
+<p>6-5 My(我的)模块项目介绍页面简单实现（parallar-scroll-view）-2</p>
+<p>6-6 My(我的)模块项目介绍页面复用代码提取技巧</p>
+<p>6-7 My(我的)模块意见反馈，项目官网展示功能实现</p>
+<p>6-8 My(我的)模块项目介绍数据请求工具开发（RepositoryUtil）-1</p>
+<p>6-9 My(我的)模块项目介绍数据请求工具开发（RepositoryUtil）-2</p>
+<p>6-10 My(我的)模块项目介绍数据展示-1</p>
+<p>6-11 My(我的)模块项目介绍数据展示-2</p>
+<p>6-12 My(我的)模块关于作者页面实现(自定义可扩展列表)-1</p>
+<p>6-13 My(我的)模块关于作者页面实现-2</p>
+<p>第7章 Search(搜索)模块开发（动态关键字，可取消异步任务设计）</p>
+<p>7-1 带搜索的NavBar实现-1</p>
+<p>7-2 带搜索的NavBar实现-2</p>
+<p>7-3 搜索数据显示与onFavorite()方法的提取-1</p>
+<p>7-4 搜索数据显示与onFavorite()方法的提取-2</p>
+<p>7-5 为Search（搜索）模块添加进度条与底部按钮-1</p>
+<p>7-6 为Search（搜索）模块添加进度条与底部按钮-2</p>
+<p>7-7 添加返回首页数据刷新功能</p>
+<p>7-8 为Promise插上翅膀之可取消的异步任务</p>
+<p>第8章 MoreMenu(更多菜单)模块开发（封装可配置菜单组件，RN版本升级踩坑）</p>
+<p>8-1 可配置菜单的实现-1</p>
+<p>8-2 可配置菜单的实现-2</p>
+<p>8-3 可配置菜单的实现-3</p>
+<p>8-4 ReactNative版本升级踩坑（0.39-to-0.40）</p>
+<p>第9章 高级功能开发（多彩主题、数据统计、社会化分享、第三方登录，热更新等）</p>
+<p>9-1 构建自定义多彩主题页面</p>
+<p>9-2 应用自定义多彩主题页面-1</p>
+<p>9-3 应用自定义多彩主题页面-2</p>
+<p>9-4 实现自定义多彩主题变换</p>
+<p>9-5 React Native原生模块的封装(Android)</p>
+<p>9-6 React Native原生模块的封装(iOS)</p>
+<p>9-7 React Native集成统计功能</p>
+<p>9-8 React Native 分享与第三方登录模块开发(Android)-分享模块开发</p>
+<p>9-9 React Native分享与第三方登录模块开发(Android)-分享模块的应用</p>
+<p>9-10 React Native 分享与第三方登录模块开发(iOS)</p>
+<p>9-11 React Native启动白屏问题原因及解决方案(Android)</p>
+<p>9-12 React Native启动白屏问题原因及解决方案(iOS)</p>
+<p>9-13 如何适配Android和iOS双平台</p>
+<p>9-14 CodePush 热更新-集成CodePush(Android)</p>
+<p>9-15 CodePush 热更新-集成CodePush(iOS)</p>
+<p>9-16 CodePush 热更新-应用CodePush(Android)</p>
+<p>9-17 CodePush 热更新-应用CodePush(iOS)</p>
+<p>第10章 项目发布前的优化、打包与上线Android和IOS APP、学习资料</p>
+<p>10-1 项目发布前的优化(Android)</p>
+<p>10-2 项目发布前的优化(iOS)</p>
+<p>10-3 项目打包发布Android应用</p>
+<p>10-4 项目打包发布iOS应用</p>
+<p>10-5 课程总结</p>
+<p>第11章 最新版React Native 的升级与适配（计划更新）</p>
+<p>第12章 API升级、依赖组件更新及适配(计划更新)</p>
+<p>第13章 从navigator到react-navigation实战教程&amp;技巧（计划更新）</p>
+<p>第14章 新特性：从ListView到FlatList，走进高性能的列表（计划更新）</p>
+<p>第15章 React Native全面屏适配指南（计划更新）</p>
+<h4 id="教程截图"><a href="#教程截图" class="headerlink" title="教程截图"></a>教程截图</h4><p><img src="http://img.blog.csdn.net/20180222160426470?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180222160434397?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180222160443216?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/2018022216045336?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzM1MjQxNTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h4 id="更多教程"><a href="#更多教程" class="headerlink" title="更多教程"></a>更多教程</h4><p>教程不断整理更新中，以上截图仅供参考，如需了解更多视频教程的详细信息请到如下地址查看：<a href="http://hfbin.cn" target="_blank" rel="external">http://hfbin.cn</a><br>教程分类说明：<a href="http://hfbin.cn/categories/" target="_blank" rel="external">http://hfbin.cn/categories/</a></p>
+<h4 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h4><p><a href="http://hfbin.cn/2018/02/21/buy-%E5%85%B3%E4%BA%8E%E6%95%99%E7%A8%8B%E3%80%81%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F%E3%80%81%E6%B8%A9%E9%A6%A8%E6%8F%90%E7%A4%BA/" target="_blank" rel="external">关于教程、获取方式、温馨提示</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/跨平台实战项目开发/" <i class="fa fa-tag"></i> 跨平台实战项目开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/22/buy-BAT大牛亲授 基于ElasticSearch的搜房网实战/" rel="next" title="BAT大牛亲授 基于ElasticSearch的搜房网实战">
+                <i class="fa fa-chevron-left"></i> BAT大牛亲授 基于ElasticSearch的搜房网实战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/22/buy-掌握React Native技术转型随意切换/" rel="prev" title="掌握React Native技术转型随意切换">
+                掌握React Native技术转型随意切换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#课程大纲"><span class="nav-number">1.</span> <span class="nav-text">课程大纲</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#教程截图"><span class="nav-number">2.</span> <span class="nav-text">教程截图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多教程"><span class="nav-number">3.</span> <span class="nav-text">更多教程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取方式"><span class="nav-number">4.</span> <span class="nav-text">获取方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  Theme -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>
