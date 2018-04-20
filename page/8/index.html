@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="en">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -102,7 +102,7 @@
 <meta property="og:url" content="http://yoursite.com/page/8/index.html">
 <meta property="og:site_name" content="Hfbin Blog">
 <meta property="og:description" content="My friend promised me to go if I had the road">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hfbin Blog">
 <meta name="twitter:description" content="My friend promised me to go if I had the road">
@@ -120,7 +120,7 @@
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: 'FQWD7RL0XS',
@@ -189,7 +189,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
  
     
@@ -257,7 +257,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            首页
           </a>
         </li>
       
@@ -267,7 +267,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Categories
+            分类
           </a>
         </li>
       
@@ -277,7 +277,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            About
+            关于
           </a>
         </li>
       
@@ -287,7 +287,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -297,7 +297,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -311,7 +311,7 @@
             
               <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
             
-            Search
+            搜索
           </a>
         </li>
       
@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/java线程安全之synchronized锁重入及出现异常锁自动释放（五）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/24/java网络编程之Netty编解码技术（六）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -392,7 +392,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/16/java线程安全之synchronized锁重入及出现异常锁自动释放（五）/" itemprop="url">java线程安全之synchronized锁重入及出现异常锁自动释放（五）</a></h1>
+                <a class="post-title-link" href="/2017/11/24/java网络编程之Netty编解码技术（六）/" itemprop="url">java网络编程之Netty编解码技术（六）</a></h1>
         
 
         <div class="post-meta">
@@ -403,10 +403,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-16T12:14:19+08:00">
-                2017-11-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-24T16:48:11+08:00">
+                2017-11-24
               </time>
             
 
@@ -424,7 +424,1000 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/24/java网络编程之Netty编解码技术（六）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/24/java网络编程之Netty编解码技术（六）/" class="cy_cmt_count" data-xid="2017/11/24/java网络编程之Netty编解码技术（六）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          概念理解&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编解码技术，说白了就是Java序列化技术，序列化目的就两个，第一进行网络传输，第二对象持久化。虽然我们可以使用java进行对象序列化，Netty去传输，但是Java序列化的硬伤太多，比如Java序列化没法跨语言、序列化后码流太大、序列化性能太低等等。JBoss Marshalling序列化的速度是JDK的3倍。
+主流的编解码框架：
+1、JBoss的Marshalling包
+2、Google的Protobuf
+3、基于 Protobuf 的Kyro
+4、MessagePack框架
+每个编解码的框架都不难，下面我主要是通过JBoss来讲解，需要了解其他框架的可以去百度。
+JBoos Marshalling&nbsp;
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/24/java网络编程之Netty编解码技术（六）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/24/java网络编程之Netty流数据的传输处理（五）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/24/java网络编程之Netty流数据的传输处理（五）/" itemprop="url">java网络编程之Netty流数据的传输处理（五）</a></h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-24T10:43:12+08:00">
+                2017-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/24/java网络编程之Netty流数据的传输处理（五）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/24/java网络编程之Netty流数据的传输处理（五）/" class="cy_cmt_count" data-xid="2017/11/24/java网络编程之Netty流数据的传输处理（五）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          aNetty流数据的传输处理
+Socket Buffer的缺陷&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于例如TCP/IP这种基于流的传输协议实现，接收到的数据会被存储在socket的接受缓冲区内。不幸的是，这种基于流的传输缓冲区并不是一个包队列，而是一个字节队列。这意味着，即使你以两个数据包的形式发送了两条消息，操作系统却不会把它们看成是两条消息，而仅仅是一个批次的字节序列。因此，在这种情况下我们就无法保证收到的数据恰好就是远程节点所发送的数据。例如，让我们假设一个操作系统的TCP/IP堆栈收到了三个数据包：
+
+
+
+ABC
+DEF
+GHI
+
+
+
+
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于这种流传输协议的普遍性质，在
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/24/java网络编程之Netty流数据的传输处理（五）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/24/java网络编程之Netty第一个程序（四）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/24/java网络编程之Netty第一个程序（四）/" itemprop="url">java网络编程之Netty第一个程序（四）</a></h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-24T01:56:11+08:00">
+                2017-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/24/java网络编程之Netty第一个程序（四）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/24/java网络编程之Netty第一个程序（四）/" class="cy_cmt_count" data-xid="2017/11/24/java网络编程之Netty第一个程序（四）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          1、为什么使用Netty？在介绍Netty之前先说一下为什么选择Netty？
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Netty是业界最流行的NIO框架之一，它的健壮性、功能、性能、可定制性和可扩展性在同类框架中都是首屈一指的，它已经得到成百上千的商用项目验证，例如Hadoop的RPC框架avro使用Netty作为底层通信框架。很多其它业界主流的RPC框架，也使用Netty来构建高性能的异步通信能力。
+通过对Netty的分析，我们将它的优点总结如下：
+1) API使用简单，开发门槛低；
+2) 功能强大，预置了多种编解码功能，支持多种主流协议；
+3) 定制能力强，可以通过ChannelHandler对通信框架进行灵活的扩展；
+4) 性能高，通过与其它业界主流的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/24/java网络编程之Netty第一个程序（四）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/java网络编程之AIO即NIO2.0（三）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/23/java网络编程之AIO即NIO2.0（三）/" itemprop="url">java网络编程之AIO/NIO2.0（三）</a></h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T00:47:36+08:00">
+                2017-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/23/java网络编程之AIO即NIO2.0（三）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/23/java网络编程之AIO即NIO2.0（三）/" class="cy_cmt_count" data-xid="2017/11/23/java网络编程之AIO即NIO2.0（三）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          概念理解&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AIO编程，在NIO基础之上引入了异步通道的概念，并提供了异步文件和异步套接字通道的实现，从而在真正意义上实现了异步非阻塞，之前我们学习的NIO只是非阻寒而并非异步。而AIO它不需要通过多路复用器对注册的通道进行轮询操作即可实现异步读写，从而简化了NIO编程模型。也可以称之为NIO2.0，这种模式才真正的属于我们异步非阻寒的模型。
+案例Server.java1234567891011121314151617181920212223242526272829303132333435public class Server &#123;	//线程池	private ExecutorService executorServ
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/23/java网络编程之AIO即NIO2.0（三）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/java网络编程之NIO（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/22/java网络编程之NIO（二）/" itemprop="url">java网络编程之NIO（二）</a></h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-22T23:40:17+08:00">
+                2017-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/22/java网络编程之NIO（二）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/22/java网络编程之NIO（二）/" class="cy_cmt_count" data-xid="2017/11/22/java网络编程之NIO（二）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          NIO类库简介&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在介绍NIO编程之前，我们首先需要澄清一个概念，NIO到底是什么的简称？有人称之为New IO，因为它相对于之前的IO类库是新增的，所以被称为New IO，这是它的官方叫法。但是，由于之前老的IO类库是阻塞IO，New IO类库的目标就是要让JAVA支持非阻塞IO，所以，更多的人喜欢称之为非阻塞IO（Non-block IO），由于非阻塞IO更能够体现NIO的特点，所以本书使用的NIO都指的是非阻塞IO。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与Socket类和ServerSocket类相对应，NIO也提供了SocketChannel和ServerSocketChannel
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/22/java网络编程之NIO（二）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/22/java网络编程之传统IO与伪异步IO（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/22/java网络编程之传统IO与伪异步IO（一）/" itemprop="url">java网络编程之传统IO与伪异步IO（一）</a></h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-22T17:46:47+08:00">
+                2017-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络编程/" itemprop="url" rel="index">
+                    <span itemprop="name">网络编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/22/java网络编程之传统IO与伪异步IO（一）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/22/java网络编程之传统IO与伪异步IO（一）/" class="cy_cmt_count" data-xid="2017/11/22/java网络编程之传统IO与伪异步IO（一）/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          概念理解&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Socket又称“套接字”，应用程序通常通过”套接向网络发出请求或者应答网络请求、Socket和ServerSocket类库位于java.net包中。ServerSocket用于服务器端，Socket是建立网络连接时使用的。在连接成功时，应用程序两端都会产生一个Socket实例，操作这个实例，完成所需的会话。对于一个网络许接来说，套接字是平等的，不因为在服务器端或在客户端而产生小同级别。不管是Socket还是ServerSocket它们的工作都是通过SocketImpl类及其子类完成的。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;套接字之间的连接过程可以分为四个步骤：服务器监听，客户
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/22/java网络编程之传统IO与伪异步IO（一）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/java线程安全之重入锁、锁与等待通知、读写锁（十七）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/20/java线程安全之重入锁、锁与等待通知、读写锁（十七）/" itemprop="url">java线程安全之重入锁、锁与等待通知、读写锁（十七）</a></h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T15:52:10+08:00">
+                2017-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -447,8 +1440,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/16/java线程安全之synchronized锁重入及出现异常锁自动释放（五）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/16/java线程安全之synchronized锁重入及出现异常锁自动释放（五）/" class="cy_cmt_count" data-xid="2017/11/16/java线程安全之synchronized锁重入及出现异常锁自动释放（五）/" itemprop="commentsCount" ></span>
+                <a href="/2017/11/20/java线程安全之重入锁、锁与等待通知、读写锁（十七）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/20/java线程安全之重入锁、锁与等待通知、读写锁（十七）/" class="cy_cmt_count" data-xid="2017/11/20/java线程安全之重入锁、锁与等待通知、读写锁（十七）/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -478,14 +1471,14 @@
       
         
           
-          科技快讯&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11月16日下午消息，以“Bring AI to Life”为主题的2017百度世界大会今天在北京国贸大酒店和北京嘉里大酒店举行。爱奇艺创始人兼CEO龚宇在大会上发表了主题为“爱奇艺·更懂娱乐”的主题演讲，龚宇表示爱奇艺对于科技的重视与百度的AI创新基因一脉相承。
-synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized拥有锁重入的功能，也就是在使用synchronized时，当一个线程得到了一个对象的锁后，再次请求此对象时是可以再次得到该对象的锁。
-案例:12345678910111213141516171819202122232425
+          概念理解&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在java多线程中，我们知道可以使用synchronized关键字来实现线程间的同步互斥工作，那么其实还有一个更优秀的机制去完成这个“同步互斥”工作，他就是Lock对象，我们主要学习两种锁，重入锁和读写锁。他们具有比 synchronized更为强大的功能，并且有嗅探锁定、多路分支等功能。
+ReentrantLock（重入锁）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重入锁，在需要进行同步的代码部分加上锁定，但是不要忘记最后一定要释放锁定，不然会照成锁永远无法释放，其他线程永远进不来的结果。
+案例：1234567891011121314151617181920212223242526
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/16/java线程安全之synchronized锁重入及出现异常锁自动释放（五）/#more" rel="contents">
-              Read more &raquo;
+            <a class="btn" href="/2017/11/20/java线程安全之重入锁、锁与等待通知、读写锁（十七）/#more" rel="contents">
+              阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -535,7 +1528,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/java线程安全之synchronized同步代码块解决脏读问题（四）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/java线程安全之Concurrent.util常用类（十六）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -554,7 +1547,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/16/java线程安全之synchronized同步代码块解决脏读问题（四）/" itemprop="url">java线程安全之synchronized同步代码块解决脏读问题（四）</a></h1>
+                <a class="post-title-link" href="/2017/11/20/java线程安全之Concurrent.util常用类（十六）/" itemprop="url">java线程安全之Concurrent.util常用类（十六）</a></h1>
         
 
         <div class="post-meta">
@@ -565,10 +1558,10 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-16T10:36:19+08:00">
-                2017-11-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T14:38:20+08:00">
+                2017-11-20
               </time>
             
 
@@ -586,7 +1579,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -609,8 +1602,8 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/16/java线程安全之synchronized同步代码块解决脏读问题（四）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/16/java线程安全之synchronized同步代码块解决脏读问题（四）/" class="cy_cmt_count" data-xid="2017/11/16/java线程安全之synchronized同步代码块解决脏读问题（四）/" itemprop="commentsCount" ></span>
+                <a href="/2017/11/20/java线程安全之Concurrent.util常用类（十六）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/20/java线程安全之Concurrent.util常用类（十六）/" class="cy_cmt_count" data-xid="2017/11/20/java线程安全之Concurrent.util常用类（十六）/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -640,13 +1633,13 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
       
         
           
-          概念理解对于对象的同步和异步的方法，我们在设计自己的程序的时候，一定要考虑问题的整体，不然就会出现数据不一致的错误，很经典的错误就是脏读(dirtyread) 
-案例123456789101112131415161718192021222324252627282930313233343536373839404142434445package cn.hfbin.sync004;/** * 业务整体需要使用完整的synchronized，保持业务的原子性。 * @author cn.hfbin * */public class DirtyRead &#123;	private String username = "cn.hfbin";	private String password = "123
+          Concurrent.util常用类CyclicBarrier使用：假设有只有的一个场景：每个线程代表一个跑步运动员，当运动员都准备好后，才一起出发，只要有一个人没有准备好，大家都等待。
+工作中场景：比如你多台机器想同时准备好了，再去干分布式计算等等。案例：12345678910111213141516171819202122232425262728293031323334353637383940public class UseCyclicBarrier &#123;	static class Runner implements Runnable &#123;  	    private CyclicBarrier barrier;  	    private String name;  	
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/16/java线程安全之synchronized同步代码块解决脏读问题（四）/#more" rel="contents">
-              Read more &raquo;
+            <a class="btn" href="/2017/11/20/java线程安全之Concurrent.util常用类（十六）/#more" rel="contents">
+              阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -696,7 +1689,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/java线程安全篇之synchronized对象锁的同步和异步（三）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/java线程安全之Executor框架及自定义线程池（十五）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -715,7 +1708,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/16/java线程安全篇之synchronized对象锁的同步和异步（三）/" itemprop="url">java线程安全篇之synchronized对象锁的同步和异步（三）</a></h1>
+                <a class="post-title-link" href="/2017/11/20/java线程安全之Executor框架及自定义线程池（十五）/" itemprop="url">java线程安全之Executor框架及自定义线程池（十五）</a></h1>
         
 
         <div class="post-meta">
@@ -726,10 +1719,10 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-16T00:34:19+08:00">
-                2017-11-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T01:20:11+08:00">
+                2017-11-20
               </time>
             
 
@@ -747,7 +1740,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -770,8 +1763,8 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/16/java线程安全篇之synchronized对象锁的同步和异步（三）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/16/java线程安全篇之synchronized对象锁的同步和异步（三）/" class="cy_cmt_count" data-xid="2017/11/16/java线程安全篇之synchronized对象锁的同步和异步（三）/" itemprop="commentsCount" ></span>
+                <a href="/2017/11/20/java线程安全之Executor框架及自定义线程池（十五）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/20/java线程安全之Executor框架及自定义线程池（十五）/" class="cy_cmt_count" data-xid="2017/11/20/java线程安全之Executor框架及自定义线程池（十五）/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -801,14 +1794,14 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
       
         
           
-          科技快讯&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;近日，据IDC最新季度智能手机数据显示，今年第三季度，小米与三星各自凭借920万台手机出货量，均占有印度智能手机23.5%的市场份额，并列成为印度第一大手机品牌。这也是小米首次追上三星，跻身印度智能手机市场第一名，二者合计占领印度智能手机市场47%的市场份额。报告显示，小米印度与去年同期相比增长率约为300%，使其成为印度市场发展最快的智能手机品牌。
-概念理解同步：synchronized同步的概念就是共享，我们要牢牢记住“共享” 这两个字，如果不是共享的资源，就没有必要进行同步。
-异步：asynchronized异步的概念就是独立，相互之间不受到任何制约。就好像我们学习http即的时候，在页面发起的ajax请求
+          Executor框架概念理解&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了更好的控制多线程，JDK提供了一套线程框架Executor,帮助开发人员有效地进行线程控制。它们都在Java.util.concurrent包中，是JDK并发包的核心。其中有一个比较重要的类：Executors,他扮演这线程工厂的角色，我们通过Executors可以创建特定功能的线程池。Executors创建线程池方法：
+newFixedThreadPool()方法，该方法返回一个固定数量的线程池，该方法的线程数始终不变，当有一个任务提交时，若线程池中空闲，则立即执行，若没有，则会被暫缓在一个任务队列中等待有空闲的线程去执行·
+具体源码如下：12345public static
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/16/java线程安全篇之synchronized对象锁的同步和异步（三）/#more" rel="contents">
-              Read more &raquo;
+            <a class="btn" href="/2017/11/20/java线程安全之Executor框架及自定义线程池（十五）/#more" rel="contents">
+              阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -858,7 +1851,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/15/java线程安全篇之synchronized 多个线程多个锁（二）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/java线程安全之多线程的设计模式（十四）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="HuangFuBin">
@@ -877,7 +1870,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/15/java线程安全篇之synchronized 多个线程多个锁（二）/" itemprop="url">java线程安全篇之synchronized 多个线程多个锁（二）</a></h1>
+                <a class="post-title-link" href="/2017/11/20/java线程安全之多线程的设计模式（十四）/" itemprop="url">java线程安全之多线程的设计模式（十四）</a></h1>
         
 
         <div class="post-meta">
@@ -888,10 +1881,10 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-15T01:17:19+08:00">
-                2017-11-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T00:26:16+08:00">
+                2017-11-20
               </time>
             
 
@@ -909,7 +1902,7 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -932,8 +1925,8 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/15/java线程安全篇之synchronized 多个线程多个锁（二）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/15/java线程安全篇之synchronized 多个线程多个锁（二）/" class="cy_cmt_count" data-xid="2017/11/15/java线程安全篇之synchronized 多个线程多个锁（二）/" itemprop="commentsCount" ></span>
+                <a href="/2017/11/20/java线程安全之多线程的设计模式（十四）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2017/11/20/java线程安全之多线程的设计模式（十四）/" class="cy_cmt_count" data-xid="2017/11/20/java线程安全之多线程的设计模式（十四）/" itemprop="commentsCount" ></span>
                 </a>
               
             
@@ -963,1051 +1956,14 @@ synchronized锁重入&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关键字synchronized�
       
         
           
-          科技快讯&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;北京时间15日晚据CNBC报道，微软创始人比尔-盖茨表示，技术可能将加剧贫富差距。因为技术进步所带来的好处，可能不是每个人都能享受到。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;他在沙特利雅得举办的米斯克全球论坛（Misk Global Forum）表示，“如果我们不小心，技术会加剧富人和穷人之间的差距。因为如果技术只在费用昂贵的学校教授，它就不能惠及每一个人。”&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这位亿万富翁还谈到了人工智能（AI）的担忧，他表示，类似人工智能（AI）这样的科技进步所带来的好处超过了任何潜在的陷阱，“我们处在一个短缺的世界，而这些进
+          多线程的设计模式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;并行设计模式属于设计优化的一部分，它是对一些常用的多线程结构的总结和抽象。与串行程序相比，并行程序的结构通常更为复杂。因此合理的使用并行模式在多线程开发中更具有意义，在这里主要介绍Future、Master-Worker和生产者-消费者模型。
+Future 模式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Future模式有点类似于商品订单。比如在网购时，当看重某一件商品事，就可以提交订单，当订单处理完成后，在家里等待商品送货上门即可。或者说更形象的我们发送Ajax请求的时候，页面是异步的进行后台处理，用户无须一直等待请求的结果，可以继续浏览或操作其他内容。
+Future 模式图
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/11/15/java线程安全篇之synchronized 多个线程多个锁（二）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/java线程安全之synchronized理解篇（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuangFuBin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hfbin Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/13/java线程安全之synchronized理解篇（一）/" itemprop="url">java线程安全之synchronized理解篇（一）</a></h1>
-        
-
-        <div class="post-meta">
-			 
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-13T20:06:19+08:00">
-                2017-11-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/线程安全/" itemprop="url" rel="index">
-                    <span itemprop="name">线程安全</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/11/13/java线程安全之synchronized理解篇（一）/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/13/java线程安全之synchronized理解篇（一）/" class="cy_cmt_count" data-xid="2017/11/13/java线程安全之synchronized理解篇（一）/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          概念线程安全概念：当多个线程访问某一个类（对象或方法）时 ，这个类始终都能表现出正确的行为 ，那么这个类（对象或方法）就是线程安全的。
-synchronized ：可以在任意的对象及方法上加上一把锁，而加锁的这段代码称为“互斥区”或“临界区”
-案例如下案例：
-123456789101112131415161718192021222324252627package cn.hfbin.base.sync001;/** * @author cn.hfbin * */public class MyThread extends Thread&#123;	private int count = 5 ;	public void run()&#123;		count--;		System.out.print
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/13/java线程安全之synchronized理解篇（一）/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/10/史上最全面的CentOS 7 之 redis 安装/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuangFuBin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hfbin Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/10/史上最全面的CentOS 7 之 redis 安装/" itemprop="url">史上最全面的CentOS 7 之 redis 安装</a></h1>
-        
-
-        <div class="post-meta">
-			 
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-10T00:11:19+08:00">
-                2017-11-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/liunx/" itemprop="url" rel="index">
-                    <span itemprop="name">liunx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/11/10/史上最全面的CentOS 7 之 redis 安装/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/10/史上最全面的CentOS 7 之 redis 安装/" class="cy_cmt_count" data-xid="2017/11/10/史上最全面的CentOS 7 之 redis 安装/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          了解Redis定义redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。
-Redis 是一个高性能的key-value数据库。 redis的出现，很大程度
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/10/史上最全面的CentOS 7 之 redis 安装/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/史上最全面的CentOS 7 之 mysql安装/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuangFuBin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hfbin Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/09/史上最全面的CentOS 7 之 mysql安装/" itemprop="url">史上最全面的CentOS 7 之 mysql安装</a></h1>
-        
-
-        <div class="post-meta">
-			 
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-09T11:43:19+08:00">
-                2017-11-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/liunx/" itemprop="url" rel="index">
-                    <span itemprop="name">liunx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/11/09/史上最全面的CentOS 7 之 mysql安装/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/09/史上最全面的CentOS 7 之 mysql安装/" class="cy_cmt_count" data-xid="2017/11/09/史上最全面的CentOS 7 之 mysql安装/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          此教程只支持联网安装前言安装环境：CentOS 7 安装mysql 5.7
-下载mysql源安装包
-wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
-
-
-安装mysql源
-yum localinstall mysql57-community-release-el7-8.noarch.rpm
-
-
-检查mysql源是否安装成功
-yum repolist enabled | grep “mysql.-community.“
-
-看到上面的内容表示安装成功！！！
-修改默认安装的mysql版本 
-
-vim /etc/yum.repos.d/mysql-community.repo
-
-将5.7源的enabled
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/09/史上最全面的CentOS 7 之 mysql安装/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/08/史上最全面的CentOS 7 之 jdk1.8 + tomcat 安装/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuangFuBin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hfbin Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/08/史上最全面的CentOS 7 之 jdk1.8 + tomcat 安装/" itemprop="url">史上最全面的CentOS 7 之 jdk1.8 + tomcat 安装</a></h1>
-        
-
-        <div class="post-meta">
-			 
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-08T01:43:19+08:00">
-                2017-11-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/liunx/" itemprop="url" rel="index">
-                    <span itemprop="name">liunx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/11/08/史上最全面的CentOS 7 之 jdk1.8 + tomcat 安装/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/08/史上最全面的CentOS 7 之 jdk1.8 + tomcat 安装/" class="cy_cmt_count" data-xid="2017/11/08/史上最全面的CentOS 7 之 jdk1.8 + tomcat 安装/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          此教程只支持离线安装前言安装环境：CentOS 7  下安装 jdk1.8 + tomcat 
-正文jdk1.8链接：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-tomcat链接：https://tomcat.apache.org/download-70.cgi
-注意：链接有可能失效 如果失效自己去官网找下载链接  
-需要百度云链接的可以在下面回复我私发给你
-jdk1.8安装执行下面命令下载（注意安装在哪 就进入安装的目录进行下载我安装在/opt下）
-
-shell&gt; cd /optshell&gt; wget http://download.oracle.com/
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/08/史上最全面的CentOS 7 之 jdk1.8 + tomcat 安装/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/SSM实现简单的CRUD之Web层/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuangFuBin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hfbin Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/07/SSM实现简单的CRUD之Web层/" itemprop="url">SSM实现简单的CRUD之Web层</a></h1>
-        
-
-        <div class="post-meta">
-			 
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-07T08:43:19+08:00">
-                2017-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SSM-Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM+Maven</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/11/07/SSM实现简单的CRUD之Web层/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/07/SSM实现简单的CRUD之Web层/" class="cy_cmt_count" data-xid="2017/11/07/SSM实现简单的CRUD之Web层/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前言本篇文章主要来讲解Web层，主要介绍前端交互设计、Restful:url满足Restful设计规范、Spring MVC、bootstrap+jquery这四个方面的开发。
-Restful接口设计学习CRUD API URL 设计
-
-
-
-请求类型
-url
-说明
-
-
-
-
-DELETE
-/emp/{ids}
-删除某一个员工信息
-
-
-PUT
-/emp/{empId}
-修改员工信息
-
-
-GET
-/emp/{id}
-查询员工信息
-
-
-GET
-checkuser
-用户名是否重复
-
-
-GET
-/depts
-所有部门
-
-
-POST
-/emp
-员工保存
-
-
-POST
-/emp
-所有员工（所携带参数不一样）
-
-
-
-一定记得在web.xml文件中加入以下配置：
-12345678&lt;filter&gt;  
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/07/SSM实现简单的CRUD之Web层/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/SSM实现简单的CRUD之Service层/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="HuangFuBin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hfbin Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/06/SSM实现简单的CRUD之Service层/" itemprop="url">SSM实现简单的CRUD之Service层</a></h1>
-        
-
-        <div class="post-meta">
-			 
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-06T22:22:13+08:00">
-                2017-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SSM-Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">SSM+Maven</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2017/11/06/SSM实现简单的CRUD之Service层/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://yoursite.com/2017/11/06/SSM实现简单的CRUD之Service层/" class="cy_cmt_count" data-xid="2017/11/06/SSM实现简单的CRUD之Service层/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前言开始Service层的编码之前，我们首先需要进行Dao层编码之后的思考:在Dao层我们只完成了针对表的相关操作包括写了接口方法和映射文件中的sql语句，并没有编写逻辑的代码，例如对多个Dao层方法的拼接，当我们用户成功秒杀商品时我们需要进行商品的减库存操作和增加用户明细等等，这些逻辑我们都需要在Service层完成。但是这个CRUD并不需要什么很难的逻辑只是一个简单的增删查改，所以在这个CRUD的Service层会很简单，接下来我们便进行Service层代码的编写。
-Service接口设计在cn.hfbin.crud包下创建一个service包用于存放我们的Service
-创建EmployeeService类，里面的方法应该是按”使用者”(程序员)的角度去设计，EmployeeServi
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/06/SSM实现简单的CRUD之Service层/#more" rel="contents">
-              Read more &raquo;
+            <a class="btn" href="/2017/11/20/java线程安全之多线程的设计模式（十四）/#more" rel="contents">
+              阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -2048,7 +2004,7 @@ Service接口设计在cn.hfbin.crud包下创建一个service包用于存放我�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2094,8 +2050,8 @@ Service接口设计在cn.hfbin.crud包下创建一个service包用于存放我�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">88</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">107</span>
+                <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
@@ -2105,8 +2061,8 @@ Service接口设计在cn.hfbin.crud包下创建一个service包用于存放我�
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">26</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
@@ -2116,8 +2072,8 @@ Service接口设计在cn.hfbin.crud包下创建一个service包用于存放我�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">35</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
               </a>
             </div>
           
@@ -2228,11 +2184,11 @@ Service接口设计在cn.hfbin.crud包下创建一个service包用于存放我�
 <div class="copyright" style="text-align: center !important;">
 	
 	<div class="powered-by" style="text-align: center !important;">
-	  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+	  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 	</div>
 
 	<div class="theme-info" style="text-align: center !important;">
-	  Theme -
+	  主题 -
 	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
 		NexT.Mist
 	  </a>

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android系列教程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/84.html  第1章 课程概述通过本章让学生：1.了解本次项目实战主要有那些功能有，以及通过本次项目实战，学生可以掌握开发一个应用所需的全部知识。2.在课程安排上，我们主要以实际的开发顺序来讲解，保证学员能够所学即所得。 第2章 首页框架搭建本章正式开始我们的项目开发，在开发项目的过程中穿插我们要讲的知识点，本">
+<meta name="keywords" content="Android系列教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件化封装思想实战Android App">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/buy-组件化封装思想实战Android App/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/84.html  第1章 课程概述通过本章让学生：1.了解本次项目实战主要有那些功能有，以及通过本次项目实战，学生可以掌握开发一个应用所需的全部知识。2.在课程安排上，我们主要以实际的开发顺序来讲解，保证学员能够所学即所得。 第2章 首页框架搭建本章正式开始我们的项目开发，在开发项目的过程中穿插我们要讲的知识点，本">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-19509b1828f89e88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-4fa450b35589c666.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-36db9db290fc1c59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-22T11:44:00.145Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="组件化封装思想实战Android App">
+<meta name="twitter:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/84.html  第1章 课程概述通过本章让学生：1.了解本次项目实战主要有那些功能有，以及通过本次项目实战，学生可以掌握开发一个应用所需的全部知识。2.在课程安排上，我们主要以实际的开发顺序来讲解，保证学员能够所学即所得。 第2章 首页框架搭建本章正式开始我们的项目开发，在开发项目的过程中穿插我们要讲的知识点，本">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/8745982-19509b1828f89e88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/22/buy-组件化封装思想实战Android App/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>组件化封装思想实战Android App | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/buy-组件化封装思想实战Android App/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">组件化封装思想实战Android App</h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T17:26:34+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android系列教程/" itemprop="url" rel="index">
+                    <span itemprop="name">Android系列教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/03/22/buy-组件化封装思想实战Android App/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/22/buy-组件化封装思想实战Android App/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a>课程大纲</h4><p>来自慕课教程：<a href="https://coding.imooc.com/class/84.html" target="_blank" rel="external">https://coding.imooc.com/class/84.html</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8745982-19509b1828f89e88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/8745982-4fa450b35589c666.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="第1章-课程概述"><a href="#第1章-课程概述" class="headerlink" title="第1章 课程概述"></a>第1章 课程概述</h5><p>通过本章让学生：1.了解本次项目实战主要有那些功能有，以及通过本次项目实战，学生可以掌握开发一个应用所需的全部知识。2.在课程安排上，我们主要以实际的开发顺序来讲解，保证学员能够所学即所得。</p>
+<h5 id="第2章-首页框架搭建"><a href="#第2章-首页框架搭建" class="headerlink" title="第2章 首页框架搭建"></a>第2章 首页框架搭建</h5><p>本章正式开始我们的项目开发，在开发项目的过程中穿插我们要讲的知识点，本节课我们主要来目的：1.搭建好我们的HomeActivity, 实现HomeActivity中Fragment的切换。2.创建首页所需要的所有Fragment(空的Fragment,功能对应模块填充)</p>
+<h5 id="第3章-App公共模块之网络请求组件"><a href="#第3章-App公共模块之网络请求组件" class="headerlink" title="第3章 App公共模块之网络请求组件"></a>第3章 App公共模块之网络请求组件</h5><p>通过本节课的学习:1.我们要基于Okhttp封装一个通用的网络请求框架，前期先实现发送get和post请求，后面我们会继续扩展我们框架的功能，例如文件下载。2.利用我们的网络框架发送请求并获取响应 3.如何利用Charles调试接口。</p>
+<h5 id="第4章-App公共模块之图片加载组件"><a href="#第4章-App公共模块之图片加载组件" class="headerlink" title="第4章 App公共模块之图片加载组件"></a>第4章 App公共模块之图片加载组件</h5><p>本章我们要完成异步网络图片加载库universeImageLoader的讲解，通过本章内容的学习。我们在掌握universeImageLoader框架的前提下，对其进行二次封装，使之成为一个独立的功能模块，方便我们以后直接复用，而且在于业务逻辑隔离的情况下，我们也可以方便的对其进行替换。…</p>
+<h5 id="第5章-首页列表开发与测试"><a href="#第5章-首页列表开发与测试" class="headerlink" title="第5章 首页列表开发与测试"></a>第5章 首页列表开发与测试</h5><p>通过本章学习，我们要掌握android中最常用的两个控件的深度使用ViewPager和ListView中如何嵌入复杂的布局。以及我们如何去合理的定义数据结构，使我们移动端使用起服务器的数据来更加的得心应手。</p>
+<h5 id="第6章-App公共模块之二维码扫描组件"><a href="#第6章-App公共模块之二维码扫描组件" class="headerlink" title="第6章 App公共模块之二维码扫描组件"></a>第6章 App公共模块之二维码扫描组件</h5><p>本章我们完成zxing扫码功能的集成。1.首先我们对zxing做一个基本的介绍 2.我们要对zxing整个工程做一个裁剪，以减少zxing包的大小及除去无用功能 3.将zxing集成到我们的实战项目中。 4.zxing核心类介绍。5.自定义扫码界面UI 6.处理扫码返回的结果数据。 通过本章的学习，我们不仅能够集成开源的二维码工程，而且…</p>
+<h5 id="第7章-视频播放SDK模块开发"><a href="#第7章-视频播放SDK模块开发" class="headerlink" title="第7章 视频播放SDK模块开发"></a>第7章 视频播放SDK模块开发</h5><p>本章是我们整个项目的核心，通过本章的学习，我们能学会：1.如何利用android最底层的类去自定义一个视频播放器。2.通过接口回调将视频器视频暴露到调用层。3.SDK封装思想的讲解，4.将我们的播放器封装为一个通用的SDK工具包。 5.在我们的实战项目中去调用我们的播放SDK，看是否方便使用。…</p>
+<h5 id="第8章-首页MineFragment开发与测试"><a href="#第8章-首页MineFragment开发与测试" class="headerlink" title="第8章 首页MineFragment开发与测试"></a>第8章 首页MineFragment开发与测试</h5><p>通过本章的学习，让学员掌握在实际开发中：1.我们是如何去管理用户信息的 2.局部广播的使用 3.SharedPreference在实际开发中的作用 4.如何利用已有数据生成二维码 5.版本更新功能如何实现</p>
+<h5 id="第9章-浏览查看大图页面开发"><a href="#第9章-浏览查看大图页面开发" class="headerlink" title="第9章 浏览查看大图页面开发"></a>第9章 浏览查看大图页面开发</h5><p>通过本章学习，我们可以学会如何去使用PhotoView实现我们项目中，网上好多教程教如何去自定义类似PhotoView的教程，大家可以暂时忽略，因为即使教你如何自定义PhotoView的人，在实际开发中也是使用PhotoView的，所以我们要先学会如何去用，等我们用的很熟悉的时候，我们可以直接去研究PhotoView的源码，这是一种最高效的方…</p>
+<h5 id="第10章-App公共模块之社交分享组件"><a href="#第10章-App公共模块之社交分享组件" class="headerlink" title="第10章 App公共模块之社交分享组件"></a>第10章 App公共模块之社交分享组件</h5><p>本章主要为我们的App添加分享功能，通过对ShareSDK分享的实战，我们不仅能学习如何去使用它去完成我们最基本的分享工作 ，更可以将其封装为一个通用的分享组件，方便我们以后的复用。</p>
+<h5 id="第11章-课程详情页面开发"><a href="#第11章-课程详情页面开发" class="headerlink" title="第11章 课程详情页面开发"></a>第11章 课程详情页面开发</h5><p>本章主要来实现我们的课程详情页面的开发，通过本节课我们主要学习：1.学习利用mpchart去开发漂亮的图表。2.Activity的各种不同的启动模式。以及如何正确的决定使用那种启动模式。</p>
+<h5 id="第12章-App公共模块之实时推送组件"><a href="#第12章-App公共模块之实时推送组件" class="headerlink" title="第12章 App公共模块之实时推送组件"></a>第12章 App公共模块之实时推送组件</h5><p>通过本章的学习，我们要学习如何将极光推送或者其它第三方推送库集成到我们的项目中。并完成与目前市面上最主流App一致的推送跳转流程开发。让我们的项目与用户更多的互动起来。</p>
+<h5 id="第13章-项目适配android6-0权限系统"><a href="#第13章-项目适配android6-0权限系统" class="headerlink" title="第13章 项目适配android6.0权限系统"></a>第13章 项目适配android6.0权限系统</h5><p>通过本章的学习，同学们可以学会如何将我们的应用无缝的适配到android6.0及以上系统，且不需要依赖任何第三方库。</p>
+<h5 id="第14章-友盟多渠道打包及上线Apk"><a href="#第14章-友盟多渠道打包及上线Apk" class="headerlink" title="第14章 友盟多渠道打包及上线Apk"></a>第14章 友盟多渠道打包及上线Apk</h5><p>通过本章的学习，我们会最终打出我们要上线市场的对应的Apk文件并上传到对应的应用市场</p>
+<h4 id="教程截图"><a href="#教程截图" class="headerlink" title="教程截图"></a>教程截图</h4><p><img src="https://upload-images.jianshu.io/upload_images/8745982-36db9db290fc1c59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="更多教程"><a href="#更多教程" class="headerlink" title="更多教程"></a>更多教程</h4><p>教程不断整理更新中，以上截图仅供参考，如需了解更多视频教程的详细信息请到如下地址查看：<a href="http://hfbin.cn" target="_blank" rel="external">http://hfbin.cn</a><br>教程分类说明：<a href="http://hfbin.cn/categories/" target="_blank" rel="external">http://hfbin.cn/categories/</a></p>
+<h4 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h4><p><a href="http://hfbin.cn/2018/02/21/buy-%E5%85%B3%E4%BA%8E%E6%95%99%E7%A8%8B%E3%80%81%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F%E3%80%81%E6%B8%A9%E9%A6%A8%E6%8F%90%E7%A4%BA/" target="_blank" rel="external">关于教程、获取方式、温馨提示</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android系列教程/" <i class="fa fa-tag"></i> Android系列教程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/22/buy-带领新手快速开发Android App/" rel="next" title="带领新手快速开发Android App">
+                <i class="fa fa-chevron-left"></i> 带领新手快速开发Android App
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/22/buy-玩转算法面试 leetcode题库分门别类详细解析/" rel="prev" title="玩转算法面试 leetcode题库分门别类详细解析">
+                玩转算法面试 leetcode题库分门别类详细解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">107</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#课程大纲"><span class="nav-number">1.</span> <span class="nav-text">课程大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第1章-课程概述"><span class="nav-number">1.1.</span> <span class="nav-text">第1章 课程概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第2章-首页框架搭建"><span class="nav-number">1.2.</span> <span class="nav-text">第2章 首页框架搭建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第3章-App公共模块之网络请求组件"><span class="nav-number">1.3.</span> <span class="nav-text">第3章 App公共模块之网络请求组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第4章-App公共模块之图片加载组件"><span class="nav-number">1.4.</span> <span class="nav-text">第4章 App公共模块之图片加载组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第5章-首页列表开发与测试"><span class="nav-number">1.5.</span> <span class="nav-text">第5章 首页列表开发与测试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第6章-App公共模块之二维码扫描组件"><span class="nav-number">1.6.</span> <span class="nav-text">第6章 App公共模块之二维码扫描组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第7章-视频播放SDK模块开发"><span class="nav-number">1.7.</span> <span class="nav-text">第7章 视频播放SDK模块开发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第8章-首页MineFragment开发与测试"><span class="nav-number">1.8.</span> <span class="nav-text">第8章 首页MineFragment开发与测试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第9章-浏览查看大图页面开发"><span class="nav-number">1.9.</span> <span class="nav-text">第9章 浏览查看大图页面开发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第10章-App公共模块之社交分享组件"><span class="nav-number">1.10.</span> <span class="nav-text">第10章 App公共模块之社交分享组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第11章-课程详情页面开发"><span class="nav-number">1.11.</span> <span class="nav-text">第11章 课程详情页面开发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第12章-App公共模块之实时推送组件"><span class="nav-number">1.12.</span> <span class="nav-text">第12章 App公共模块之实时推送组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第13章-项目适配android6-0权限系统"><span class="nav-number">1.13.</span> <span class="nav-text">第13章 项目适配android6.0权限系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第14章-友盟多渠道打包及上线Apk"><span class="nav-number">1.14.</span> <span class="nav-text">第14章 友盟多渠道打包及上线Apk</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#教程截图"><span class="nav-number">2.</span> <span class="nav-text">教程截图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多教程"><span class="nav-number">3.</span> <span class="nav-text">更多教程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取方式"><span class="nav-number">4.</span> <span class="nav-text">获取方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!--
+<div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+-->
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  主题 -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python实战教程系列," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/169.html  第1章 欢迎来到 Python3 玩转机器学习欢迎大家来到《Python3玩转机器学习》的课堂。在这个课程中，我们将从0开始，一点一点进入机器学习的世界。本门课程对机器学习领域的学习，绝不不仅仅只是对算法的学习，还包括诸如算法的评价，方法的选择，模型的优化，参数的调整，数据的整理，等等一系列工作">
+<meta name="keywords" content="Python实战教程系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3入门机器学习 经典算法与应用">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/buy-Python3入门机器学习 经典算法与应用/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/169.html  第1章 欢迎来到 Python3 玩转机器学习欢迎大家来到《Python3玩转机器学习》的课堂。在这个课程中，我们将从0开始，一点一点进入机器学习的世界。本门课程对机器学习领域的学习，绝不不仅仅只是对算法的学习，还包括诸如算法的评价，方法的选择，模型的优化，参数的调整，数据的整理，等等一系列工作">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-3347bc811445eb12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-e35715bead6c962e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-e6b0c660d4d7be99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-50b8835113d3dc60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-40278a7fde95e496.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-22T11:35:32.690Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3入门机器学习 经典算法与应用">
+<meta name="twitter:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/169.html  第1章 欢迎来到 Python3 玩转机器学习欢迎大家来到《Python3玩转机器学习》的课堂。在这个课程中，我们将从0开始，一点一点进入机器学习的世界。本门课程对机器学习领域的学习，绝不不仅仅只是对算法的学习，还包括诸如算法的评价，方法的选择，模型的优化，参数的调整，数据的整理，等等一系列工作">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/8745982-3347bc811445eb12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/22/buy-Python3入门机器学习 经典算法与应用/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>Python3入门机器学习 经典算法与应用 | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/buy-Python3入门机器学习 经典算法与应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python3入门机器学习 经典算法与应用</h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T17:18:34+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python实战教程系列/" itemprop="url" rel="index">
+                    <span itemprop="name">Python实战教程系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/03/22/buy-Python3入门机器学习 经典算法与应用/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/22/buy-Python3入门机器学习 经典算法与应用/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a>课程大纲</h4><p>来自慕课教程：<a href="https://coding.imooc.com/class/169.html" target="_blank" rel="external">https://coding.imooc.com/class/169.html</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8745982-3347bc811445eb12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/8745982-e35715bead6c962e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="第1章-欢迎来到-Python3-玩转机器学习"><a href="#第1章-欢迎来到-Python3-玩转机器学习" class="headerlink" title="第1章 欢迎来到 Python3 玩转机器学习"></a>第1章 欢迎来到 Python3 玩转机器学习</h5><p>欢迎大家来到《Python3玩转机器学习》的课堂。在这个课程中，我们将从0开始，一点一点进入机器学习的世界。本门课程对机器学习领域的学习，绝不不仅仅只是对算法的学习，还包括诸如算法的评价，方法的选择，模型的优化，参数的调整，数据的整理，等等一系列工作。准备好了吗？现在开始我们的机器学习之旅！…</p>
+<h5 id="第2章-机器学习基础"><a href="#第2章-机器学习基础" class="headerlink" title="第2章 机器学习基础"></a>第2章 机器学习基础</h5><p>机器学习到底是什么鬼？这一章将带领大家深入理解机器学习的世界，让大家去熟悉那些看似陌生的专业术语。监督学习，非监督学习，半监督学习，增强学习，批量学习，在线学习，参数学习，非参数学习。看完这一章，这些概念你就统统了解啦。不仅如此，本章还包含相当深刻地和机器学习相关的哲学探讨，让你深入思索有关机器学习…</p>
+<h5 id="第3章-Jupyter-Notebook-numpy和matplotlib"><a href="#第3章-Jupyter-Notebook-numpy和matplotlib" class="headerlink" title="第3章 Jupyter Notebook, numpy和matplotlib"></a>第3章 Jupyter Notebook, numpy和matplotlib</h5><p>工欲善其事，必先利其器。在本章，我们将学习和机器学习相关的基础工具的使用：Jupyter Notebook, numpy和matplotlib。大多数教程在讲解机器学习的时候，大量使用这些工具，却不对这些工具进行系统讲解。我特意添加了这个章节，让同学们在后续编写机器学习算法的过程中，更加得心应手！…</p>
+<h5 id="第4章-最基础的分类算法-k近邻算法-kNN"><a href="#第4章-最基础的分类算法-k近邻算法-kNN" class="headerlink" title="第4章 最基础的分类算法-k近邻算法 kNN"></a>第4章 最基础的分类算法-k近邻算法 kNN</h5><p>k近邻算法本身是一个思想非常简单的算法，但是这个简单算法背后，也蕴含着丰富的内容。在这一章，我们将详细介绍k近邻算法的原理，进而对训练数据集，测试数据集，分类准确度，超参数，数据归一化，样本距离等基础概念进行详细的探讨。我们将详细了解scikit-learn框架中对算法的封装，并实现我们自己的算法框架。我们还将学…</p>
+<h5 id="第5章-线性回归法"><a href="#第5章-线性回归法" class="headerlink" title="第5章 线性回归法"></a>第5章 线性回归法</h5><p>线性回归法是机器学习领域的经典算法，很多更复杂的算法都是以线性回归为基础的。在这一章，我们将深入学习线性回归法背后的原理，同时仔细探讨如何评价回归算法。大家将对MSE,RMSE,MAE和R Squared等回归问题的评价指标有充分的理解。在实现层面上，我们还将学习机器学习领域的一个重要的实现技巧：向量化。…</p>
+<h5 id="第6章-梯度下降法"><a href="#第6章-梯度下降法" class="headerlink" title="第6章 梯度下降法"></a>第6章 梯度下降法</h5><p>梯度下降法是在机器学习领域的一个重要的搜索策略。在这一章，我们将详细讲解梯度下降法的基本原理，一步一步改进梯度下降算法，让大家理解梯度下降法中各种参数，尤其是学习率的意义。同时，我们还将引申出随机梯度下降法和小批量梯度下降法两个方法，让大家对梯度下降法家族有一个全方位的认识。…</p>
+<h5 id="第7章-PCA与梯度上升法"><a href="#第7章-PCA与梯度上升法" class="headerlink" title="第7章 PCA与梯度上升法"></a>第7章 PCA与梯度上升法</h5><p>通常教材会使用非常多的数学概念来讲解PCA，在这个课程中，我们将另辟蹊径，绕开繁重的数学概念，使用梯度下降法的姊妹方法：梯度上升法来求解PCA问题，进而深刻理解PCA的基本原理，如何使用PCA进行数据的降维。我们还将给出多个PCA的应用场景，不仅让大家亲手实践出PCA降维的巨大威力，也让大家看到PCA在降噪，人脸识别等…</p>
+<h5 id="第8章-多项式回归与模型泛化"><a href="#第8章-多项式回归与模型泛化" class="headerlink" title="第8章 多项式回归与模型泛化"></a>第8章 多项式回归与模型泛化</h5><p>在这一章，我们将接触非线性问题。我们将学习多项式回归的思想，使用线性回归的思路来解决非线性问题。进一步，我们将引申出或许是机器学习领域最重要的一个问题：模型泛化问题。我们将深入探讨什么是欠拟合，什么是过拟合，怎样检测欠拟合和过拟合。什么是交叉验证，什么是模型正则化。听起来拗口的Ridge和Lasso都是什么鬼…</p>
+<h5 id="第9章-逻辑回归"><a href="#第9章-逻辑回归" class="headerlink" title="第9章 逻辑回归"></a>第9章 逻辑回归</h5><p>据统计，逻辑回归是机器学习领域最常用的分类算法，没有之一！在这一章，我们将逐渐揭开逻辑回归的神秘面纱，了解如何应用线性回归的思路，来解决分类问题。我们将综合之前所学习的很多内容，一点一点来完善我们的逻辑回归模型。我们还将继续深入分类问题，学习对分类结果概率的估计，以及决策边界等重要概念。 …</p>
+<h5 id="第10章-评价分类结果"><a href="#第10章-评价分类结果" class="headerlink" title="第10章 评价分类结果"></a>第10章 评价分类结果</h5><p>对机器学习分类算法结果的评估，是一个公认的复杂问题。在这一章，我们将来阐述这个问题为什么复杂。我们如何更好地看待我们的机器学习算法给出的结果。学习诸如混淆矩阵，准确率，精确率，召回率，F1，以及ROC等诸多评价分类结果的指标。通过这一章的学习，大家将更好地理解自己的机器学习算法给出的结果，从而在实际应用…</p>
+<h5 id="第11章-支撑向量机-SVM"><a href="#第11章-支撑向量机-SVM" class="headerlink" title="第11章 支撑向量机 SVM"></a>第11章 支撑向量机 SVM</h5><p>在这一章，我们将深入学习大名鼎鼎的支撑向量机SVM。我们将从线性SVM开始，理解SVM的思路，进而深入理解SVM解决非线性问题的方式——核函数。我们将重点学习两个最重要的核函数：多项式核和径向基函数核。我们更会使用真实的数据集实验，看到SVM的优缺点。最后，我们还将探讨使用SVM解决回归问题的思路。 …</p>
+<h5 id="第12章-决策树"><a href="#第12章-决策树" class="headerlink" title="第12章 决策树"></a>第12章 决策树</h5><p>在这一章，我们将学习另外一个大名鼎鼎的机器学习算法：决策树。决策树本身非常简单，背后并没有复杂的数学模型，但使用好决策树也有很多技巧。我们将深入了解什么是熵模型，什么是基尼系数，怎样使用决策树解决分类问题，怎样获得分类的概率，怎样用决策树解决回归问题，以及使用决策树的注意事项。 …</p>
+<h5 id="第13章-集成学习和随机森林"><a href="#第13章-集成学习和随机森林" class="headerlink" title="第13章 集成学习和随机森林"></a>第13章 集成学习和随机森林</h5><p>集成学习的思想是机器学习领域解决问题的一种重要思想。我们将从集成之前已经学习过的算法出发，进而引入集成学习的经典算法：随机森林。我们将看到集成学习的威力。在这一章，我们还会对其他集成学习的思想，如AdaBoost, Gradient Boosting, Stacking等算法进行介绍。 …</p>
+<h5 id="第14章-更多机器学习算法"><a href="#第14章-更多机器学习算法" class="headerlink" title="第14章 更多机器学习算法"></a>第14章 更多机器学习算法</h5><p>相信通过这个课程的学习。同学们学到的不仅仅是一个一个零散的机器学习算法，更对机器学领域解决问题的方式有了一个系统性的认识。学会了这种思维方法，相信大家都可以更好地继续深入学习机器学习。在最后，我将给大家介绍scikit-learn的文档，希望大家能够借助scikit-learn这个强大的机器学习库，继续探索机器学习这个当下…</p>
+<h4 id="教程截图"><a href="#教程截图" class="headerlink" title="教程截图"></a>教程截图</h4><p><img src="https://upload-images.jianshu.io/upload_images/8745982-e6b0c660d4d7be99.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/8745982-50b8835113d3dc60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/8745982-40278a7fde95e496.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="更多教程"><a href="#更多教程" class="headerlink" title="更多教程"></a>更多教程</h4><p>教程不断整理更新中，以上截图仅供参考，如需了解更多视频教程的详细信息请到如下地址查看：<a href="http://hfbin.cn" target="_blank" rel="external">http://hfbin.cn</a><br>教程分类说明：<a href="http://hfbin.cn/categories/" target="_blank" rel="external">http://hfbin.cn/categories/</a></p>
+<h4 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h4><p><a href="http://hfbin.cn/2018/02/21/buy-%E5%85%B3%E4%BA%8E%E6%95%99%E7%A8%8B%E3%80%81%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F%E3%80%81%E6%B8%A9%E9%A6%A8%E6%8F%90%E7%A4%BA/" target="_blank" rel="external">关于教程、获取方式、温馨提示</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python实战教程系列/" <i class="fa fa-tag"></i> Python实战教程系列</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/22/buy2-掌握React Native技术转型随意切换/" rel="next" title="掌握React Native技术转型随意切换">
+                <i class="fa fa-chevron-left"></i> 掌握React Native技术转型随意切换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/22/buy-聚焦Python分布式爬虫必学框架Scrapy 打造搜索引擎/" rel="prev" title="聚焦Python分布式爬虫必学框架Scrapy 打造搜索引擎">
+                聚焦Python分布式爬虫必学框架Scrapy 打造搜索引擎 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">107</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#课程大纲"><span class="nav-number">1.</span> <span class="nav-text">课程大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第1章-欢迎来到-Python3-玩转机器学习"><span class="nav-number">1.1.</span> <span class="nav-text">第1章 欢迎来到 Python3 玩转机器学习</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第2章-机器学习基础"><span class="nav-number">1.2.</span> <span class="nav-text">第2章 机器学习基础</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第3章-Jupyter-Notebook-numpy和matplotlib"><span class="nav-number">1.3.</span> <span class="nav-text">第3章 Jupyter Notebook, numpy和matplotlib</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第4章-最基础的分类算法-k近邻算法-kNN"><span class="nav-number">1.4.</span> <span class="nav-text">第4章 最基础的分类算法-k近邻算法 kNN</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第5章-线性回归法"><span class="nav-number">1.5.</span> <span class="nav-text">第5章 线性回归法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第6章-梯度下降法"><span class="nav-number">1.6.</span> <span class="nav-text">第6章 梯度下降法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第7章-PCA与梯度上升法"><span class="nav-number">1.7.</span> <span class="nav-text">第7章 PCA与梯度上升法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第8章-多项式回归与模型泛化"><span class="nav-number">1.8.</span> <span class="nav-text">第8章 多项式回归与模型泛化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第9章-逻辑回归"><span class="nav-number">1.9.</span> <span class="nav-text">第9章 逻辑回归</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第10章-评价分类结果"><span class="nav-number">1.10.</span> <span class="nav-text">第10章 评价分类结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第11章-支撑向量机-SVM"><span class="nav-number">1.11.</span> <span class="nav-text">第11章 支撑向量机 SVM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第12章-决策树"><span class="nav-number">1.12.</span> <span class="nav-text">第12章 决策树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第13章-集成学习和随机森林"><span class="nav-number">1.13.</span> <span class="nav-text">第13章 集成学习和随机森林</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第14章-更多机器学习算法"><span class="nav-number">1.14.</span> <span class="nav-text">第14章 更多机器学习算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#教程截图"><span class="nav-number">2.</span> <span class="nav-text">教程截图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多教程"><span class="nav-number">3.</span> <span class="nav-text">更多教程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取方式"><span class="nav-number">4.</span> <span class="nav-text">获取方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!--
+<div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+-->
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  主题 -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>

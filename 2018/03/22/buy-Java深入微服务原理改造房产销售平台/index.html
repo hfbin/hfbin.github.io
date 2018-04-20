@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java系列视频教程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hfbin Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/174.html 第1章 课程介绍(一线架构师亲授+各种分享)一线互联网架构师亲授微服务的两个不同学习阶段–单体阶段（基于SpringBoot）和微服务阶段(通过大量图示剖析SpringCloud组件原理),并阐述单体阶段和微服务阶段所包含的技术点已经学完本课程会收获什么;最后介绍课程安排，让大家可以更好的安排好自">
+<meta name="keywords" content="java系列视频教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java深入微服务原理改造房产销售平台">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/buy-Java深入微服务原理改造房产销售平台/index.html">
+<meta property="og:site_name" content="Hfbin Blog">
+<meta property="og:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/174.html 第1章 课程介绍(一线架构师亲授+各种分享)一线互联网架构师亲授微服务的两个不同学习阶段–单体阶段（基于SpringBoot）和微服务阶段(通过大量图示剖析SpringCloud组件原理),并阐述单体阶段和微服务阶段所包含的技术点已经学完本课程会收获什么;最后介绍课程安排，让大家可以更好的安排好自">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-1f20dbe76cb064b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-f4654d2e4229c41b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-fe9c4425d2caf7f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8745982-87fcc2e8625d3df4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-22T11:47:37.295Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java深入微服务原理改造房产销售平台">
+<meta name="twitter:description" content="课程大纲来自慕课教程：https://coding.imooc.com/class/174.html 第1章 课程介绍(一线架构师亲授+各种分享)一线互联网架构师亲授微服务的两个不同学习阶段–单体阶段（基于SpringBoot）和微服务阶段(通过大量图示剖析SpringCloud组件原理),并阐述单体阶段和微服务阶段所包含的技术点已经学完本课程会收获什么;最后介绍课程安排，让大家可以更好的安排好自">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/8745982-1f20dbe76cb064b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'FQWD7RL0XS',
+      apiKey: 'ad0b6762f0b7721176ce7c215ba85c58',
+      indexName: 'hfbin',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('该文章博主已加密') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/22/buy-Java深入微服务原理改造房产销售平台/"/>
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+	<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+	
+
+
+  <title>Java深入微服务原理改造房产销售平台 | Hfbin Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1266987503&web_id=1266987503" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+ 
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.2"></script>
+
+  
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"></span>
+        <span class="site-title">Hfbin Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My friend promised me to go if I had the road</p>
+      
+  </div>
+
+  <div class="site-nav-toggle" style="position: absolute; float: left; ">
+    <button>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+      <span class="btn-bar" style="background: #fff;"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav" >
+  <!-- set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable % -->
+  	
+
+
+  
+    <ul id="menu" class="menu" >
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+			 <!-- 增加下面语句 -->
+		  
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/buy-Java深入微服务原理改造房产销售平台/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HuangFuBin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hfbin Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java深入微服务原理改造房产销售平台</h1>
+        
+
+        <div class="post-meta">
+			 
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T11:11:11+08:00">
+                2018-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java系列视频教程/" itemprop="url" rel="index">
+                    <span itemprop="name">java系列视频教程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/03/22/buy-Java深入微服务原理改造房产销售平台/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/22/buy-Java深入微服务原理改造房产销售平台/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a>课程大纲</h4><p>来自慕课教程：<a href="https://coding.imooc.com/class/174.html" target="_blank" rel="external">https://coding.imooc.com/class/174.html</a><br><img src="https://upload-images.jianshu.io/upload_images/8745982-1f20dbe76cb064b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/8745982-f4654d2e4229c41b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="第1章-课程介绍-一线架构师亲授-各种分享"><a href="#第1章-课程介绍-一线架构师亲授-各种分享" class="headerlink" title="第1章 课程介绍(一线架构师亲授+各种分享)"></a>第1章 课程介绍(一线架构师亲授+各种分享)</h5><p>一线互联网架构师亲授微服务的两个不同学习阶段–单体阶段（基于SpringBoot）和微服务阶段(通过大量图示剖析SpringCloud组件原理),并阐述单体阶段和微服务阶段所包含的技术点已经学完本课程会收获什么;最后介绍课程安排，让大家可以更好的安排好自己的时间进行学习（课程提供QQ交流群）。</p>
+<h5 id="第2章-单体架构之项目概要设计-amp-数据表设计"><a href="#第2章-单体架构之项目概要设计-amp-数据表设计" class="headerlink" title="第2章 单体架构之项目概要设计&amp;数据表设计"></a>第2章 单体架构之项目概要设计&amp;数据表设计</h5><p>本章会带着大家对房产销售平台一功能、模型、流程三个方面进行需求分析,之后我们将抽取出项目中的功能模型,分析功能模型之间的关联关系，同时在本章我们会对房产销售平台单体架构进行技术选型和架构设计,学习到做好技术选型有哪些技巧;之后会进行数据库设计，将功能模型落地到数据库中,并手把手带着大家使用Navicat Premiu…</p>
+<h5 id="第3章-单体架构之SpringBoot工程框架搭建与技巧"><a href="#第3章-单体架构之SpringBoot工程框架搭建与技巧" class="headerlink" title="第3章 单体架构之SpringBoot工程框架搭建与技巧"></a>第3章 单体架构之SpringBoot工程框架搭建与技巧</h5><p>本章首先手把手教大家搭建Java,Maven开发环境,安装IDE工具STS; 然后以多种方式创建SpringBoot工程,并讲解SpringBoot的几大特性,pom文件接入SpringBoot的不同方式,内嵌servlet容器的接入与替换,Starter(起步依赖)的实现原理,SpringBoot与Mybatis,Freemarker等组件的整合,SpringBoot进行错误页处理, 自定义Starter,让大家…</p>
+<h5 id="第4章-单体架构之用户注册及个人页面功能开发"><a href="#第4章-单体架构之用户注册及个人页面功能开发" class="headerlink" title="第4章 单体架构之用户注册及个人页面功能开发"></a>第4章 单体架构之用户注册及个人页面功能开发</h5><p>本章会深入剖析SpringMvc的请求处理流程,并借助Guava Cache完成注册key的绑定，同时会详细介绍Guava Cache的存储数量限制,过期设置,事件监听器，之后使用Spring Mail + Spring Task完成异步发送激活链接;并通过Nginx搭建支持用户头像等静态资源的访问，之后会讲解用户注册、用户登录、用户鉴权的业务流程，并编写Sp…</p>
+<h5 id="第5章-单体架构之房产和推荐功能开发（分页组件、Ajax、Redis）"><a href="#第5章-单体架构之房产和推荐功能开发（分页组件、Ajax、Redis）" class="headerlink" title="第5章 单体架构之房产和推荐功能开发（分页组件、Ajax、Redis）"></a>第5章 单体架构之房产和推荐功能开发（分页组件、Ajax、Redis）</h5><p>本章我会封装一个后端分页组件来完成房产列表分页功能,并带领大家应用Ajax技术实现房屋的评分和收藏， 之后会讲解如何通过table join查询来实现房屋收藏列表， 使用Redis的sorted sort数据结构来实现热门推荐，使用Jedis客户端工具进行Redis操作,每个功能的实现我都会带大家由功能演示到代码实现再到验证测试,然后…</p>
+<h5 id="第6章-单体架构之上线部署和监控实战（SprinBoot插件和工具）"><a href="#第6章-单体架构之上线部署和监控实战（SprinBoot插件和工具）" class="headerlink" title="第6章 单体架构之上线部署和监控实战（SprinBoot插件和工具）"></a>第6章 单体架构之上线部署和监控实战（SprinBoot插件和工具）</h5><p>本章会介绍Spring-Boot-Maven-Plugin的特性,以及如何配置SpringBoot maven打包工具，并通过SprinBoot提供的maven Plugin工具进行打包, 之后会讲解如何在工程接入SpringActuator来监控我们的应用,当然除了内嵌的监控组件，还会带来大家一起搭建SpringBoot Admin作为我们的外部可视化监控平台，并介绍SpringBoot Admin…</p>
+<h5 id="第7章-单体架构的不足和解决方案"><a href="#第7章-单体架构的不足和解决方案" class="headerlink" title="第7章 单体架构的不足和解决方案"></a>第7章 单体架构的不足和解决方案</h5><p>本章会介绍单体架构的优势和不足,还会讲解微服务架构是如何解决单体架构的问题。微服务也会带来一些挑战，那微服务都面临哪些挑战，面对这些挑战我们应该怎么来做，微服务需要关注哪些方面，微服务的最佳实践是什么， SOA和微服务有什么区别，这些问题都将在本章中得到答案。…</p>
+<h5 id="第8章-微服务架构之服务拆分、确定服务边界"><a href="#第8章-微服务架构之服务拆分、确定服务边界" class="headerlink" title="第8章 微服务架构之服务拆分、确定服务边界"></a>第8章 微服务架构之服务拆分、确定服务边界</h5><p>本章结合房产销售平台项目阐述微服务拆分的原则,如何在处理服务拆分又能同时满足需求迭代,如何在服务拆分时又兼顾业务模型和团队结构,康威定律在架构设计中的应用。 同时对于如何做好架构设计，一个系统的架构是否优秀需要进行哪些衡量;微服务架构下,我们如何进行数据库拆分等问题，在本章中都能得到答案。…</p>
+<h5 id="第9章-微服务架构之SpringCloud技术栈的选型及架构设计"><a href="#第9章-微服务架构之SpringCloud技术栈的选型及架构设计" class="headerlink" title="第9章 微服务架构之SpringCloud技术栈的选型及架构设计"></a>第9章 微服务架构之SpringCloud技术栈的选型及架构设计</h5><p>本章会介绍SpringCloud基础知识，SpringCloud套件组件，微服务的架构场景，在目前SpringBoot工程中接入SpringCloud。然后进行微服务架构设计，搭建一个支持微服务架构的脚手架，包含服务注册和发现组件Spring Cloud Eureka，服务通信组件RestTemplate以及二次封装，同时支持直连和服务发现，负载均衡组件Spring Cloud R…</p>
+<h5 id="第10章-微服务架构之用户服务实战（SpringData-Redis及JWT等技术）"><a href="#第10章-微服务架构之用户服务实战（SpringData-Redis及JWT等技术）" class="headerlink" title="第10章 微服务架构之用户服务实战（SpringData Redis及JWT等技术）"></a>第10章 微服务架构之用户服务实战（SpringData Redis及JWT等技术）</h5><p>本章我将学习到用户服务的接口设计，接入Spring Data Redis缓存实现用户查询接口，并基于JWT(Json Web Token)实现身份认证和鉴权; 在介绍SpringData Redis之前我会带领大家一起安装Redis，并通过时序图详细讲解从基于Session到Token再到JWT进行身份认证方案的演进过程，详细分析各个方案都有什么优缺点，最终借助JW…</p>
+<h5 id="第11章-微服务架构之网关服务API-Gateway实战"><a href="#第11章-微服务架构之网关服务API-Gateway实战" class="headerlink" title="第11章 微服务架构之网关服务API Gateway实战"></a>第11章 微服务架构之网关服务API Gateway实战</h5><p>本章将介绍微服务API Gateway模块的实现,首先我会介绍API Gateway的接口设计,并通过RestTemplate来调用我们的用户服务来完成用户注册、登录和登出，以及个人页的编写，以及和原生的RestTemplate比较,最后会带大家基于RestTemplate封装一个更加易用的RESTFul组件，包括状态码判断，异常处理，请求链接构建，响应结果反序列…</p>
+<h5 id="第12章-微服务架构之房产服务"><a href="#第12章-微服务架构之房产服务" class="headerlink" title="第12章 微服务架构之房产服务"></a>第12章 微服务架构之房产服务</h5><p>本章我将介绍房产服务以及通过API Gateway调用房产服务实现房产功能,同时介绍房产服务的接口设计,并通过Swagger暴露接口文档，以及Swagger的接入过程,最后介绍API Gateway调用房产服务完成房产详情、房产收藏的实现过程。</p>
+<h5 id="第13章-微服务架构之评论博客服务"><a href="#第13章-微服务架构之评论博客服务" class="headerlink" title="第13章 微服务架构之评论博客服务"></a>第13章 微服务架构之评论博客服务</h5><p>本章我将介绍评论博客服务的接口设计。首先在博客评分服务编写出接口实现，然后通过API Gateway调用评论服务，展示评论列表，并通过API Gateway调用博客服务，展示博客列表。</p>
+<h5 id="第14章-微服务架构之Spring-Cloud-Hystrix实现服务容错"><a href="#第14章-微服务架构之Spring-Cloud-Hystrix实现服务容错" class="headerlink" title="第14章 微服务架构之Spring Cloud Hystrix实现服务容错"></a>第14章 微服务架构之Spring Cloud Hystrix实现服务容错</h5><p>本章我们将学习微服务经常遇到的问题—-级联故障，并深入讲解级联故障发生的背景和原因，进而引出解决级联故障的解决方案—SpringCloud Hystrix断路器，并讲解Hystrix断路器相关概念(舱壁隔离、超时控制、服务降级、服务熔断)，Hystrix断路器的工作流程，工程接入Hystrix的步骤，接入后我们会进行实际演示来验证Hystri…</p>
+<h5 id="第15章-微服务架构之全链路追踪、搭建ELK日志检索架构"><a href="#第15章-微服务架构之全链路追踪、搭建ELK日志检索架构" class="headerlink" title="第15章 微服务架构之全链路追踪、搭建ELK日志检索架构"></a>第15章 微服务架构之全链路追踪、搭建ELK日志检索架构</h5><p>本章我们将学习微服务的链路追踪和日志检索，首先介绍下全链路追踪的背景及 一些基本概念,引出并讲解解决方案Spring Cloud Sleuth，,之后日志配置文件如何修改输出TraceId、SpanId，并通过Zipkin Ui图形化查询链路调用情况，并讲解Spring Cloud Sleuth的工作原理， 对应日志检索，ELK架构所用的三种技术及数据流程，…</p>
+<h5 id="第16章-课程总结"><a href="#第16章-课程总结" class="headerlink" title="第16章 课程总结"></a>第16章 课程总结</h5><p>课程知识点梳理&amp;问答：<a href="https://www.imooc.com/article/23408，本章就到了课程的尾声了，微服务是致力于后端架构开发同学的必备技能，本章会通过脑图重新梳理单体和微服务架构知识图谱，让大家能够对前面学到的东西进行记忆强化，希望大家都能学以致用，学有所成，开启职业新篇章。" target="_blank" rel="external">https://www.imooc.com/article/23408，本章就到了课程的尾声了，微服务是致力于后端架构开发同学的必备技能，本章会通过脑图重新梳理单体和微服务架构知识图谱，让大家能够对前面学到的东西进行记忆强化，希望大家都能学以致用，学有所成，开启职业新篇章。</a>…</p>
+<h4 id="教程截图"><a href="#教程截图" class="headerlink" title="教程截图"></a>教程截图</h4><p><img src="https://upload-images.jianshu.io/upload_images/8745982-fe9c4425d2caf7f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/8745982-87fcc2e8625d3df4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="更多教程"><a href="#更多教程" class="headerlink" title="更多教程"></a>更多教程</h4><p>教程不断整理更新中，以上截图仅供参考，如需了解更多视频教程的详细信息请到如下地址查看：<a href="http://hfbin.cn" target="_blank" rel="external">http://hfbin.cn</a><br>教程分类说明：<a href="http://hfbin.cn/categories/" target="_blank" rel="external">http://hfbin.cn/categories/</a></p>
+<h4 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h4><p><a href="http://hfbin.cn/2018/02/21/buy-%E5%85%B3%E4%BA%8E%E6%95%99%E7%A8%8B%E3%80%81%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F%E3%80%81%E6%B8%A9%E9%A6%A8%E6%8F%90%E7%A4%BA/" target="_blank" rel="external">关于教程、获取方式、温馨提示</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/weixinpay.png" alt="HuangFuBin WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="HuangFuBin Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java系列视频教程/" <i class="fa fa-tag"></i> java系列视频教程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/03/buy-从天气项目入门 Spring Cloud 微服务治理/" rel="next" title="从天气项目入门 Spring Cloud 微服务治理">
+                <i class="fa fa-chevron-left"></i> 从天气项目入门 Spring Cloud 微服务治理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/22/buy-Nginx 从入门到实践/" rel="prev" title="Nginx 从入门到实践">
+                Nginx 从入门到实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_tsina"></a>
+  <!--<a class="jiathis_button_tqq"></a>-->
+  
+  <!--<a class="jiathis_button_douban"></a>-->
+  <!--<a class="jiathis_button_renren"></a>-->
+  <a class="jiathis_button_qzone"></a>
+  <!--<a class="jiathis_button_kaixin001"></a>-->
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars3.githubusercontent.com/u/26451830?s=400&u=fac2b4c7903b3ad1210b530e2d18e42fcb410b0a&v=4"
+               alt="HuangFuBin" />
+          <p class="site-author-name" itemprop="name">HuangFuBin</p>
+           
+              <p class="site-description motion-element" itemprop="description">My friend promised me to go if I had the road</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">107</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hfbin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=DmZ7b2BpaHtsZ2AgbGF9fU5oYXZjb2diIG1hYw" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3904243687/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.hfbin.cn/" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#课程大纲"><span class="nav-number">1.</span> <span class="nav-text">课程大纲</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第1章-课程介绍-一线架构师亲授-各种分享"><span class="nav-number">1.1.</span> <span class="nav-text">第1章 课程介绍(一线架构师亲授+各种分享)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第2章-单体架构之项目概要设计-amp-数据表设计"><span class="nav-number">1.2.</span> <span class="nav-text">第2章 单体架构之项目概要设计&数据表设计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第3章-单体架构之SpringBoot工程框架搭建与技巧"><span class="nav-number">1.3.</span> <span class="nav-text">第3章 单体架构之SpringBoot工程框架搭建与技巧</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第4章-单体架构之用户注册及个人页面功能开发"><span class="nav-number">1.4.</span> <span class="nav-text">第4章 单体架构之用户注册及个人页面功能开发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第5章-单体架构之房产和推荐功能开发（分页组件、Ajax、Redis）"><span class="nav-number">1.5.</span> <span class="nav-text">第5章 单体架构之房产和推荐功能开发（分页组件、Ajax、Redis）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第6章-单体架构之上线部署和监控实战（SprinBoot插件和工具）"><span class="nav-number">1.6.</span> <span class="nav-text">第6章 单体架构之上线部署和监控实战（SprinBoot插件和工具）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第7章-单体架构的不足和解决方案"><span class="nav-number">1.7.</span> <span class="nav-text">第7章 单体架构的不足和解决方案</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第8章-微服务架构之服务拆分、确定服务边界"><span class="nav-number">1.8.</span> <span class="nav-text">第8章 微服务架构之服务拆分、确定服务边界</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第9章-微服务架构之SpringCloud技术栈的选型及架构设计"><span class="nav-number">1.9.</span> <span class="nav-text">第9章 微服务架构之SpringCloud技术栈的选型及架构设计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第10章-微服务架构之用户服务实战（SpringData-Redis及JWT等技术）"><span class="nav-number">1.10.</span> <span class="nav-text">第10章 微服务架构之用户服务实战（SpringData Redis及JWT等技术）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第11章-微服务架构之网关服务API-Gateway实战"><span class="nav-number">1.11.</span> <span class="nav-text">第11章 微服务架构之网关服务API Gateway实战</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第12章-微服务架构之房产服务"><span class="nav-number">1.12.</span> <span class="nav-text">第12章 微服务架构之房产服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第13章-微服务架构之评论博客服务"><span class="nav-number">1.13.</span> <span class="nav-text">第13章 微服务架构之评论博客服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第14章-微服务架构之Spring-Cloud-Hystrix实现服务容错"><span class="nav-number">1.14.</span> <span class="nav-text">第14章 微服务架构之Spring Cloud Hystrix实现服务容错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第15章-微服务架构之全链路追踪、搭建ELK日志检索架构"><span class="nav-number">1.15.</span> <span class="nav-text">第15章 微服务架构之全链路追踪、搭建ELK日志检索架构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第16章-课程总结"><span class="nav-number">1.16.</span> <span class="nav-text">第16章 课程总结</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#教程截图"><span class="nav-number">2.</span> <span class="nav-text">教程截图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多教程"><span class="nav-number">3.</span> <span class="nav-text">更多教程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取方式"><span class="nav-number">4.</span> <span class="nav-text">获取方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!--
+<div class="copyright display_zhanzhang" style="text-align: center !important;">
+  <span class="author" itemprop="copyrightHolder">桂ICP备16010161号</span>
+</div>
+-->
+<div class="copyright" style="text-align: center !important;">
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HuangFuBin</span>
+</div>
+<div class="copyright" style="text-align: center !important;">
+	
+	<div class="powered-by" style="text-align: center !important;">
+	  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+	</div>
+
+	<div class="theme-info" style="text-align: center !important;">
+	  主题 -
+	  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+		NexT.Mist
+	  </a>
+	</div>
+	
+</div>
+<div class="copyright display_zhanzhang"  style="text-align: center !important;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1266987503'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1266987503%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+        
+
+<div class="busuanzi-count">
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cysX5MNF0';
+      var conf = '504c8a8b8a5aff5f06dd805c527bbf0f';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+
+</html>
